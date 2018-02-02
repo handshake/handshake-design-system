@@ -1,9 +1,24 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from "@storybook/addon-actions";
+import { withKnobs, text, boolean, number, select } from '@storybook/addon-knobs/react';
 import { Button } from 'antd';
 
 storiesOf('AntD/Button', module)
+    .addDecorator(withKnobs)
+    .add('intro', () => (
+        <Button
+            disabled={boolean("Disabled", false)}
+            ghost={boolean("Ghost", false)}
+            htmlType={select("HTML element type", ["button", "reset", "submit"], "button")}
+            loading={boolean("Ghost", false)}
+            onClick={action("clicked")}
+            size={select("Size", ["small", "large"], "small")}
+            type={select("Type", ["primary", "dashed", "danger"], "primary")}
+        >
+            {text("Text", "Button Intro")}
+        </Button>
+    ))
     .add('default', () => (
         <Button>hello</Button>
     ))

@@ -4,15 +4,17 @@ class Card extends React.Component {
     render() {
         let styles = {
           card: {
-            border: '1px solid #FF4422',
-            borderRadius: 4,
-            backgroundColor: '#FF9988',
+            border: '1px solid #fff',
+            borderRadius: 5,
+            backgroundColor: '#ff5508',
+            display: 'block',
           },
           title: {
-            color: 'white',
+            color: "#fff",
+            fontFamily: 'Helvetica Neue',
             margin: 0,
             padding: 10,
-            fontFamily: 'Helvetica Neue',
+            "text-align": 'center',
           }
         };
 

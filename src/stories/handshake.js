@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import Card from '../components/card';
 
-storiesOf('Card', module)
-    .add('with title', () => (
+storiesOf('Handshake/Card', module)
+    .add('title', () => (
         <Card title="Hi There"></Card>
     ));

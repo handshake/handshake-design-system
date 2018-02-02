@@ -2,7 +2,7 @@ import React from 'react';
 
 class Card extends React.Component {
     render() {
-        let styles = {
+        const styles = {
           card: {
             border: '1px solid #fff',
             borderRadius: 5,

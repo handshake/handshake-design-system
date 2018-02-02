@@ -1,1 +1,1 @@
-# handshake-design-system
+# Handshake Design System 1.0

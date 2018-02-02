@@ -11,7 +11,7 @@ storiesOf('AntD/Button', module)
             disabled={boolean("Disabled", false)}
             ghost={boolean("Ghost", false)}
             htmlType={select("HTML element type", ["button", "reset", "submit"], "button")}
-            loading={boolean("Ghost", false)}
+            loading={boolean("Loading", false)}
             onClick={action("clicked")}
             size={select("Size", ["small", "large"], "small")}
             type={select("Type", ["primary", "dashed", "danger"], "primary")}

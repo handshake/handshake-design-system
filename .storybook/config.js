@@ -2,6 +2,8 @@ import { configure } from '@storybook/react';
 import { setOptions } from '@storybook/addon-options';
 
 import 'antd/dist/antd.css';
+import 'semantic-ui-css/semantic.min.css';
+import 'grommet/grommet.min.css';
 
 // Customize options for our storybook UI
 setOptions ({

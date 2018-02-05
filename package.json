@@ -21,8 +21,10 @@
   },
   "dependencies": {
     "antd": "^3.1.6",
+    "grommet": "^1.10.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "semantic-ui-react": "^0.78.1"
   },
   "devDependencies": {
     "@storybook/addon-info": "^3.3.12",
@@ -30,6 +32,7 @@
     "@storybook/addon-options": "^3.3.12",
     "@storybook/react": "^3.3.11",
     "babel-core": "^6.26.0",
-    "babel-plugin-import": "^1.6.3"
+    "babel-plugin-import": "^1.6.3",
+    "semantic-ui-css": "^2.2.14"
   }
 }

@@ -1,10 +1,12 @@
 {
-  "name": "handshake-design-system",
+  "name": "@handshake/design-system",
   "version": "1.0.0",
   "description": "Handshake Design System",
+  "private": true,
   "author": "",
   "contributors": [
-    "Adam Phillips-Silver <adam.phillips-silver@handshake.com>"
+    "Adam Phillips-Silver <adam.phillips-silver@handshake.com>",
+    "Kevan Davis <kevan.davis@handshake.com>"
   ],
   "license": "UNLICENSED",
   "repository": {
@@ -14,22 +16,60 @@
   "bugs": {
     "url": "https://github.com/handshake/handshake-design-system/issues"
   },
-  "main": "index.js",
+  "devDependencies": {
+    "@storybook/addon-actions": "alpha",
+    "@storybook/addon-info": "alpha",
+    "@storybook/addon-knobs": "alpha",
+    "@storybook/addon-links": "alpha",
+    "@storybook/addon-options": "alpha",
+    "@storybook/addon-viewport": "alpha",
+    "@storybook/addons": "alpha",
+    "@storybook/react": "alpha",
+    "@babel/core": "^7.1.0",
+    "babel-plugin-styled-components": "^1.7.1",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "css-loader": "^1.0.0",
+    "file-loader": "^2.0.0",
+    "jest-expo": "~29.0.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "raw-loader": "^0.5.1",
+    "react-art": "^16.5.2",
+    "react-native": "^0.57.1",
+    "react-native-web": "^0.9.0",
+    "react-test-renderer": "16.3.1",
+    "storybook-addon-intl": "^2.3.0",
+    "style-loader": "^0.23.0",
+    "url-loader": "^1.1.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "start": "./bin/prepare_images.sh && ./bin/extract_less_variables.js && PLATFORM=web start-storybook -p 9001 -c storybook"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "dependencies": {
-    "antd": "^3.1.6",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@kmdavis/carmen": "^0.1.0",
+    "antd": "^3.9.2",
+    "antd-mobile": "^2.2.5",
+    "antd-mobile-rn": "^2.2.1",
+    "babel-plugin-wildcard": "^5.0.0",
+    "babel-preset-react-native": "^4.0.1",
+    "flat": "^4.1.0",
+    "lodash": "^4.17.10",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.2",
+    "react-intl": "^2.4.0",
+    "styled-components": "^3.4.6"
   },
-  "devDependencies": {
-    "@storybook/addon-info": "^3.3.12",
-    "@storybook/addon-knobs": "^3.3.11",
-    "@storybook/addon-options": "^3.3.12",
-    "@storybook/react": "^3.3.11",
-    "babel-core": "^6.26.0",
-    "babel-plugin-import": "^1.6.3"
+  "optionalDependencies": {
+    "@handshake/design-system-fonts": "^1.0.0"
   }
 }

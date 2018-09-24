@@ -1,0 +1,5 @@
+{
+    "$comment": "Restart Storybook after any change to this file; it will not be picked up automatically.",
+    "card-head-background": "#ff5508",
+    "font-family": "BrandonText,\"Chinese Quote\",-apple-system,BlinkMacSystemFont,\"Segoe UI\",\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"Helvetica Neue\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\""
+}

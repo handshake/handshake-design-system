@@ -1,7 +1,7 @@
 require("@babel/register")();
 const webpack = require("webpack");
 
-const __LESS_VARIABLES__ = require("../src/theme");
+const { __LESS_VARIABLES__ } = require("../src/theme");
 
 module.exports = (storybookBaseConfig, configType) => {
     storybookBaseConfig.resolve = {

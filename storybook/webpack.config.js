@@ -1,4 +1,5 @@
 require("@babel/register")();
+const path = require("path");
 const webpack = require("webpack");
 
 const { __LESS_VARIABLES__ } = require("../src/theme");
@@ -83,7 +84,11 @@ module.exports = (storybookBaseConfig, configType) => {
         new webpack.IgnorePlugin(/\.d\.ts$/),
         new webpack.DefinePlugin({
             "process.env.PLATFORM": `"${process.env.PLATFORM || "web"}"`,
-        })
+        }),
+        new webpack.NormalModuleReplacementPlugin(
+            /antd-mobile-rn\/(es|lib)\/style\/themes\/default\.native\.js/,
+            path.resolve(__dirname, "../src/theme/antd_mobile_rn_variables.js")
+        ),
     );
 
     return storybookBaseConfig;

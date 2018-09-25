@@ -6,7 +6,7 @@ import { withKnobs, array, boolean, button, color, date, knob, number, object, t
 import { withViewport } from "@storybook/addon-viewport";
 
 import { Avatar, Card, Icon } from "../..";
-import { Card as NativeCard, Text } from "../../index.native";
+import { Card as NativeCard, Text, WingBlank, WhiteSpace } from "../../index.native";
 
 storiesOf("AntD/Card", module)
     .addDecorator(withInfo)
@@ -141,29 +141,41 @@ storiesOf("AntD/Card/Native", module)
     .addDecorator(withKnobs)
     .add(
         "options",
-        () => (
-            <NativeCard
-                full={boolean("Full", false)}
-            >
-                <NativeCard.Header
-                    title={text("Title", "Example")}
-                    thumb={text("Thumbnail", "https://picsum.photos/32/?random")}
-                    thumbStyle={object("Thumb style", {})}
-                    extra={text("Header Right Side Content", "Upper Right")}
-                />
-                <NativeCard.Body>
-                    <Text
-                        style={{
-                            fontFamily: "BrandonText",
-                        }}
-                    >{text("Content", "Sample Content")}</Text>
-                </NativeCard.Body>
-                <NativeCard.Footer
-                    content={text("Footer Left Side Content", "Left Side")}
-                    extra={text("Footer Right Side Content", "Right Side")}
-                />
-            </NativeCard>
-        ),
+        () => {
+            const content = (
+                <NativeCard
+                        full={boolean("Full", false)}
+                    >
+                        <NativeCard.Header
+                            title={text("Title", "Example")}
+                            thumb={text("Thumbnail", "http://picsum.photos/32/?random")}
+                            thumbStyle={object("Thumb style", { width: 32, height: 32 })}
+                            extra={text("Header Right Side Content", "Upper Right")}
+                        />
+                        <NativeCard.Body>
+                            <WingBlank>
+                                <Text
+                                    style={{
+                                        fontFamily: "BrandonText",
+                                    }}
+                                >{text("Content", "Sample Content")}</Text>
+                            </WingBlank>
+                        </NativeCard.Body>
+                        <NativeCard.Footer
+                            content={text("Footer Left Side Content", "Left Side")}
+                            extra={text("Footer Right Side Content", "Right Side")}
+                        />
+                    </NativeCard>
+            );
+            return (boolean("Full", false) ?
+                content
+            :
+                <WingBlank  size="lg">
+                    <WhiteSpace size="lg" />
+                    {content}
+                </WingBlank>
+            );
+        },
         {
             info: {
                 header: false,

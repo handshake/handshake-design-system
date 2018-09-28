@@ -10,6 +10,7 @@ module.exports = (storybookBaseConfig, configType) => {
         alias: {
             "react-native/Libraries/StyleSheet/setNormalizedColorAlpha": "react-native-web/dist/modules/normalizeColor",
             "react-native": "react-native-web",
+            "react-native-svg": "react-native-svg-web",
             "@storybook/react-native": "@storybook/react",
         }
     };
@@ -78,6 +79,14 @@ module.exports = (storybookBaseConfig, configType) => {
                     },
                 },
             ],
+        },
+        {
+            test: /\.svg$/,
+            use: [
+                {
+                    loader: "react-native-svg-loader",
+                },
+            ]
         }
     );
     storybookBaseConfig.plugins.push(

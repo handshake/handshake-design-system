@@ -12,6 +12,7 @@ import { ThemeSubscriber } from "../../components/design-context/theme-provider"
 
 import "./anticon.less";
 
+// TODO: move this someplace common
 const nativeIcons = [
     "check-circle",
     "check",
@@ -151,5 +152,13 @@ storiesOf("AntD/Icon/Native", module)
                     ~~~
                 `,
             }
+        }
+    )
+    .add(
+        "svg experiment",
+        () => {
+            // TODO: reimplement native Icon using SVG icons from web:
+            const Alibaba = require("@ant-design/icons/svg/outline/alibaba.svg");
+            return <Alibaba />
         }
     );

@@ -38,7 +38,7 @@ export default {
     toast: PropTypes.bool,
 }
 
-export const DEFAULT_PROPS = {
+export const defaultProps = {
     block: false,
     enabled: true,
     size: "small",

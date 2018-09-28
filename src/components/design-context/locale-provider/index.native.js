@@ -1,7 +1,6 @@
 import _ from "lodash";
 import { IntlProvider } from "react-intl";
 import AntDLocaleProvider from "antd-mobile/es/locale-provider";
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import {
@@ -11,14 +10,14 @@ import {
     getLocaleData,
 } from "./common.js";
 
-import PROP_TYPES, { DEFAULT_PROPS } from "./prop_types";
+import propTypes, { defaultProps } from "./prop_types";
 
 export default class LocaleProvider extends Component {
     static ALL_SUPPORTED_LOCALES = ALL_SUPPORTED_LOCALES
     static DEFAULT_LOCALE = DEFAULT_LOCALE
 
-    static propTypes = PROP_TYPES
-    static defaultProps = DEFAULT_PROPS
+    static propTypes = propTypes
+    static defaultProps = defaultProps
 
     static getDerivedStateFromProps (nextProps) {
         return getLocaleData(nextProps.locale, nextProps.getAdditionalMessages);

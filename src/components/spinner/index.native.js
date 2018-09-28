@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import View from "antd-mobile-rn/es/view"; // NOTE: is a straight re-export from react-native
 
-import PROP_TYPES, { DEFAULT_PROPS } from "./prop_types";
+import propTypes, { defaultProps } from "./prop_types";
 
 const SpinnerBox = styled(View)`
     align-items: center;
@@ -21,8 +21,8 @@ const SpinnerFrame = styled(View)`
 `;
 
 export default class Spinner extends Component {
-    static propTypes = PROP_TYPES;
-    static defaultProps = DEFAULT_PROPS;
+    static propTypes = propTypes;
+    static defaultProps = defaultProps;
 
     render () {
         const { enabled = true, block, size, text, toast } = this.props;

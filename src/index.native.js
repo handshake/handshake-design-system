@@ -14,24 +14,13 @@ import _ from "lodash";
  *     }
  */
 
-// NOTE: we do not automatically export any custom fonts. These must be opted into by importing them
-// into your project. The manner of doing this depends on... many things. Our storybook app uses
-// Expo, which provides a simple way of loading a font:
-//     import { Font } from "expo";
-//
-//     async componentDidMount() {
-//         await Font.loadAsync({
-//             BrandonText: require("../src/fonts/BrandonText/Regular.otf"),
-//         });
-//     }
-
 // NOTE for developers: `_components` denotes a vanilla AntD/AntD-Mobile component that has not yet
 // been wrapped. `components` are components that we've already wrapped
 
 export { default as Accordion } from "./_components/accordion/index.native";
 export { default as ActionSheet } from "./_components/action-sheet/index.native";
 export { default as Badge } from "./_components/badge/index.native";
-export { default as Button } from "./_components/button/index.native";
+export { default as Button } from "./components/button/index.native";
 // Calendar // antd-mobile only
 export { default as Card } from "./_components/card/index.native";
 export { default as Carousel } from "./_components/carousel/index.native";

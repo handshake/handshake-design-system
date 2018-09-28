@@ -6,7 +6,7 @@ import styled from "styled-components";
 import "antd/es/card/style";
 import "antd/es/spin/style";
 
-import PROP_TYPES, { DEFAULT_PROPS } from "./prop_types";
+import propTypes, { defaultProps } from "./prop_types";
 
 const SpinnerCard = styled(Card)`
     align-items: center;
@@ -39,8 +39,8 @@ const Toast = styled.div`
 `;
 
 export default class Spinner extends Component {
-    static propTypes = PROP_TYPES;
-    static defaultProps = DEFAULT_PROPS;
+    static propTypes = propTypes;
+    static defaultProps = defaultProps;
 
     render () {
         const { enabled = true, block, size, text, toast } = this.props;

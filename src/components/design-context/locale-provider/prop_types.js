@@ -7,6 +7,6 @@ export default {
     locale: PropTypes.string.isRequired,
 }
 
-export const DEFAULT_PROPS = {
+export const defaultProps = {
     locale: DEFAULT_LOCALE,
 };

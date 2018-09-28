@@ -40,7 +40,8 @@ NOTE: some of the equivalencies are a bit of a stretch
 | BackTop            | -                     | -                 | -               | -     |
 | Badge              | Badge                 | Badge             | -               | -     |
 | Breadcrumb         | -                     | -                 | -               | -     |
-| Button             | Button                | Button            | -               | -     |
+| Button             | Button                | Button            | Button          | -     |
+| Button.Group       | SegmentedControl      | SegmentedControl  | -               | -     |
 | Calendar           | Calendar              | ?                 | -               | -     |
 | Card               | Card                  | Card              | -               | -     |
 | Carousel           | Carousel              | Carousel          | -               | -     |

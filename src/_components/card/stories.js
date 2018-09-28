@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
 import { withKnobs, array, boolean, button, color, date, knob, number, object, text, select } from "@storybook/addon-knobs";
+import withStyles from "@sambego/storybook-styles"
 import { withViewport } from "@storybook/addon-viewport";
 
 import { Avatar, Card, Icon } from "../..";
@@ -10,6 +11,7 @@ import { Card as NativeCard, Text, WingBlank, WhiteSpace } from "../../index.nat
 
 storiesOf("AntD/Card", module)
     .addDecorator(withInfo)
+    .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
     .add(
         "Basic Options",

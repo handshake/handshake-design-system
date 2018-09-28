@@ -14,12 +14,6 @@ import _ from "lodash";
  *     }
  */
 
-// NOTE: we do not automatically export any custom fonts. these must be opted into by importing them
-// into your project, e.g. if you're using webpack, you can add the following to via CSS/LESS/SASS:
-//     @import "~@handshake/design-system/src/fonts/BrandonText.less";
-// alternatively, you can just import it in JS:
-//     import "@handshake/design-system/src/fonts/BrandonText.less";
-
 // NOTE for developers: `_components` denotes a vanilla AntD/AntD-Mobile component that has not yet
 // been wrapped. `components` are components that we've already wrapped
 
@@ -31,7 +25,7 @@ export { default as Avatar } from "./_components/avatar/index.web";
 export { default as BackTop } from "./_components/back-top/index.web";
 export { default as Badge } from "./_components/badge/index.web";
 export { default as Breadcrumb } from "./_components/breadcrumb/index.web";
-export { default as Button } from "./_components/button/index.web";
+export { default as Button } from "./components/button/index.web";
 export { default as Calendar } from "./_components/calendar/index.web";
 export { default as Card } from "./_components/card/index.web";
 export { default as Carousel } from "./_components/carousel/index.web";

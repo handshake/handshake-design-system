@@ -2,13 +2,15 @@ import { storiesOf } from "@storybook/react";
 import React from "react";
 import { withInfo } from "@storybook/addon-info";
 import { withKnobs, array, boolean, button, color, date, knob, number, object, text, select } from "@storybook/addon-knobs";
+import withStyles from "@sambego/storybook-styles"
 import { withViewport } from "@storybook/addon-viewport";
 
 import { Spinner } from "../../index.web";
-import { Spinner as NativeSpinner, View, Text } from "../../index.native";
+import { Spinner as NativeSpinner, View, Text, WingBlank, WhiteSpace } from "../../index.native";
 
 storiesOf("Spinner", module)
     .addDecorator(withInfo)
+    .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
     .add(
         "options",
@@ -47,7 +49,8 @@ storiesOf("Spinner/Native", module)
         () => (
             // 568 == height of iphone5 viewport, e.g. full screen
             // Toast centers itself vertically in its closest `relative` parent which is this View
-            <View style={boolean("Toast", false) ? { height: 568 } : {}}>
+            <WingBlank size="lg" style={boolean("Toast", false) ? { height: 568 } : {}}>
+                <WhiteSpace size="lg" />
                 {boolean("Block", false) ? [
                     // Text forces anything nested inside to be inline, so, our block spinner
                     // cannot be a child of a Text. On the flipside, Text itself is a block element,
@@ -75,7 +78,7 @@ storiesOf("Spinner/Native", module)
                         Text After
                     </Text>
                 )}
-            </View>
+            </WingBlank>
         ),
         {
             info: {

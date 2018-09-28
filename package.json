@@ -17,6 +17,13 @@
     "url": "https://github.com/handshake/handshake-design-system/issues"
   },
   "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
+    "@sambego/storybook-styles": "^1.0.0",
     "@storybook/addon-actions": "alpha",
     "@storybook/addon-info": "alpha",
     "@storybook/addon-knobs": "alpha",
@@ -25,14 +32,8 @@
     "@storybook/addon-viewport": "alpha",
     "@storybook/addons": "alpha",
     "@storybook/react": "alpha",
-    "@babel/core": "^7.1.0",
-    "babel-plugin-styled-components": "^1.7.1",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.0.0",
-    "@babel/runtime": "^7.0.0",
     "babel-loader": "^8.0.2",
+    "babel-plugin-styled-components": "^1.7.1",
     "css-loader": "^1.0.0",
     "file-loader": "^2.0.0",
     "jest-expo": "~29.0.0",
@@ -41,6 +42,8 @@
     "raw-loader": "^0.5.1",
     "react-art": "^16.5.2",
     "react-native": "^0.57.1",
+    "react-native-svg-loader": "^0.1.5",
+    "react-native-svg-web": "github:isman-usoh/react-native-svg-web",
     "react-native-web": "^0.9.0",
     "react-test-renderer": "16.3.1",
     "storybook-addon-intl": "^2.3.0",
@@ -67,7 +70,8 @@
     "react": "^16.5.1",
     "react-dom": "^16.5.2",
     "react-intl": "^2.4.0",
-    "styled-components": "^3.4.6"
+    "styled-components": "^3.4.6",
+    "tinycolor2": "^1.4.1"
   },
   "optionalDependencies": {
     "@handshake/design-system-fonts": "^1.0.0"

@@ -7,7 +7,7 @@ import DesignContext from "../src/components/design-context";
 // Custom replacement for `storybook-addon-intl`'s `withIntl` decorator
 // so we can use our own `LocaleProvider` which combines both `react-intl`'s
 // `IntlProvider` and AntD's `LocaleProvider`
-export default class IntlDecorator extends Component {
+export default class DesignContextDecorator extends Component {
     static ALL_SUPPORTED_LOCALES = DesignContext.LocaleProvider.ALL_SUPPORTED_LOCALES
     static DEFAULT_LOCALE = DesignContext.LocaleProvider.DEFAULT_LOCALE
 
@@ -26,6 +26,7 @@ export default class IntlDecorator extends Component {
 
     state = {
         locale: "en-US",
+        theme: {}
     }
 
     componentWillUnmount () {
@@ -38,7 +39,10 @@ export default class IntlDecorator extends Component {
 
     render () {
         return (
-            <DesignContext locale={this.state.locale || DesignContext.LocaleProvider.DEFAULT_LOCALE}>
+            <DesignContext
+                locale={this.state.locale || DesignContext.LocaleProvider.DEFAULT_LOCALE}
+                theme={this.state.theme}
+            >
                 {this.props.children}
             </DesignContext>
         );

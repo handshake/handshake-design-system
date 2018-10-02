@@ -9,10 +9,13 @@ import { withViewport } from "@storybook/addon-viewport";
 import { Avatar, Card, Icon } from "../..";
 import { Card as NativeCard, Text, WingBlank, WhiteSpace } from "../../index.native";
 
+import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
+
 storiesOf("AntD/Card", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
+    .addDecorator(withThemeVariables(["placeholder"]))
     .add(
         "Basic Options",
         () => (
@@ -141,6 +144,7 @@ storiesOf("AntD/Card/Native", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
+    .addDecorator(withThemeVariables(["placeholder"]))
     .add(
         "options",
         () => {

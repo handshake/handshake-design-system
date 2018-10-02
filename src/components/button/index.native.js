@@ -6,6 +6,34 @@ import Text from "antd-mobile-rn/es/text";
 import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
 import { ThemeSubscriber } from "../design-context/theme-provider";
 
+// List of all theme variables this component uses.
+// Eventually, I'd like to automate generating this data.
+// This is currently only used by the Storybook Theme Customizer Addon Panel,
+// but there are other potential use cases, so, I'm putting this here instead of
+// hard coding it in the the stories file.
+const THEME_VARIABLES = [
+    "borderColorBase",
+    "buttonFontSize",
+    "buttonFontSizeSm",
+    "buttonHeight",
+    "buttonHeightSm",
+    "colorTextBase",
+    "colorTextBaseInverse",
+    "fillBase",
+    "fillDisabled",
+    "fillTap",
+    "ghostButtonColor",
+    "ghostButtonFillTap",
+    "hSpacingLg",
+    "hSpacingMd",
+    "hSpacingSm",
+    "primaryButtonFill",
+    "primaryButtonFillTap",
+    "radiusMd",
+    "warningButtonFill",
+    "warningButtonFillTap",
+];
+
 // original: antd-mobile-rn/es/button/style/index.native.js
 // maintenance task: check ^^ for changes anytime we update antd-mobile-rn
 function styles (theme) {
@@ -123,6 +151,13 @@ function styles (theme) {
 }
 
 class ButtonWrapper extends Component {
+    static propTypes = propTypes;
+    static defaultProps = {
+        block: true,
+        ...defaultProps
+    };
+    static THEME_VARIABLES = THEME_VARIABLES;
+
     render () {
         const content = (
             <ThemeSubscriber>
@@ -167,11 +202,5 @@ class ButtonWrapper extends Component {
         return this.props.block ? content : <Text>{content}</Text>;
     }
 }
-
-ButtonWrapper.propTypes = propTypes;
-ButtonWrapper.defaultProps = {
-    block: true,
-    ...defaultProps
-};
 
 export default ButtonWrapper;

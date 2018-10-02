@@ -4,6 +4,35 @@ import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
 import antdColorPalette from "../../util/antd_color_palette";
 
+// List of all theme variables this component uses.
+// Eventually, I'd like to automate generating this data.
+// This is currently only used by the Storybook Theme Customizer Addon Panel,
+// but there are other potential use cases, so, I'm putting this here instead of
+// hard coding it in the the stories file.
+const THEME_VARIABLES = [
+    "borderColorBase",
+    "btnBorderRadiusBase",
+    "btnBorderRadiusSm",
+    "btnDangerColor",
+    "btnDefaultBg",
+    "btnDefaultBorder",
+    "btnDefaultColor",
+    "btnDisableBg",
+    "btnDisableBorder",
+    "btnDisableColor",
+    "btnPaddingBase",
+    "btnPaddingLg",
+    "btnPaddingSm",
+    "btnPrimaryBg",
+    "btnPrimaryColor",
+    "fontSizeBase",
+    "fontSizeLg",
+    "fontSizeSm",
+    "lineHeightBase",
+    "primary5",
+    "primary7",
+];
+
 const VARIABLE_LOOKUP = {
     backgroundColor: {
         default: {
@@ -14,10 +43,10 @@ const VARIABLE_LOOKUP = {
         },
         disabled: "btnDisableBg",
         ghost: {
-            active: "btnGhostBg",
+            active: () => "transparent",
             default: () => "transparent",
-            focus: "btnGhostBg",
-            hover: "btnGhostBg",
+            focus: () => "transparent",
+            hover: () => "transparent",
         },
         primary: {
             active: (theme) => antdColorPalette(theme.btnPrimaryBg, 7),
@@ -101,11 +130,6 @@ const VARIABLE_LOOKUP = {
         large: "btnHeightLg",
         small: "btnHeightSm",
     },
-    lineHeight: { // ?
-        default: "lineHeightBase",
-        large: "lineHeightLg",
-        small: "lineHeightSm",
-    },
     padding: {
         default: "btnPaddingBase",
         large: "btnPaddingLg",
@@ -145,7 +169,6 @@ const loadingCircle = keyframes`
     }
 `;
 
-// : ${({ theme }) => theme.__ };
 const Button = styled(AntdButton)`
     background-color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.backgroundColor[ghost ? "ghost" : type || "default"].default, theme)};
     background-image: none;
@@ -305,8 +328,8 @@ const Button = styled(AntdButton)`
     }
 
     /* a inside Button which only work in Chrome
-     * http://stackoverflow.com/a/17253457
-     */
+    * http://stackoverflow.com/a/17253457
+    */
     > a:only-child {
         color: currentColor;
         &:after {
@@ -327,16 +350,17 @@ const Button = styled(AntdButton)`
 `;
 
 class ButtonWrapper extends Component {
+    static propTypes = propTypes;
+    static defaultProps = {
+        block: false,
+        webHtmlType: "button",
+        ...defaultProps
+    };
+    static THEME_VARIABLES = THEME_VARIABLES;
+
     render () {
-        return <Button {...mapPropsForWeb(this.props)} />
+        return <Button {...mapPropsForWeb(this.props)} />;
     }
 }
-
-ButtonWrapper.propTypes = propTypes;
-ButtonWrapper.defaultProps = {
-    block: false,
-    webHtmlType: "button",
-    ...defaultProps
-};
 
 export default ButtonWrapper;

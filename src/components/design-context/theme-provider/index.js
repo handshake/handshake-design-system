@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
-import __LESS_VARIABLES__ from "../../../theme";
+import LESS_VARIABLES from "../../../theme";
 
 const ThemeProvider = ({ children, theme }) => {
     return (
         <StyledThemeProvider
-            theme={_.extend({}, __LESS_VARIABLES__, theme)}
+            theme={_.extend({}, LESS_VARIABLES, theme)}
         >
             {children}
         </StyledThemeProvider>

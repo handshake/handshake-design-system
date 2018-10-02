@@ -1,23 +1,42 @@
 import _ from "lodash";
-import __ANTD_LESS_VARIABLES__ from "./antd_less_variables.json";
-import __ANTD_MOBILE_LESS_VARIABLES__ from "./antd_mobile_less_variables.json";
-import __ANTD_RN_VARIABLES__ from "antd-mobile-rn/lib/style/themes/default.native";
-import __HS_LESS_VARIABLES__ from "./handshake_less_variables.json";
+import ANTD_LESS_VARIABLES from "./antd_less_variables.json";
+import ANTD_MOBILE_LESS_VARIABLES from "./antd_mobile_less_variables.json";
+import ANTD_RN_VARIABLES from "./antd_less_variables.json";
+import HS_LESS_VARIABLES from "./handshake_less_variables.json";
 
-const __LESS_VARIABLES__ = _.omit(
+let baseVariables = _.omit(
     _.extend(
-        __ANTD_MOBILE_LESS_VARIABLES__,
-        _.mapKeys(__ANTD_RN_VARIABLES__, (__, key) => _.kebabCase(key)),
-        __ANTD_LESS_VARIABLES__,
-        __HS_LESS_VARIABLES__,
+        {},
+        ANTD_MOBILE_LESS_VARIABLES,
+        _.mapKeys(ANTD_RN_VARIABLES, (__, key) => _.kebabCase(key)),
+        ANTD_LESS_VARIABLES,
     ),
     "$comment",
+    "comment",
 );
+baseVariables = _.fromPairs(_.sortBy(_.toPairs(baseVariables, 0)));
 
-const __RN_VARIABLES__ = _.mapKeys(__LESS_VARIABLES__, (__, key) => _.snakeCase(key))
+let themeVariables = _.omit(
+    _.extend(
+        {},
+        baseVariables,
+        HS_LESS_VARIABLES,
+    ),
+    "$comment",
+    "comment",
+);
+themeVariables = _.fromPairs(_.sortBy(_.toPairs(themeVariables, 0)));
 
-export default _.mapKeys(__LESS_VARIABLES__, (__, key) => _.camelCase(key));
-export {
-    __LESS_VARIABLES__,
-    __RN_VARIABLES__,
+const base = {
+    camelCase: _.mapKeys(baseVariables, (__, key) => _.camelCase(key)),
+    kebabCase: baseVariables,
+    snakeCase: _.mapKeys(baseVariables, (__, key) => _.snakeCase(key)),
 };
+const theme = {
+    camelCase: _.mapKeys(themeVariables, (__, key) => _.camelCase(key)),
+    kebabCase: themeVariables,
+    snakeCase: _.mapKeys(themeVariables, (__, key) => _.snakeCase(key)),
+};
+
+export default theme.camelCase;
+export { base, theme };

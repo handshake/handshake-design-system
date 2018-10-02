@@ -29,7 +29,12 @@ ${Object.keys(parsed.variables()).map(v => `.${v.slice(1)} { value: ${v}; }`).jo
             }),
         )
         .then(pairs => pairs.filter(p => !_.isNil(p)))
-        .then(pairs => pairs.map(([k, v]) => [k, isNaN(v) ? v : _.toNumber(v)]))
+        .then(pairs => pairs.map(([k, v]) => [
+            k,
+            (!isNaN(v) && _.toNumber(v)) ||
+            ((v === "true" || v === "false") && v === "true") ||
+            v
+        ]))
         .then(pairs => _.sortBy(pairs, "0"))
         .then(_.fromPairs);
 }

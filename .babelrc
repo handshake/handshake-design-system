@@ -8,6 +8,7 @@
     ], "@babel/react"],
     "plugins": [
         "@babel/plugin-proposal-class-properties",
-        ["wildcard", { "noModifyCase": true, "exts": ["js", "json"] }]
+        ["wildcard", { "noModifyCase": true, "exts": ["js", "json"] }],
+        "@quickbaseoss/babel-plugin-styled-components-css-namespace"
     ]
 }

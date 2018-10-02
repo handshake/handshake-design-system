@@ -5,6 +5,20 @@ import View from "antd-mobile-rn/es/view"; // NOTE: is a straight re-export from
 
 import propTypes, { defaultProps } from "./prop_types";
 
+// List of all theme variables this component uses.
+// Eventually, I'd like to automate generating this data.
+// This is currently only used by the Storybook Theme Customizer Addon Panel,
+// but there are other potential use cases, so, I'm putting this here instead of
+// hard coding it in the the stories file.
+const THEME_VARIABLES = [
+    "componentBackground",
+    "borderColorSplit",
+    "borderRadiusSm",
+    // TODO: incomplete
+];
+
+// TODO: style ActivityIndicator
+
 const SpinnerBox = styled(View)`
     align-items: center;
     background-color: ${({ theme }) => theme.componentBackground};
@@ -23,6 +37,7 @@ const SpinnerFrame = styled(View)`
 export default class Spinner extends Component {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
+    static THEME_VARIABLES = THEME_VARIABLES;
 
     render () {
         const { enabled = true, block, size, text, toast } = this.props;

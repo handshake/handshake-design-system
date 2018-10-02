@@ -1,1 +1,1 @@
-module.exports = require("./index").__RN_VARIABLES__;
+module.exports = require("./antd_mobile_rn_variables.json");

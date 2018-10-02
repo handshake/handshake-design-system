@@ -8,6 +8,19 @@ import "antd/es/spin/style";
 
 import propTypes, { defaultProps } from "./prop_types";
 
+// List of all theme variables this component uses.
+// Eventually, I'd like to automate generating this data.
+// This is currently only used by the Storybook Theme Customizer Addon Panel,
+// but there are other potential use cases, so, I'm putting this here instead of
+// hard coding it in the the stories file.
+const THEME_VARIABLES = [
+    "placeholder",
+    // TODO: incomplete
+];
+
+// TODO: style Spin
+
+// TODO: replace with `div` so we're not using default antd Card styles here
 const SpinnerCard = styled(Card)`
     align-items: center;
     display: flex;
@@ -41,6 +54,7 @@ const Toast = styled.div`
 export default class Spinner extends Component {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
+    static THEME_VARIABLES = THEME_VARIABLES;
 
     render () {
         const { enabled = true, block, size, text, toast } = this.props;

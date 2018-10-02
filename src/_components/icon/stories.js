@@ -10,6 +10,8 @@ import { Icon } from "../..";
 import { Icon as NativeIcon } from "../../index.native";
 import { ThemeSubscriber } from "../../components/design-context/theme-provider";
 
+import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
+
 import "./anticon.less";
 
 // TODO: move this someplace common
@@ -92,6 +94,7 @@ function allNativeIcons () {
 storiesOf("AntD/Icon", module)
     .addDecorator(withInfo)
     .addDecorator(withKnobs)
+    .addDecorator(withThemeVariables(["cardHeadBackground"]))
     .add(
         "Outlined",
         () => allIconsOfType("outline", "outlined"),
@@ -139,6 +142,7 @@ storiesOf("AntD/Icon/Native", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
+    .addDecorator(withThemeVariables(["placeholder"]))
     .add(
         "All",
         () => allNativeIcons(),

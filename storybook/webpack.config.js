@@ -2,7 +2,7 @@ require("@babel/register")();
 const path = require("path");
 const webpack = require("webpack");
 
-const { __LESS_VARIABLES__ } = require("../src/theme");
+const { kebabCase: LESS_VARIABLES } = require("../src/theme").theme;
 
 module.exports = (storybookBaseConfig, configType) => {
     storybookBaseConfig.resolve = {
@@ -50,7 +50,7 @@ module.exports = (storybookBaseConfig, configType) => {
                     loader: "less-loader", // compile less to css
                     options: {
                         javascriptEnabled: true,
-                        modifyVars: __LESS_VARIABLES__,
+                        modifyVars: LESS_VARIABLES,
                         sourceMap: true,
                     },
                 },

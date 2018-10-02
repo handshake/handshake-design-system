@@ -19,6 +19,7 @@ addDecorator(storyFn => (
 ));
 
 function loadStories() {
+    require("./welcome_story");
     require("../src/stories");
 }
 

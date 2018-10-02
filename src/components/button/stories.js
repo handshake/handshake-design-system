@@ -10,10 +10,13 @@ import { withViewport } from "@storybook/addon-viewport";
 import { Button } from "../..";
 import { Button as NativeButton, WingBlank, WhiteSpace } from "../../index.native";
 
+import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
+
 storiesOf("Button", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
+    .addDecorator(withThemeVariables(Button.THEME_VARIABLES))
     .add(
         "options",
         () => (
@@ -45,6 +48,7 @@ storiesOf("Button", module)
         }
     );
 
+// TODO: implement svg icons for RN, then this list will be replaced by the iconManifest above
 import "../../_components/icon/anticon.less";
 const nativeIcons = [
     "check-circle",
@@ -65,6 +69,7 @@ storiesOf("Button/Native", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
+    .addDecorator(withThemeVariables(NativeButton.THEME_VARIABLES))
     .add(
         "options",
         () => (

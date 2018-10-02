@@ -55,7 +55,6 @@ class ThemeCustomizer extends Component {
                                 let KnobType = knobs.text;
                                 let value = theme[key];
                                 let onChange = (val) => {
-                                    console.log(`CHANGING ${key} from "${theme[key]}" to "${val}"`);
                                     theme[key] = val;
                                     this.themeChanged(theme);
                                 };
@@ -73,6 +72,7 @@ class ThemeCustomizer extends Component {
                                         // error. Fix has already been merged,
                                         // but hasn't been published yet.
                                         // TODO: check again tomorrow.
+                                        // https://github.com/storybooks/storybook/tree/master/addons/knobs
                                         //KnobType = knobs.color;
                                     } else if (CSS_UNIT_RE.test(value)) {
                                         const [__, cssValue, cssUnit] = value.match(CSS_UNIT_RE);
@@ -80,7 +80,6 @@ class ThemeCustomizer extends Component {
                                         KnobType = knobs.number;
                                         extra = <div>{value}{cssUnit}</div>;
                                         onChange = (val) => {
-                                            console.log(`CHANGING ${key} from "${theme[key]}" to "${val}${cssUnit}"`);
                                             theme[key] = `${val}${cssUnit}`;
                                             this.themeChanged(theme);
                                         };

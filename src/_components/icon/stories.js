@@ -14,7 +14,7 @@ import withThemeVariables from "../../../storybook/theme_customizer/with_theme_v
 
 import "./anticon.less";
 
-// TODO: move this someplace common
+// TODO: implement svg icons for RN, then this list will be replaced by the iconManifest above
 const nativeIcons = [
     "check-circle",
     "check",

@@ -31,7 +31,7 @@ export { default as DesignContext } from "./components/design-context";
 export { default as Drawer } from "./_components/drawer/index.native";
 export { default as Flex } from "./_components/flex/index.native";
 export { default as Grid } from "./_components/grid/index.native";
-export { default as Icon } from "./_components/icon/index.native";
+export { default as Icon } from "./components/icon/index.native";
 export { default as ImagePicker } from "./_components/image-picker/index.native";
 export { default as List } from "./_components/list/index.native";
 // ListView // antd-mobile only

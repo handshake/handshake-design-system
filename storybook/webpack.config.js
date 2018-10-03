@@ -86,6 +86,23 @@ module.exports = (storybookBaseConfig, configType) => {
                 {
                     loader: "react-native-svg-loader",
                 },
+                {
+                    loader: "string-replace-loader",
+                    options: {
+                        multiple: [
+                            {
+                                search: 'fill="#333333"',
+                                replace: 'fill="replace"',
+                                flags: "g",
+                            },
+                            {
+                                search: '<path (d="[^"]+") />',
+                                replace: '<path $1 fill="replace" />',
+                                flags: "g",
+                            },
+                        ],
+                    },
+                },
             ]
         }
     );

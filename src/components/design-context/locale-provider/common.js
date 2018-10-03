@@ -4,7 +4,7 @@ import carmen from "@kmdavis/carmen";
 import flatten from "flat";
 
 // These imports depend on using `babel-plugin-wildcard`
-// with the following options: `{ "noModifyCase": true, "exts": ["js", "json"] }`
+// with the following options: `{ "noModifyCase": true, "exts": ["js", "json", "svg"] }`
 // see our .babelrc for an example usage
 import * as ALL_ANTD_WEB_LOCALES from "../../../../node_modules/antd/es/locale-provider";
 import * as ALL_ANTD_MOBILE_LOCALES from "../../../../node_modules/antd-mobile/es/locale-provider";

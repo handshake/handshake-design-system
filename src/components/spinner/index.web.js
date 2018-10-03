@@ -3,8 +3,6 @@ import AntdSpin from "antd/es/spin";
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
 
-// import "antd/es/spin/style";
-
 import propTypes, { defaultProps } from "./prop_types";
 
 // List of all theme variables this component uses.

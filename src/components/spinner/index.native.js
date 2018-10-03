@@ -25,8 +25,6 @@ const THEME_VARIABLES = [
     "vSpacingSm",
 ];
 
-// TODO: style ActivityIndicator
-
 function styles (theme) {
     return {
         container: {

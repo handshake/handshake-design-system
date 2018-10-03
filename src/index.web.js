@@ -40,7 +40,7 @@ export { default as Dropdown } from "./_components/dropdown/index.web";
 export { default as Flex } from "./_components/flex/index.web";
 export { default as Form } from "./_components/form/index.web";
 export { Row, Col } from "./_components/grid/index.web";
-export { default as Icon } from "./_components/icon/index.web";
+export { default as Icon } from "./components/icon/index.web";
 export { default as Input } from "./_components/input/index.web";
 export { default as InputNumber } from "./_components/input-number/index.web";
 export { default as Layout } from "./_components/layout/index.web";

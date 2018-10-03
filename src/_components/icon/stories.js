@@ -56,6 +56,7 @@ function allIconsOfType (manifestType, themeType) {
                         <Icon
                             spin={boolean("Spin", false)}
                             style={{
+                                color: "#ff0000",
                                 fontSize: 40,
                             }}
                             theme={themeType}

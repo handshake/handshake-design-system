@@ -1,7 +1,8 @@
 import _ from "lodash";
+import { Text as AnimatableText } from "react-native-animatable";
 import * as ANTD_ICONS from "@ant-design/icons/lib/dist";
 import React, { Component } from "react";
-import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
+import propTypes, { defaultProps, mapPropsForMobile, ALL_TYPES } from "./prop_types";
 import { renderIconDefinitionToSVGElement } from "@ant-design/icons/lib/helpers";
 import rnSvgParser from "@target-corp/react-native-svg-parser";
 import { ThemeSubscriber } from "../design-context/theme-provider";
@@ -30,9 +31,10 @@ class IconWrapper extends Component {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
     static THEME_VARIABLES = THEME_VARIABLES;
+    static ALL_TYPES = ALL_TYPES;
 
     render () {
-        let { color, pxSize, theme, type } = mapPropsForMobile(this.props);
+        let { color, pxSize, spin, theme, type } = mapPropsForMobile(this.props);
 
         if (!type) {
             return null;
@@ -41,14 +43,30 @@ class IconWrapper extends Component {
         let iconName = `${_.upperFirst(_.camelCase(type))}${THEME_LOOKUP[theme]}`;
         const icon = _.cloneDeep(ANTD_ICONS[iconName]);
 
+        let content;
         if (typeof icon.icon === "function") {
-            return rnSvgParser(renderIconDefinitionToSVGElement(icon, { placeholders: {
+            content = rnSvgParser(renderIconDefinitionToSVGElement(icon, { placeholders: {
                 primaryColor: color, 
                 secondaryColor: colorPalette(color, 0),
             }}), "", { height: pxSize, width: pxSize });
+        } else {
+            fillPaths(icon.icon, color);
+            content = rnSvgParser(renderIconDefinitionToSVGElement(icon), "", { height: pxSize, width: pxSize });
         }
-        fillPaths(icon.icon, color);
-        return rnSvgParser(renderIconDefinitionToSVGElement(icon), "", { height: pxSize, width: pxSize });
+
+        if (spin) {
+            return (
+                <AnimatableText
+                    animation="rotate"
+                    easing="linear"
+                    iterationCount="infinite"
+                    style={{ width: pxSize }}
+                >
+                    {content}
+                </AnimatableText>
+            );
+        }
+        return content;
     }
 }
 

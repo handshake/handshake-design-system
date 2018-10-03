@@ -1,8 +1,8 @@
 import _ from "lodash";
 import Button from "antd-mobile-rn/es/button";
-import Icon from "antd-mobile-rn/es/icon";
 import React, { Component } from "react";
 import Text from "antd-mobile-rn/es/text";
+import Icon from "../icon/index.native";
 import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
 import { ThemeSubscriber } from "../design-context/theme-provider";
 
@@ -169,6 +169,7 @@ class ButtonWrapper extends Component {
                         {(this.props.icon && !this.props.loading) ?
                             [
                                 <Icon
+                                    key="icon"
                                     color={(() => {
                                         switch (this.props.type) {
                                         case "primary":
@@ -187,9 +188,10 @@ class ButtonWrapper extends Component {
                                                 theme.colorTextBase;
                                         }
                                     })()}
-                                    size={this.props.size === "large" ? "sm" : "xxs"}
+                                    size={this.props.size === "large" ? 16 : "small"}
                                     type={this.props.icon}
                                 />,
+                                <Text key="gap">&nbsp;&nbsp;</Text>,
                                 this.props.children,
                             ]
                         :

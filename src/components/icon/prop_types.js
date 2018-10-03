@@ -3,8 +3,11 @@ import PropTypes from "prop-types";
 
 export default {
     color: PropTypes.string,
-    size: PropTypes.oneOf(["default", "large", "small"]), // ?
-    // spin: PropTypes.bool,
+    size: PropTypes.oneOfType([
+        PropTypes.oneOf(["default", "large", "small"]),
+        PropTypes.number,
+    ]),
+    spin: PropTypes.bool,
     theme: PropTypes.oneOf(["filled", "outlined", "twoTone"]),
     type: PropTypes.string.isRequired,
     // type: PropTypes.oneOf([TBD]).isRequired,
@@ -13,9 +16,11 @@ export default {
 export const defaultProps = {
     color: "#000",
     size: "default",
-    // spin: false,
+    spin: false,
     theme: "outlined",
 };
+
+export const ALL_TYPES = _.union(iconManifest.fill, iconManifest.outline, iconManifest.twotone).sort();
 
 export function fallbackTheme (theme, type) {
     if (theme === "twoTone" && iconManifest.fill.includes(type)) {
@@ -35,6 +40,14 @@ export function fallbackTheme (theme, type) {
     return false;
 }
 
+function getSize (size) {
+    return typeof size === "number" ? size : ({
+        default: 24,
+        large: 48,
+        small: 12,
+    }[size] || size);
+}
+
 export function mapPropsForWeb (props) {
     let { theme, type } = props;
     const manifestType =  (() => ({
@@ -47,12 +60,9 @@ export function mapPropsForWeb (props) {
     }
     if (theme === "twoTone") {
         return {
+            spin: props.spin,
             style: {
-                fontSize: ((size) => ({
-                    default: "24px",
-                    large: "48px",
-                    small: "12px",
-                }[size] || size))(props.size),
+                fontSize: `${getSize(props.size)}px`,
             },
             theme,
             twoToneColor: props.color,
@@ -60,13 +70,10 @@ export function mapPropsForWeb (props) {
         }
     }
     return {
+        spin: props.spin,
         style: {
             color: props.color,
-            fontSize: ((size) => ({
-                default: "24px",
-                large: "48px",
-                small: "12px",
-            }[size] || size))(props.size),
+            fontSize: `${getSize(props.size)}px`,
         },
         theme,
         type,
@@ -85,11 +92,8 @@ export function mapPropsForMobile (props) {
     }
     return {
         color: props.color,
-        pxSize: ((size) => ({
-            default: 24,
-            large: 48,
-            small: 12,
-        }[size] || size))(props.size),
+        pxSize: getSize(props.size),
+        spin: props.spin,
         theme,
         type,
     };

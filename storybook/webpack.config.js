@@ -26,7 +26,7 @@ module.exports = (storybookBaseConfig, configType) => {
     };
     const babelLoaderRule = storybookBaseConfig.module.rules[0];
     babelLoaderRule.exclude =
-        /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-menu)\/).*/;
+        /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-menu|react-native-animatable)\/).*/;
     storybookBaseConfig.module.rules.push(
         {
             test: /\.(png|jpe?g|gif)$/i,

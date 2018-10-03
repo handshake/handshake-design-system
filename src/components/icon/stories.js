@@ -1,5 +1,4 @@
 import { action } from "@storybook/addon-actions";
-import iconManifest from "@ant-design/icons/lib/manifest";
 import { storiesOf } from "@storybook/react";
 import React from "react";
 import { withInfo } from "@storybook/addon-info";
@@ -20,25 +19,13 @@ storiesOf("Icon", module)
     .add(
         "options",
         () => {
-            const theme = select("Theme", ["filled", "outlined", "twoTone"], "outlined");
-            let types;
-            switch (theme) {
-            case "filled":
-                types = iconManifest.fill;
-                break;
-            case "twoTone":
-                types = iconManifest.twotone;
-                break;
-            default:
-            case "outlined":
-                types = iconManifest.outline;
-            }
             return (
                 <Icon
                     color={color("Color", "#ff0000")}
                     size={select("Size", ["default", "large", "small"], "default")}
-                    theme={theme}
-                    type={select("Type", types, types[0])}
+                    spin={boolean("Spin", false)}
+                    theme={select("Theme", ["filled", "outlined", "twoTone"], "outlined")}
+                    type={select("Type", Icon.ALL_TYPES, Icon.ALL_TYPES[0])}
                 />
             );
         },
@@ -63,27 +50,15 @@ storiesOf("Icon/Native", module)
     .add(
         "options",
         () => {
-            const theme = select("Theme", ["filled", "outlined", "twoTone"], "outlined");
-            let types;
-            switch (theme) {
-            case "filled":
-                types = iconManifest.fill;
-                break;
-            case "twoTone":
-                types = iconManifest.twotone;
-                break;
-            default:
-            case "outlined":
-                types = iconManifest.outline;
-            }
             return (
                 <WingBlank  size="lg">
                     <WhiteSpace size="lg" />
                     <NativeIcon
                         color={color("Color", "#ff0000")}
                         size={select("Size", ["default", "large", "small"])}
-                        theme={theme}
-                        type={select("Type", types, types[0])}
+                        spin={boolean("Spin", false)}
+                        theme={select("Theme", ["filled", "outlined", "twoTone"], "outlined")}
+                        type={select("Type", NativeIcon.ALL_TYPES, NativeIcon.ALL_TYPES[0])}
                     />
                 </WingBlank>
             );

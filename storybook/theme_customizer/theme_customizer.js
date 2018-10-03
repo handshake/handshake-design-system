@@ -18,7 +18,10 @@ const CSS_UNIT_RE = /^(\.\d+|\d+\.\d+|\d+)(\w+)$/;
 
 class ThemeCustomizer extends Component {
     static propTypes = {
-        variables: PropTypes.arrayOf(PropTypes.string),
+        variables: PropTypes.oneOfType([
+            PropTypes.arrayOf(PropTypes.string),
+            PropTypes.bool,
+        ]),
     }
 
     constructor (props) {
@@ -45,6 +48,11 @@ class ThemeCustomizer extends Component {
 
     render () {
         const inPanel = !!(this.props.variables && this.props.variables.length);
+
+        if (this.props.variables === false) {
+            return null;
+        }
+
         return (
             <ThemeSubscriber>
                 {theme => {

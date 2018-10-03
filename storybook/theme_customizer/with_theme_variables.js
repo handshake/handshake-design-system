@@ -9,7 +9,7 @@ const withThemeVariables = makeDecorator({
     allowDeprecatedUsage: true,
     wrapper: (getStory, context, { options: variables }) => {
         const channel = addons.getChannel();
-        channel.emit(EVENT_SET_THEME_PANEL_VARIABLES, variables.sort());
+        channel.emit(EVENT_SET_THEME_PANEL_VARIABLES, variables && variables.sort());
         return getStory(context);
       },
 });
@@ -20,7 +20,7 @@ export class WithThemeVariables extends Component {
         const { children, variables } = this.props;
         const channel = addons.getChannel();
     
-        channel.emit(EVENT_SET_THEME_PANEL_VARIABLES, variables.sort());
+        channel.emit(EVENT_SET_THEME_PANEL_VARIABLES, variables && variables.sort());
         return children;
     }
 }

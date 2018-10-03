@@ -1,47 +1,30 @@
+import _ from "lodash";
+import * as ANTD_ICONS from "@ant-design/icons/lib/dist";
 import React, { Component } from "react";
-import propTypes, { defaultProps, fallbackTheme } from "./prop_types";
+import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
+import { renderIconDefinitionToSVGElement } from "@ant-design/icons/lib/helpers";
+import rnSvgParser from "@target-corp/react-native-svg-parser";
 import { ThemeSubscriber } from "../design-context/theme-provider";
+import colorPalette from "../../util/antd_color_palette";
 
-/*
-NOTE: this component depends on using webpack with the following rule:
-    {
-        test: /\.svg$/,
-        use: [
-            {
-                loader: "react-native-svg-loader",
-            },
-            {
-                loader: "string-replace-loader",
-                options: {
-                    search: 'fill="#333333"',
-                    replace: 'fill="replace"',
-                },
-            },
-        ]
+// TODO: similar to antd (web) provide a mechanism to register additional icons
+
+const THEME_VARIABLES = false;
+
+function fillPaths (node, color) {
+    if (node.tag === "path") {
+        node.attrs.fill = color;
     }
-*/
-
-// These imports depend on using `babel-plugin-wildcard`
-// with the following options: `{ "noModifyCase": true, "exts": ["js", "json", "svg"] }`
-// see our .babelrc for an example usage
-import * as ALL_FILL_ICONS from "../../../node_modules/@ant-design/icons/svg/fill";
-import * as ALL_OUTLINE_ICONS from "../../../node_modules/@ant-design/icons/svg/outline";
-// import * as ALL_TWOTONE_ICONS from "../../../node_modules/@ant-design/icons/svg/twotone";
-
-const icons = {
-    filled: ALL_FILL_ICONS,
-    outlined: ALL_OUTLINE_ICONS,
-    // twoTone: ALL_TWOTONE_ICONS,
+    if (node.children) {
+        node.children.forEach(n => fillPaths(n, color));
+    }
 }
 
-// List of all theme variables this component uses.
-// Eventually, I'd like to automate generating this data.
-// This is currently only used by the Storybook Theme Customizer Addon Panel,
-// but there are other potential use cases, so, I'm putting this here instead of
-// hard coding it in the the stories file.
-const THEME_VARIABLES = [
-    "placeholder",
-];
+const THEME_LOOKUP = {
+    filled: "Fill",
+    outlined: "Outline",
+    twoTone: "TwoTone",
+}
 
 class IconWrapper extends Component {
     static propTypes = propTypes;
@@ -49,47 +32,23 @@ class IconWrapper extends Component {
     static THEME_VARIABLES = THEME_VARIABLES;
 
     render () {
-        let { color, size, theme, type } = this.props;
+        let { color, pxSize, theme, type } = mapPropsForMobile(this.props);
 
         if (!type) {
             return null;
         }
 
-        if (theme === "twoTone") {
-            theme = "filled";
+        let iconName = `${_.upperFirst(_.camelCase(type))}${THEME_LOOKUP[theme]}`;
+        const icon = _.cloneDeep(ANTD_ICONS[iconName]);
+
+        if (typeof icon.icon === "function") {
+            return rnSvgParser(renderIconDefinitionToSVGElement(icon, { placeholders: {
+                primaryColor: color, 
+                secondaryColor: colorPalette(color, 0),
+            }}), "", { height: pxSize, width: pxSize });
         }
-
-        let iconSet = icons[theme || "default"];
-
-        if (!iconSet[type]) {
-            theme = fallbackTheme(theme, type);
-
-            if (!theme) {
-                return null;
-            }
-
-            iconSet = icons[theme];
-        }
-
-        let pxSize;
-        switch (size) {
-        case "large":
-            pxSize = 48;
-            break;
-        case "small":
-            pxSize = 12;
-            break;
-        case "default":
-        default:
-            pxSize = 24;
-        }
-
-        const SvgIcon = iconSet[type];
-        return <SvgIcon
-            height={pxSize}
-            fill={color}
-            width={pxSize}
-        />;
+        fillPaths(icon.icon, color);
+        return rnSvgParser(renderIconDefinitionToSVGElement(icon), "", { height: pxSize, width: pxSize });
     }
 }
 

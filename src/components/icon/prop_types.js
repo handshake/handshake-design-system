@@ -5,7 +5,7 @@ export default {
     color: PropTypes.string,
     size: PropTypes.oneOf(["default", "large", "small"]), // ?
     // spin: PropTypes.bool,
-    theme: PropTypes.oneOf(["filled", "outlined", "twoTone"]), // twoTone might be tricky on RN
+    theme: PropTypes.oneOf(["filled", "outlined", "twoTone"]),
     type: PropTypes.string.isRequired,
     // type: PropTypes.oneOf([TBD]).isRequired,
 }
@@ -68,6 +68,28 @@ export function mapPropsForWeb (props) {
                 small: "12px",
             }[size] || size))(props.size),
         },
+        theme,
+        type,
+    };
+}
+
+export function mapPropsForMobile (props) {
+    let { theme, type } = props;
+    const manifestType =  (() => ({
+        filled: "fill",
+        outlined: "outline",
+        twoTone: "twotone",
+    }[theme]))();
+    if (!iconManifest[manifestType].includes(type)) {
+        theme = fallbackTheme(theme, type);
+    }
+    return {
+        color: props.color,
+        pxSize: ((size) => ({
+            default: 24,
+            large: 48,
+            small: 12,
+        }[size] || size))(props.size),
         theme,
         type,
     };

@@ -12,7 +12,7 @@ module.exports = (storybookBaseConfig, configType) => {
             "react-native": "react-native-web",
             "react-native-svg": "react-native-svg-web",
             "@storybook/react-native": "@storybook/react",
-        }
+        },
     };
     // FIXME: this next bit is very evil;
     // some (specifically react-native-menu) was failing on load due to:
@@ -83,9 +83,6 @@ module.exports = (storybookBaseConfig, configType) => {
     );
     storybookBaseConfig.plugins.push(
         new webpack.IgnorePlugin(/\.d\.ts$/),
-        new webpack.DefinePlugin({
-            "process.env.PLATFORM": `"${process.env.PLATFORM || "web"}"`,
-        }),
         new webpack.NormalModuleReplacementPlugin(
             /antd-mobile-rn\/(es|lib)\/style\/themes\/default\.native\.js/,
             path.resolve(__dirname, "../src/theme/antd_mobile_rn_variables.js")

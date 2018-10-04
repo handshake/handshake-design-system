@@ -17,6 +17,7 @@
     "url": "https://github.com/handshake/handshake-design-system/issues"
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
@@ -26,7 +27,7 @@
     "@sambego/storybook-styles": "^1.0.0",
     "@storybook/addon-actions": "alpha",
     "@storybook/addon-info": "alpha",
-    "@storybook/addon-knobs": "alpha",
+    "@storybook/addon-knobs": "^4.0.0-alpha.24",
     "@storybook/addon-links": "alpha",
     "@storybook/addon-options": "alpha",
     "@storybook/addon-viewport": "alpha",
@@ -39,6 +40,7 @@
     "jest-expo": "~29.0.0",
     "less": "^3.8.1",
     "less-loader": "^4.1.0",
+    "metro-react-native-babel-preset": "^0.47.1",
     "raw-loader": "^0.5.1",
     "react-art": "^16.5.2",
     "react-native": "^0.57.1",
@@ -47,10 +49,12 @@
     "react-test-renderer": "16.3.1",
     "storybook-addon-intl": "^2.3.0",
     "style-loader": "^0.23.0",
-    "url-loader": "^1.1.1"
+    "url-loader": "^1.1.1",
+    "webpack-cli": "^3.1.2"
   },
   "scripts": {
-    "start": "./bin/prepare_images.sh && ./bin/extract_less_variables.js && PLATFORM=web start-storybook -p 9001 -c storybook"
+    "build": "./bin/extract_less_variables.js && rm -rf lib && babel src --out-dir lib --ignore src/**/stories.js && cd src && find . \\( -name \"*.json\" \\) | cut -d'/' -f2- | cpio -p -dum ../lib",
+    "start": "./bin/prepare_images.sh && ./bin/extract_less_variables.js && start-storybook -p 9001 -c storybook"
   },
   "jest": {
     "preset": "jest-expo"
@@ -64,7 +68,6 @@
     "antd-mobile": "^2.2.5",
     "antd-mobile-rn": "^2.2.1",
     "babel-plugin-wildcard": "^5.0.0",
-    "babel-preset-react-native": "^4.0.1",
     "flat": "^4.1.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",

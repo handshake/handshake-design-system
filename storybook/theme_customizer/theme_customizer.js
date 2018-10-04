@@ -74,14 +74,7 @@ class ThemeCustomizer extends Component {
                                     KnobType = knobs.number;
                                 } else if (typeof value === "string") {
                                     if (tinycolor(value)._ok) {
-                                        // Color knob is currently broken;
-                                        // It renders fine, until you click on
-                                        // it. Value can't be edited due to
-                                        // error. Fix has already been merged,
-                                        // but hasn't been published yet.
-                                        // TODO: check again tomorrow.
-                                        // https://github.com/storybooks/storybook/tree/master/addons/knobs
-                                        //KnobType = knobs.color;
+                                        KnobType = knobs.color;
                                     } else if (CSS_UNIT_RE.test(value)) {
                                         const [__, cssValue, cssUnit] = value.match(CSS_UNIT_RE);
                                         value = _.toNumber(cssValue);

@@ -36,9 +36,10 @@ const MobileWrapper = styled.div`
     & > div {
         background: #f5f5f9;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 60px 12px;
+        cursor: pointer;
         height: 568px;
         margin: auto;
-        overflow: hidden;
+        overflow: auto;
         width: 320px;
     }
 `;
@@ -71,34 +72,30 @@ export default class Playground extends Component {
                     {this.props.web ?
                         <WebWrapper>
                             <div>
-                                <web.DesignContext>
-                                    <ErrorBoundary>
-                                        <JSXParser
-                                            components={web}
-                                            jsx={this.state.jsx}
-                                        />
-                                    </ErrorBoundary>
-                                </web.DesignContext>
+                                <ErrorBoundary>
+                                    <JSXParser
+                                        components={web}
+                                        jsx={this.state.jsx}
+                                    />
+                                </ErrorBoundary>
                             </div>
                         </WebWrapper> : null
                     }
                     {this.props.mobile ?
                         <MobileWrapper>
                             <div>
-                                <mobile.DesignContext>
-                                    <mobile.WingBlank>
-                                        <mobile.WhiteSpace size="lg" />
-                                        <ErrorBoundary>
-                                            <JSXParser
-                                                allowUnknownElements={false}
-                                                components={mobile}
-                                                componentsOnly
-                                                jsx={this.state.jsx}
-                                                renderInWrapper={false}
-                                            />
-                                        </ErrorBoundary>
-                                    </mobile.WingBlank>
-                                </mobile.DesignContext>
+                                <mobile.WingBlank>
+                                    <mobile.WhiteSpace size="lg" />
+                                    <ErrorBoundary>
+                                        <JSXParser
+                                            allowUnknownElements={false}
+                                            components={mobile}
+                                            componentsOnly
+                                            jsx={this.state.jsx}
+                                            renderInWrapper={false}
+                                        />
+                                    </ErrorBoundary>
+                                </mobile.WingBlank>
                             </div>
                         </MobileWrapper> : null
                     }

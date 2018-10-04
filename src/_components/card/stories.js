@@ -15,7 +15,7 @@ storiesOf("AntD/Card", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(["placeholder"]))
+    .addDecorator(withThemeVariables(false))
     .add(
         "Basic Options",
         () => (
@@ -144,34 +144,34 @@ storiesOf("AntD/Card/Native", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(["placeholder"]))
+    .addDecorator(withThemeVariables(false))
     .add(
         "options",
         () => {
             const content = (
                 <NativeCard
-                        full={boolean("Full", false)}
-                    >
-                        <NativeCard.Header
-                            title={text("Title", "Example")}
-                            thumb={text("Thumbnail", "http://picsum.photos/32/?random")}
-                            thumbStyle={object("Thumb style", { width: 32, height: 32 })}
-                            extra={text("Header Right Side Content", "Upper Right")}
-                        />
-                        <NativeCard.Body>
-                            <WingBlank>
-                                <Text
-                                    style={{
-                                        fontFamily: "BrandonText",
-                                    }}
-                                >{text("Content", "Sample Content")}</Text>
-                            </WingBlank>
-                        </NativeCard.Body>
-                        <NativeCard.Footer
-                            content={text("Footer Left Side Content", "Left Side")}
-                            extra={text("Footer Right Side Content", "Right Side")}
-                        />
-                    </NativeCard>
+                    full={boolean("Full", false)}
+                >
+                    <NativeCard.Header
+                        title={text("Title", "Example")}
+                        thumb={text("Thumbnail", "http://picsum.photos/32/?random")}
+                        thumbStyle={object("Thumb style", { width: 32, height: 32 })}
+                        extra={text("Header Right Side Content", "Upper Right")}
+                    />
+                    <NativeCard.Body>
+                        <WingBlank>
+                            <Text
+                                style={{
+                                    fontFamily: "BrandonText",
+                                }}
+                            >{text("Content", "Sample Content")}</Text>
+                        </WingBlank>
+                    </NativeCard.Body>
+                    <NativeCard.Footer
+                        content={text("Footer Left Side Content", "Left Side")}
+                        extra={text("Footer Right Side Content", "Right Side")}
+                    />
+                </NativeCard>
             );
             return (boolean("Full", false) ?
                 content

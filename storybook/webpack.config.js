@@ -14,20 +14,23 @@ module.exports = (storybookBaseConfig, configType) => {
             "@storybook/react-native": "@storybook/react",
         },
     };
-    // FIXME: this next bit is very evil;
-    // some (specifically react-native-menu) was failing on load due to:
-    // > Cannot assign to read only property 'exports' of object '#<Object>'
-    // I couldn't find an immediately solution, and I needed to demo this, so, I'm stubbing out these
-    // dependencies of dependencies that were not actually using YET. A real solution is still needed.
-    storybookBaseConfig.externals = {
-        "react-native-camera-roll-picker": "{}",
-        "react-native-collapsible": "{}",
-        "react-native-menu": "{}",
-    };
     const babelLoaderRule = storybookBaseConfig.module.rules[0];
     babelLoaderRule.exclude =
-        /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-menu|react-native-animatable)\/).*/;
+        /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-animatable)\/).*/;
     storybookBaseConfig.module.rules.push(
+        {
+            test: /\.js$/,
+            include: /node_modules\/react-native-menu/,
+            use: [
+                {
+                    loader: "babel-loader",
+                    options: {
+                        babelrc: false,
+                        presets: ["module:metro-react-native-babel-preset"]
+                    },
+                },
+            ],
+        },
         {
             test: /\.(png|jpe?g|gif)$/i,
             use: [

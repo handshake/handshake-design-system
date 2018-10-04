@@ -1,9 +1,11 @@
 import _ from "lodash";
-import { storiesOf } from "@storybook/react";
 import React from "react";
+import { storiesOf } from "@storybook/react";
 import { withOptions } from "@storybook/addon-options";
 import withStyles from "@sambego/storybook-styles"
 import ThemeCustomizer from "./theme_customizer/theme_customizer";
+
+import Playground from "./playground";
 
 storiesOf("Welcome", module)
     .addDecorator(withOptions({ showAddonPanel: false }))
@@ -14,8 +16,9 @@ storiesOf("Welcome", module)
         </div>
     ))
     .addDecorator(withStyles({
+        background: "rgba(255,255,255,0.89)",
+        height: "100vh",
         overflowX: "hidden",
     }))
-    .add("Theme Customization", () => {
-        return <ThemeCustomizer/>;
-    });
+    .add("Theme Customization", () => <ThemeCustomizer />)
+    .add("Playground", () => <Playground web mobile />);

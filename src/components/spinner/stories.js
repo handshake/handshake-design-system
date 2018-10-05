@@ -1,12 +1,14 @@
 import { storiesOf } from "@storybook/react";
 import React from "react";
+import Text from "antd-mobile-rn/es/text";
+import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 import { withInfo } from "@storybook/addon-info";
 import { withKnobs, array, boolean, button, color, date, knob, number, object, text, select } from "@storybook/addon-knobs";
 import withStyles from "@sambego/storybook-styles"
 import { withViewport } from "@storybook/addon-viewport";
 
 import { Spinner } from "../../index.web";
-import { Spinner as NativeSpinner, View, Text, WingBlank, WhiteSpace } from "../../index.native";
+import { Spinner as NativeSpinner } from "../../index.native";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 

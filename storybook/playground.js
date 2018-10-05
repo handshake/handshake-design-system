@@ -2,14 +2,15 @@ import AceEditor from "react-ace";
 import JSXParser from "react-jsx-parser";
 import React, { Component } from "react";
 import styled from "styled-components";
+import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 
 import "brace/mode/jsx";
+import "brace/theme/github";
 
 import * as web from "../src/index.web";
 import * as mobile from "../src/index.native";
 
 // style (mostly) borrowed from storybook viewport addon
-
 const WebWrapper = styled.div`
     box-sizing: border-box;
     width: 100%;
@@ -66,6 +67,7 @@ export default class Playground extends Component {
                     mode="jsx"
                     onChange={(jsx) => this.setState({ jsx })}
                     style={{ borderBottom: "1px solid #f0f0f0", height: 200, width: "100%" }}
+                    theme="github"
                     value={this.state.jsx}
                 />
                 <ErrorBoundary>
@@ -84,8 +86,8 @@ export default class Playground extends Component {
                     {this.props.mobile ?
                         <MobileWrapper>
                             <div>
-                                <mobile.WingBlank>
-                                    <mobile.WhiteSpace size="lg" />
+                                <WingBlank>
+                                    <WhiteSpace size="lg" />
                                     <ErrorBoundary>
                                         <JSXParser
                                             allowUnknownElements={false}
@@ -95,7 +97,7 @@ export default class Playground extends Component {
                                             renderInWrapper={false}
                                         />
                                     </ErrorBoundary>
-                                </mobile.WingBlank>
+                                </WingBlank>
                             </div>
                         </MobileWrapper> : null
                     }

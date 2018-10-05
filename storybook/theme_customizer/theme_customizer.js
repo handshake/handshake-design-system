@@ -7,6 +7,7 @@ import React, { Component } from "react";
 import tinycolor from "tinycolor2";
 import ButtonGroup from "./button_group";
 import KnobLine from "./knob_line";
+import styled from "styled-components";
 import { ThemeSubscriber } from "../../src/components/design-context/theme-provider";
 import THEME, { base } from "../../src/theme";
 
@@ -15,6 +16,11 @@ import { EVENT_SET_THEME } from "./constants";
 const objDiff = (a, b) => _.omitBy(b, (v, k) => a[k] === v);
 
 const CSS_UNIT_RE = /^(\.\d+|\d+\.\d+|\d+)(\w+)$/;
+
+const ColorPicker = styled(knobs.color)`
+    color: transparent;
+    flex-grow: 0;
+`;
 
 class ThemeCustomizer extends Component {
     static propTypes = {
@@ -74,7 +80,16 @@ class ThemeCustomizer extends Component {
                                     KnobType = knobs.number;
                                 } else if (typeof value === "string") {
                                     if (tinycolor(value)._ok) {
-                                        KnobType = knobs.color;
+                                        // KnobType = knobs.color;
+                                        extra = (
+                                            <ColorPicker
+                                                knob={{
+                                                    name: key,
+                                                    value,
+                                                }}
+                                                onChange={onChange}
+                                            />
+                                        )
                                     } else if (CSS_UNIT_RE.test(value)) {
                                         const [__, cssValue, cssUnit] = value.match(CSS_UNIT_RE);
                                         value = _.toNumber(cssValue);

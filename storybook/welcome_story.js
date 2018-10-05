@@ -7,6 +7,8 @@ import ThemeCustomizer from "./theme_customizer/theme_customizer";
 
 import Playground from "./playground";
 
+// import "antd/es/style";
+
 storiesOf("Welcome", module)
     .addDecorator(withOptions({ showAddonPanel: false }))
     .add("welcome", () => (
@@ -17,6 +19,7 @@ storiesOf("Welcome", module)
     ))
     .addDecorator(withStyles({
         background: "rgba(255,255,255,0.89)",
+        // fontFamily: 'BrandonText,\"Chinese Quote\",-apple-system,BlinkMacSystemFont,\"Segoe UI\",\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"Helvetica Neue\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\"',
         height: "100vh",
         overflowX: "hidden",
     }))

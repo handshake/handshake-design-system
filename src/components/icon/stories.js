@@ -1,13 +1,14 @@
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 import React from "react";
+import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 import { withInfo } from "@storybook/addon-info";
 import { withKnobs, array, boolean, button, color, date, knob, number, object, text, select } from "@storybook/addon-knobs";
 import withStyles from "@sambego/storybook-styles"
 import { withViewport } from "@storybook/addon-viewport";
 
 import { Icon } from "../..";
-import { Icon as NativeIcon, WingBlank, WhiteSpace } from "../../index.native";
+import { Icon as NativeIcon } from "../../index.native";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 

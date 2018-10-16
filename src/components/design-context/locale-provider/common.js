@@ -63,10 +63,10 @@ const ALL_SUPPORTED_LOCALES = _.uniq(_.keys(ALL_HS_LOCALES).map(locale => {
 function getLocaleData (locale, getAdditionalMessages) {
     const parsed = carmen.parse(locale);
     const language = parsed.language || DEFAULT_LANGUAGE;
+    const region = parsed.region || DEFAULT_REGION;
+    const localeName = `${language}-${region}`;
 
     if (!cache[locale]) {
-        const region = parsed.region || DEFAULT_REGION;
-        const localeName = `${language}-${region}`;
         const antdLocaleName = `${language}_${region}`;
 
         let antdLocaleData = _.merge(
@@ -99,7 +99,7 @@ function getLocaleData (locale, getAdditionalMessages) {
     const result = _.cloneDeep(cache[locale]);
 
     if (getAdditionalMessages) {
-        _.extend(result.messages, flatten(getAdditionalMessages(language)));
+        _.extend(result.messages, flatten(getAdditionalMessages({ language, locale: localeName })));
     }
 
     return result

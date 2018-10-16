@@ -180,7 +180,7 @@ const Button = styled(AntdButton)`
     color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.color[ghost ? "ghost" : type || "default"].default, theme)};
     cursor: pointer;
     display: inline-block;
-    font-family: inherit;
+    font-family: ${({ theme }) => theme.fontFamily };
     font-size: ${({ size, theme }) => t(VARIABLE_LOOKUP.fontSize[size || "default"], theme)};
     font-weight: ${({ theme }) => theme.btnFontWeight };
     height: ${({ size, theme }) => t(VARIABLE_LOOKUP.height[size || "default"], theme)};

@@ -89,7 +89,8 @@ class ThemeCustomizer extends Component {
                                                 }}
                                                 onChange={onChange}
                                             />
-                                        )
+                                        );
+                                        // TODO: try to format value to hex
                                     } else if (CSS_UNIT_RE.test(value)) {
                                         const [__, cssValue, cssUnit] = value.match(CSS_UNIT_RE);
                                         value = _.toNumber(cssValue);

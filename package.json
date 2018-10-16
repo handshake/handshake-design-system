@@ -8,6 +8,7 @@
     "Adam Phillips-Silver <adam.phillips-silver@handshake.com>",
     "Kevan Davis <kevan.davis@handshake.com>"
   ],
+  "module": "src/index.web",
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
@@ -19,7 +20,7 @@
   "devDependencies": {
     "@babel/cli": "^7.1.2",
     "@babel/core": "^7.1.0",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
@@ -63,7 +64,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@kmdavis/carmen": "^0.1.0",
     "@quickbaseoss/babel-plugin-styled-components-css-namespace": "^0.1.1",
     "@target-corp/react-native-svg-parser": "^1.0.6",

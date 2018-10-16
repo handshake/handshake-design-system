@@ -61,9 +61,10 @@ const ALL_SUPPORTED_LOCALES = _.uniq(_.keys(ALL_HS_LOCALES).map(locale => {
 })).sort();
 
 function getLocaleData (locale, getAdditionalMessages) {
+    const parsed = carmen.parse(locale);
+    const language = parsed.language || DEFAULT_LANGUAGE;
+
     if (!cache[locale]) {
-        const parsed = carmen.parse(locale);
-        const language = parsed.language || DEFAULT_LANGUAGE;
         const region = parsed.region || DEFAULT_REGION;
         const localeName = `${language}-${region}`;
         const antdLocaleName = `${language}_${region}`;

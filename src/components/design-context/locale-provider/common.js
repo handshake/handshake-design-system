@@ -11,6 +11,9 @@ import * as ALL_ANTD_MOBILE_LOCALES from "../../../../node_modules/antd-mobile/e
 // NOTE: there is also data for React-Native at "../../../../node_modules/antd-mobile-rn/es/locale-provider"
 // but it is just a subset of the mobile locale data, and it has some syntax errors (wat?) in one
 // of the locales (sv_SE) so, I'm going to ignore it.
+
+// TODO: maybe replace below wildcard import with "react-intl/locale-data/index.js" which is a pre-compiled aggregate;
+// antd doesn't have any equivalent, so we would still need the wildcard babel plugin
 import * as ALL_REACT_INTL_LOCALES from "../../../../node_modules/react-intl/locale-data";
 import * as ALL_HS_LOCALES from "../../../locales";
 

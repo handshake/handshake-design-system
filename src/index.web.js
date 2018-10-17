@@ -1,5 +1,3 @@
-import _ from "lodash";
-
 /**
  * `.babelrc` for importing only the components you use using `babel-plugin-import`
  *     {
@@ -17,64 +15,126 @@ import _ from "lodash";
 // NOTE for developers: `_components` denotes a vanilla AntD/AntD-Mobile component that has not yet
 // been wrapped. `components` are components that we've already wrapped
 
-// export { default as Affix } from "./_components/affix/index.web";
-// export { default as Alert } from "./_components/alert/index.web";
-// export { default as Anchor } from "./_components/anchor/index.web";
-// export { default as AutoComplete } from "./_components/auto-complete/index.web";
-// export { default as Avatar } from "./_components/avatar/index.web";
-// export { default as BackTop } from "./_components/back-top/index.web";
-// export { default as Badge } from "./_components/badge/index.web";
-// export { default as Breadcrumb } from "./_components/breadcrumb/index.web";
+import { default as Affix } from "./_components/affix/index.web";
+import { default as Alert } from "./_components/alert/index.web";
+import { default as Anchor } from "./_components/anchor/index.web";
+import { default as AutoComplete } from "./_components/auto-complete/index.web";
+import { default as Avatar } from "./_components/avatar/index.web";
+import { default as BackTop } from "./_components/back-top/index.web";
+import { default as Badge } from "./_components/badge/index.web";
+import { default as Breadcrumb } from "./_components/breadcrumb/index.web";
+import { default as Calendar } from "./_components/calendar/index.web";
+import { default as Card } from "./_components/card/index.web";
+import { default as Carousel } from "./_components/carousel/index.web";
+import { default as Cascader } from "./_components/cascader/index.web";
+import { default as Checkbox } from "./_components/checkbox/index.web";
+import { default as Collapse } from "./_components/collapse/index.web";
+import { default as DatePicker } from "./_components/date-picker/index.web";
+import { default as Divider } from "./_components/divider/index.web";
+import { default as Drawer } from "./_components/drawer/index.web";
+import { default as Dropdown } from "./_components/dropdown/index.web";
+import { default as Flex } from "./_components/flex/index.web";
+import { default as Form } from "./_components/form/index.web";
+import { Row, Col } from "./_components/grid/index.web";
+import { default as Input } from "./_components/input/index.web";
+import { default as InputNumber } from "./_components/input-number/index.web";
+import { default as Layout } from "./_components/layout/index.web";
+import { default as List } from "./_components/list/index.web";
+import { default as Mention } from "./_components/mention/index.web";
+import { default as Menu } from "./_components/menu/index.web";
+import { default as Message } from "./_components/message/index.web";
+import { default as Modal } from "./_components/modal/index.web";
+import { default as Notification } from "./_components/notification/index.web";
+import { default as Pagination } from "./_components/pagination/index.web";
+import { default as Popconfirm } from "./_components/popconfirm/index.web";
+import { default as Popover } from "./_components/popover/index.web";
+import { default as Progress } from "./_components/progress/index.web";
+import { default as Radio } from "./_components/radio/index.web";
+import { default as Rate } from "./_components/rate/index.web";
+import { default as Result } from "./_components/result/index.web";
+import { default as SegmentedControl } from "./_components/segmented-control/index.web";
+import { default as Select } from "./_components/select/index.web";
+import { default as Skeleton } from "./_components/skeleton/index.web";
+import { default as Slider } from "./_components/slider/index.web";
+import { default as Steps } from "./_components/steps/index.web";
+import { default as SwipeAction } from "./_components/swipe-action/index.web";
+import { default as Switch } from "./_components/switch/index.web";
+import { default as Table } from "./_components/table/index.web";
+import { default as Tabs } from "./_components/tabs/index.web";
+import { default as Tag } from "./_components/tag/index.web";
+import { default as TimePicker } from "./_components/time-picker/index.web";
+import { default as Timeline } from "./_components/timeline/index.web";
+import { default as Toast } from "./_components/toast/index.web";
+import { default as Tooltip } from "./_components/tooltip/index.web";
+import { default as Transfer } from "./_components/transfer/index.web";
+import { default as Tree } from "./_components/tree/index.web";
+import { default as TreeSelect } from "./_components/tree-select/index.web";
+import { default as Upload } from "./_components/upload/index.web";
+import { default as WhiteSpace } from "./_components/white-space/index.web";
+import { default as WingBlank } from "./_components/wing-blank/index.web";
+
+export const antd = {
+    Affix,
+    Alert,
+    Anchor,
+    AutoComplete,
+    Avatar,
+    BackTop,
+    Badge,
+    Breadcrumb,
+    Calendar,
+    Card,
+    Carousel,
+    Cascader,
+    Checkbox,
+    Col,
+    Collapse,
+    DatePicker,
+    Divider,
+    Drawer,
+    Dropdown,
+    Flex,
+    Form,
+    Input,
+    InputNumber,
+    Layout,
+    List,
+    Mention,
+    Menu,
+    Message,
+    Modal,
+    Notification,
+    Pagination,
+    Popconfirm,
+    Popover,
+    Progress,
+    Radio,
+    Rate,
+    Result,
+    Row, 
+    SegmentedControl,
+    Select,
+    Skeleton,
+    Slider,
+    Steps,
+    SwipeAction,
+    Switch,
+    Table,
+    Tabs,
+    Tag,
+    TimePicker,
+    Timeline,
+    Toast,
+    Tooltip,
+    Transfer,
+    Tree,
+    TreeSelect,
+    Upload,
+    WhiteSpace,
+    WingBlank,
+};
+
 export { default as Button } from "./components/button/index.web";
-// export { default as Calendar } from "./_components/calendar/index.web";
-// export { default as Card } from "./_components/card/index.web";
-// export { default as Carousel } from "./_components/carousel/index.web";
-// export { default as Cascader } from "./_components/cascader/index.web";
-// export { default as Checkbox } from "./_components/checkbox/index.web";
-// export { default as Collapse } from "./_components/collapse/index.web";
-// export { default as DatePicker } from "./_components/date-picker/index.web";
 export { default as DesignContext } from "./components/design-context";
-// export { default as Divider } from "./_components/divider/index.web";
-// export { default as Drawer } from "./_components/drawer/index.web";
-// export { default as Dropdown } from "./_components/dropdown/index.web";
-// export { default as Flex } from "./_components/flex/index.web";
-// export { default as Form } from "./_components/form/index.web";
-// export { Row, Col } from "./_components/grid/index.web";
 export { default as Icon } from "./components/icon/index.web";
-// export { default as Input } from "./_components/input/index.web";
-// export { default as InputNumber } from "./_components/input-number/index.web";
-// export { default as Layout } from "./_components/layout/index.web";
-// export { default as List } from "./_components/list/index.web";
-// export { default as Mention } from "./_components/mention/index.web";
-// export { default as Menu } from "./_components/menu/index.web";
-// export { default as Message } from "./_components/message/index.web";
-// export { default as Modal } from "./_components/modal/index.web";
-// export { default as Notification } from "./_components/notification/index.web";
-// export { default as Pagination } from "./_components/pagination/index.web";
-// export { default as Popconfirm } from "./_components/popconfirm/index.web";
-// export { default as Popover } from "./_components/popover/index.web";
-// export { default as Progress } from "./_components/progress/index.web";
-// export { default as Radio } from "./_components/radio/index.web";
-// export { default as Rate } from "./_components/rate/index.web";
-// export { default as Result } from "./_components/result/index.web";
-// export { default as SegmentedControl } from "./_components/segmented-control/index.web";
-// export { default as Select } from "./_components/select/index.web";
-// export { default as Skeleton } from "./_components/skeleton/index.web";
-// export { default as Slider } from "./_components/slider/index.web";
 export { default as Spinner } from "./components/spinner/index.web";
-// export { default as Steps } from "./_components/steps/index.web";
-// export { default as SwipeAction } from "./_components/swipe-action/index.web";
-// export { default as Switch } from "./_components/switch/index.web";
-// export { default as Table } from "./_components/table/index.web";
-// export { default as Tabs } from "./_components/tabs/index.web";
-// export { default as Tag } from "./_components/tag/index.web";
-// export { default as TimePicker } from "./_components/time-picker/index.web";
-// export { default as Timeline } from "./_components/timeline/index.web";
-// export { default as Toast } from "./_components/toast/index.web";
-// export { default as Tooltip } from "./_components/tooltip/index.web";
-// export { default as Transfer } from "./_components/transfer/index.web";
-// export { default as Tree } from "./_components/tree/index.web";
-// export { default as TreeSelect } from "./_components/tree-select/index.web";
-// export { default as Upload } from "./_components/upload/index.web";
-// export { default as WhiteSpace } from "./_components/white-space/index.web";
-// export { default as WingBlank } from "./_components/wing-blank/index.web";

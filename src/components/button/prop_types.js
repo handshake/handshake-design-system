@@ -17,7 +17,7 @@ export const defaultProps = {
     // block: WEB ? false : true,
     disabled: false,
     loading: false,
-    size: "large",
+    size: "default",
     style: {},
     type: "default",
     // webHtmlType: "button",

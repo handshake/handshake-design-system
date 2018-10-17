@@ -3,16 +3,16 @@ import LocaleProvider from "./locale-provider";
 import ThemeProvider, { ThemeSubscriber } from "./theme-provider";
 
 const DesignContext = ({ children, getAdditionalMessages, locale, theme }) => (
-    <ThemeProvider
-        theme={theme}
+    <LocaleProvider
+        getAdditionalMessages={getAdditionalMessages}
+        locale={locale}
     >
-        <LocaleProvider
-            getAdditionalMessages={getAdditionalMessages}
-            locale={locale}
+        <ThemeProvider
+            theme={theme}
         >
             {children}
-        </LocaleProvider>
-    </ThemeProvider>
+        </ThemeProvider>
+    </LocaleProvider>
 );
 
 DesignContext.propTypes = {

@@ -89,7 +89,7 @@ export default class Spinner extends Component {
     static THEME_VARIABLES = THEME_VARIABLES;
 
     render () {
-        const { enabled = true, block, size, text, toast } = this.props;
+        const { enabled = true, block, size, style, text, toast } = this.props;
         
         if (!enabled) {
             return null;
@@ -103,6 +103,7 @@ export default class Spinner extends Component {
                             {theme => (
                                 <ActivityIndicator
                                     size={size || "large"}
+                                    style={style}
                                     styles={styles(theme)}
                                     text={text}
                                 />
@@ -118,6 +119,7 @@ export default class Spinner extends Component {
                 {theme => (
                     <ActivityIndicator
                         size={size || "small"}
+                        style={style}
                         styles={styles(theme)}
                         text={text}
                         toast={toast}

@@ -17,6 +17,7 @@ export const defaultProps = {
     color: "#000",
     size: "default",
     spin: false,
+    style: {},
     theme: "outlined",
 };
 
@@ -63,6 +64,7 @@ export function mapPropsForWeb (props) {
             spin: props.spin,
             style: {
                 fontSize: `${getSize(props.size)}px`,
+                ...props.style,
             },
             theme,
             twoToneColor: props.color,
@@ -74,6 +76,7 @@ export function mapPropsForWeb (props) {
         style: {
             color: props.color,
             fontSize: `${getSize(props.size)}px`,
+            ...props.style,
         },
         theme,
         type,
@@ -94,6 +97,7 @@ export function mapPropsForMobile (props) {
         color: props.color,
         pxSize: getSize(props.size),
         spin: props.spin,
+        style: props.style,
         theme,
         type,
     };

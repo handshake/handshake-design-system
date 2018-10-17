@@ -42,5 +42,6 @@ export const defaultProps = {
     block: false,
     enabled: true,
     size: "small",
+    style: {},
     toast: false,
 };

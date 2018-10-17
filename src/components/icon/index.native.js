@@ -34,7 +34,7 @@ class IconWrapper extends Component {
     static ALL_TYPES = ALL_TYPES;
 
     render () {
-        let { color, pxSize, spin, theme, type } = mapPropsForMobile(this.props);
+        let { color, pxSize, spin, style, theme, type } = mapPropsForMobile(this.props);
 
         if (!type) {
             return null;
@@ -48,10 +48,10 @@ class IconWrapper extends Component {
             content = rnSvgParser(renderIconDefinitionToSVGElement(icon, { placeholders: {
                 primaryColor: color, 
                 secondaryColor: colorPalette(color, 0),
-            }}), "", { height: pxSize, width: pxSize });
+            }}), "", { height: pxSize, width: pxSize, ...style });
         } else {
             fillPaths(icon.icon, color);
-            content = rnSvgParser(renderIconDefinitionToSVGElement(icon), "", { height: pxSize, width: pxSize });
+            content = rnSvgParser(renderIconDefinitionToSVGElement(icon), "", { height: pxSize, width: pxSize, ...style });
         }
 
         if (spin) {

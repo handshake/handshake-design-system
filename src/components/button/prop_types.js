@@ -18,6 +18,7 @@ export const defaultProps = {
     disabled: false,
     loading: false,
     size: "large",
+    style: {},
     type: "default",
     // webHtmlType: "button",
 };
@@ -33,6 +34,7 @@ export function mapPropsForWeb (props) {
         onClick: props.onClick,
         // shape: props.shape,
         size: props.size,
+        style: props.style,
         type: ((type) => ({
             ghost: "default",
             warning: "danger",
@@ -50,6 +52,7 @@ export function mapPropsForMobile (props) {
         loading: props.loading,
         onClick: props.onClick,
         size: ((size) => ({ default: "large" })[size] || size)(props.size),
+        style: props.style,
         type: props.type
     };
 }

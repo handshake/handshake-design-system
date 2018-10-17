@@ -27,6 +27,7 @@ export function mapPropsForWeb (props) {
     return {
         block: props.block,
         children: props.children,
+        className: props.className,
         disabled: props.disabled,
         ghost: props.type === "ghost",
         icon: props.icon,

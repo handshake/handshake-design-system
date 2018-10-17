@@ -169,7 +169,7 @@ export default class Spinner extends Component {
     static THEME_VARIABLES = THEME_VARIABLES;
 
     render () {
-        const { enabled = true, block, size, style, text, toast } = this.props;
+        const { className, block, enabled = true, size, style, text, toast } = this.props;
 
         if (!enabled) {
             return null;
@@ -180,6 +180,7 @@ export default class Spinner extends Component {
                 <Toaster>
                     <Toast>
                         <Spin
+                            className={className}
                             size={size || "large"}
                             style={style}
                             tip={text}
@@ -193,6 +194,7 @@ export default class Spinner extends Component {
             return (
                 <SpinnerCard>
                     <Spin
+                        className={className}
                         size={size || "large"}
                         style={style}
                         tip={text}
@@ -203,6 +205,7 @@ export default class Spinner extends Component {
 
         return (
             <Spin
+                className={className}
                 size={size || "small"}
                 style={style}
                 tip={text}

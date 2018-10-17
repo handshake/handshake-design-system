@@ -61,6 +61,7 @@ export function mapPropsForWeb (props) {
     }
     if (theme === "twoTone") {
         return {
+            className: props.className,
             spin: props.spin,
             style: {
                 fontSize: `${getSize(props.size)}px`,
@@ -72,6 +73,7 @@ export function mapPropsForWeb (props) {
         }
     }
     return {
+        className: props.className,
         spin: props.spin,
         style: {
             color: props.color,

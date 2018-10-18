@@ -73,6 +73,16 @@ import { default as Upload } from "./_components/upload/index.web";
 import { default as WhiteSpace } from "./_components/white-space/index.web";
 import { default as WingBlank } from "./_components/wing-blank/index.web";
 
+import {
+    FormattedDate,
+    FormattedTime,
+    FormattedRelative,
+    FormattedNumber,
+    FormattedPlural,
+    FormattedMessage,
+    FormattedHTMLMessage,
+} from "react-intl";
+
 export const antd = {
     Affix,
     Alert,
@@ -132,6 +142,16 @@ export const antd = {
     Upload,
     WhiteSpace,
     WingBlank,
+};
+
+export const intl = {
+    FormattedDate,
+    FormattedTime,
+    FormattedRelative,
+    FormattedNumber,
+    FormattedPlural,
+    FormattedMessage,
+    FormattedHTMLMessage,
 };
 
 export { default as Button } from "./components/button/index.web";

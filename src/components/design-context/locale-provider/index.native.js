@@ -26,21 +26,29 @@ export default class LocaleProvider extends Component {
     state = {
         antdLocaleData: {},
         messages: {},
-        intlLocale: DEFAULT_LANGUAGE,
+        language: DEFAULT_LANGUAGE,
+        localeName: DEFAULT_LOCALE,
     }
 
     render () {
         return (
-            <AntDLocaleProvider
-                locale={this.state.antdLocaleData}
-            >
-                <IntlProvider
-                    locale={this.state.intlLocale}
-                    messages={this.state.messages}
+            <LocaleContext.Provider value={{
+                language: this.state.language,
+                locale: this.state.localeName,
+            }}>
+                <AntDLocaleProvider
+                    locale={this.state.antdLocaleData}
                 >
-                    { this.props.children }
-                </IntlProvider>
-            </AntDLocaleProvider>
+                    <IntlProvider
+                        locale={this.state.language}
+                        messages={this.state.messages}
+                    >
+                        { this.props.children }
+                    </IntlProvider>
+                </AntDLocaleProvider>
+            </LocaleContext.Provider>
         );
     }
 }
+
+export const LocaleSubscriber = LocaleContext.Subscriber;

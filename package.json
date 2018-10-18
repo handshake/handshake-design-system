@@ -1,6 +1,6 @@
 {
   "name": "@handshake/design-system",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Handshake Design System",
   "private": true,
   "author": "",
@@ -9,7 +9,7 @@
     "Kevan Davis <kevan.davis@handshake.com>"
   ],
   "main": "lib/index.web",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/handshake/handshake-design-system.git"

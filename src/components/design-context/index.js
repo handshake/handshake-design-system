@@ -1,5 +1,5 @@
 import React from "react";
-import LocaleProvider from "./locale-provider";
+import LocaleProvider, { LocaleSubscriber } from "./locale-provider";
 import ThemeProvider, { ThemeSubscriber } from "./theme-provider";
 
 const DesignContext = ({ children, getAdditionalMessages, locale, theme }) => (
@@ -21,12 +21,14 @@ DesignContext.propTypes = {
 };
 
 DesignContext.LocaleProvider = LocaleProvider;
+DesignContext.LocaleSubscriber = LocaleSubscriber;
 DesignContext.ThemeProvider = ThemeProvider;
 DesignContext.ThemeSubscriber = ThemeSubscriber;
 
 export default DesignContext;
 export {
     LocaleProvider,
+    LocaleSubscriber,
     ThemeProvider,
     ThemeSubscriber
 }

@@ -2,6 +2,7 @@ import _ from "lodash";
 import { addLocaleData } from "react-intl";
 import carmen from "@kmdavis/carmen";
 import flatten from "flat";
+import React from "react";
 
 // These imports depend on using `babel-plugin-wildcard`
 // with the following options: `{ "noModifyCase": true, "exts": ["js", "json", "svg"] }`
@@ -92,7 +93,8 @@ function getLocaleData (locale, getAdditionalMessages) {
         cache[locale] = {
             antdLocaleData,
             messages,
-            intlLocale: language,
+            language,
+            locale: localeName,
         };
     }
 
@@ -105,9 +107,15 @@ function getLocaleData (locale, getAdditionalMessages) {
     return result
 }
 
+const LocaleContext = React.createContext({
+    language: DEFAULT_LANGUAGE,
+    locale: DEFAULT_LOCALE,
+});
+
 export {
     ALL_SUPPORTED_LOCALES,
     DEFAULT_LANGUAGE,
     DEFAULT_LOCALE,
     getLocaleData,
+    LocaleContext,
 }

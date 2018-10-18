@@ -60,6 +60,16 @@ import { default as View } from "./_components/view/index.native";
 import { default as WhiteSpace } from "./_components/white-space/index.native";
 import { default as WingBlank } from "./_components/wing-blank/index.native";
 
+import {
+    FormattedDate,
+    FormattedTime,
+    FormattedRelative,
+    FormattedNumber,
+    FormattedPlural,
+    FormattedMessage,
+    // FormattedHTMLMessage,
+} from "react-intl";
+
 export const antd = {
     Accordion,
     ActionSheet,
@@ -99,6 +109,16 @@ export const antd = {
     View,
     WhiteSpace,
     WingBlank,
+};
+
+export const intl = {
+    FormattedDate,
+    FormattedTime,
+    FormattedRelative,
+    FormattedNumber,
+    FormattedPlural,
+    FormattedMessage,
+    // FormattedHTMLMessage,
 };
 
 export { default as Button } from "./components/button/index.native";

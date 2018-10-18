@@ -82,7 +82,7 @@ Elsewhere in your code, you can import and use any of the components provided by
 ```js
 import { Button } from "@handshake/design-system";
 
-<Button type="primary">I'm a primary button!</Button>
+<Button type="primary">This is a primary button!</Button>
 ```
 
 To see a list of our Components, what they look like, and what props they take, goto **TODO - INSERT PUBLIC FACING STORYBOOK URL**
@@ -165,11 +165,11 @@ TBD
 
 ## Contributors
 
-Adam Phillips-Silver <adam.phillips-silver@handshake.com>
-David Wolf <david.wolf@handshake.com>
-Kevan Davis <kevan.davis@handshake.com>
-Misaki Suehiro <misaki.suehiro@handshake.com>
-Zoe Peleti <zoe.peleti@handshake.com>
+* Adam Phillips-Silver <adam.phillips-silver@handshake.com>
+* David Wolf <david.wolf@handshake.com>
+* Kevan Davis <kevan.davis@handshake.com>
+* Misaki Suehiro <misaki.suehiro@handshake.com>
+* Zoe Peleti <zoe.peleti@handshake.com>
 
 ## Contributing
 

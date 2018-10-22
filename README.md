@@ -112,7 +112,7 @@ const { ThemeSubscriber } = DesignContext;
 
 <ThemeSubscriber>
     {theme =>
-        <div style={{ fontFamily: theme.fontFamily }} />
+        <div style={{ fontFamily: theme.hsFontFamily }} />
     }
 </ThemeSubscriber>
 ```

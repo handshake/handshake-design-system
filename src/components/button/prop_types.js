@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export default {
     block: PropTypes.bool,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     disabled: PropTypes.bool,
     icon: PropTypes.string,
     loading: PropTypes.bool,

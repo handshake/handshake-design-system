@@ -58,7 +58,7 @@
     "webpack-cli": "^3.1.2"
   },
   "scripts": {
-    "build": "./bin/extract_less_variables.js && rm -rf lib && babel src --out-dir lib --ignore src/**/stories.js && sed -i '' 's/.\\/..\\/..\\/..\\/..\\/node_modules\\///g' lib/components/design-context/locale-provider/common.js && cd src && find . \\( -name \"*.json\" \\) | cut -d'/' -f2- | cpio -p -dum ../lib",
+    "build": "./bin/extract_less_variables.js && rm -rf lib && babel src --out-dir lib --ignore src/**/stories.js --ignore src/**/__tests__ --ignore src/components/__template__ && sed -i '' 's/.\\/..\\/..\\/..\\/..\\/node_modules\\///g' lib/components/design-context/locale-provider/common.js && cd src && find . \\( -name \"*.json\" \\) | cut -d'/' -f2- | cpio -p -dum ../lib",
     "start": "./bin/prepare_images.sh && ./bin/extract_less_variables.js && start-storybook -p 9001 -c storybook"
   },
   "jest": {

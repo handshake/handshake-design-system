@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
 import antdColorPalette from "../../util/antd_color_palette";
+import t from "../../util/theme_variable_helper";
 
 // List of all theme variables this component uses.
 // Eventually, I'd like to automate generating this data.
@@ -146,13 +147,6 @@ const VARIABLE_LOOKUP = {
         small: "-17px",
     }
 };
-
-function t (v, theme, ...extra) {
-    if (typeof v === "string") {
-        return theme[v];
-    }
-    return v(theme, ...extra);
-}
 
 // Unimplemented CSS:
 // Circle shape

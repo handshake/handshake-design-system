@@ -2,6 +2,7 @@
 import AntdSpin from "antd/es/spin";
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
+import t from "../../util/theme_variable_helper";
 
 import propTypes, { defaultProps } from "./prop_types";
 
@@ -33,13 +34,6 @@ const VARIABLE_LOOKUP = {
         small: () => "6px",
     },
 };
-
-function t (v, theme, ...extra) {
-    if (typeof v === "string") {
-        return theme[v];
-    }
-    return v(theme, ...extra);
-}
 
 const antSpinMove = keyframes`
     to {

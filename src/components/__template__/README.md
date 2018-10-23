@@ -21,7 +21,7 @@
             // etc...
         };
         ```
-        and in your `index.native.js` locate the `styles` function and copy/paste the antd style return value into the return value of this function, search+replace `variables` -> `theme` and change the vase of the variables from snake_case to lowerCamelCase, e.g.:
+        and in your `index.native.js` locate the `styles` function and copy/paste the antd style return value into the return value of this function, search+replace `variables` -> `theme` and change the case of the variables from snake_case to lowerCamelCase, e.g.:
         ```js
         function styles (theme) {
             return {
@@ -49,16 +49,13 @@
             // etc...
         }
         ```
-        and in your `index.web.js` file locate the styled antd component and craft some styles here
-        that are equivalent to the original antd less file; some copy/pasting can be done, but there is a **fundamental paradigm shift**: antd will add & remove css classes to match the current props and state, e.g. a primary button that is loading will have 3 classes: `ant-btn`, `ant-btn-primary` and `ant-btn-loading`; and if it's a small button, it'll also have `ant-btn-sm`. styled-components on the other hand puts exactly 2 classes on a component: 1 to indicate the component itself, and the other to indicate the current **aggregate** state. What this means for you is that instead of overriding a css value with an additional class, you have to override it in the css value itself, e.g.:
+        and in your `index.web.js` file locate the styled antd component and craft some styles here that are equivalent to the original antd less file; some copy/pasting can be done, but there is a **fundamental paradigm shift**: antd will add & remove css classes to match the current props and state, e.g. a primary button that is loading will have 3 classes: `ant-btn`, `ant-btn-primary` and `ant-btn-loading`; and if it's a small button, it'll also have `ant-btn-sm`. styled-components on the other hand puts exactly 2 classes on a component: 1 to indicate the component itself, and the other to indicate the current **aggregate** state. What this means for you is that instead of overriding a css value with an additional class, you have to override it in the css value itself, e.g.:
         ```less
         css-prop-1: ${p => p.state1 ? p.theme.variableName3 : p.theme.variableName1};
         css-prop-2: ${p => p.theme.variableName2};
         ```
-        basically, it all has to be flattened. And variable names change to lowerCamelCase and are wrapped in interpolated functions that are passed the `props` (but not the `state`) of the
-        component. The only child selectors will mostly just be for mouse interactions and child components.
-        Again, make sure to add the names of any variables you use to the `THEME_VARIABLES` list.
-3. (medium) We also need to make the props (and in many cases their values) consistent, e.g. if the web version of a component takes a `type` prop which could have value `primary`, `default`, or `warning` and the mobile component has a `btnType` prop which could have value `main`, `secondary`, or `dangerWillRobinson`, we have some work to do. Open up the `prop_types.js` file, and note the 4 exports; the default export is the prop_types themselves. PropTypes are used by React itself to validate props that are passed into a component, and you can find the official documentation here: https://reactjs.org/docs/typechecking-with-proptypes.html; let's say our component takes 2 props, foo & bar, 1 of them is a string, and the other is a number, and only 1 of them is required:
+        basically, it all has to be flattened. And variable names change to lowerCamelCase and are wrapped in interpolated functions that are passed the `props` (but not the `state`) of the component. The only child selectors will mostly just be for mouse interactions and child components. Again, make sure to add the names of any variables you use to the `THEME_VARIABLES` list.
+3. (medium) We also need to make the props (and in many cases their values) consistent, e.g. if the web version of a component takes a `type` prop which could have value `primary`, `default`, or `warning` and the mobile component has a `btnType` prop which could have value `main`, `secondary`, or `dangerWillRobinson`, we have some work to do. Open up the `prop_types.js` file, and note the 4 exports; the default export is the prop types themselves. PropTypes are used by React itself to validate props that are passed into a component, and you can find the official documentation here: https://reactjs.org/docs/typechecking-with-proptypes.html; let's say our component takes 2 props, foo & bar, 1 of them is a string, and the other is a number, and only 1 of them is required:
     ```js
     export default {
         foo: PropTypes.string.isRequired,
@@ -82,8 +79,9 @@
 
     export function mapPropsForMobile (props) {
         return {
-            // but the mobile version is subpar, so...
+            // but the mobile version is subpar, and needs to match, so...
             type: (type => ({
+                // this is a map of our enum -> antd's enum
                 primary: "main",
                 default: "secondary",
                 warning: "dangerWillRobinson",
@@ -95,7 +93,7 @@
     1. disable the functionality that is missing. An example of this from the `button` component is disabling the `circle` button prop or the `dashed` type.
     2. adding/polyfilling the missing functionality. An example of this from the `button` component is adding support for the `icon` prop on mobile.
     Implementing these polyfills has to be handled on a case by case example, so, I'm not going to provide any examples here. Instead, take a look at any of the existing components and you'll probably find some examples.
-5. (easy-ish) We also need to write some stories for our component. Open up `stories.js`. At a minimum, you need to fill in the `options` story, including `knobs` for every prop. Here's an example, assuming the `foo`, `bar`, and `type` props used before:
+5. (easy-ish) We also need to write some stories for our component. Open up `stories.js`. At a minimum, you need to fill in the `options` story for both web & native, including `knobs` for every prop. Here's an example, assuming the `foo`, `bar`, and `type` props used before:
 ```js
     <MyComponent
         foo={text("Foo", "default foo")}

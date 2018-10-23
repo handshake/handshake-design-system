@@ -68,6 +68,8 @@ import {
     FormattedPlural,
     FormattedMessage,
     // FormattedHTMLMessage,
+    injectIntl,
+    intlShape,
 } from "react-intl";
 
 export const antd = {
@@ -119,6 +121,8 @@ export const intl = {
     FormattedPlural,
     FormattedMessage,
     // FormattedHTMLMessage,
+    injectIntl,
+    intlShape,
 };
 
 export { default as Button } from "./components/button/index.native";

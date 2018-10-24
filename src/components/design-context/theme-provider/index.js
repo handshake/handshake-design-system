@@ -1,7 +1,7 @@
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
-import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import { ThemeProvider as StyledThemeProvider, ThemeConsumer as ThemeSubscriber } from "styled-components";
 
 import LESS_VARIABLES from "../../../theme";
 
@@ -22,20 +22,6 @@ ThemeProvider.propTypes = {
 
 export default ThemeProvider;
 
-export const ThemeSubscriber = ({ children }, context) => {
-    if (!children) {
-        // TODO: warning
-        return null;
-    }
-    if (typeof children === "function") {
-        return children(context["__styled-components__next__"].getTheme());
-    }
-    // TODO: warning
-    return children;
-}
-
-ThemeSubscriber.propTypes = {
-    children: PropTypes.func.isRequired,
+export {
+    ThemeSubscriber
 };
-
-ThemeSubscriber.contextTypes = StyledThemeProvider.childContextTypes;

@@ -65,6 +65,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@kmdavis/carmen": "^0.1.0",
     "@target-corp/react-native-svg-parser": "^1.0.6",
     "antd": "^3.10.0",

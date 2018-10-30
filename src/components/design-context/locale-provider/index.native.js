@@ -32,6 +32,9 @@ export default class LocaleProvider extends Component {
     }
 
     render () {
+        console.log("LocaleContext.Provider", LocaleContext.Provider);
+        console.log("AntDLocaleProvider", AntDLocaleProvider);
+        console.log("IntlProvider", IntlProvider);
         return (
             <LocaleContext.Provider value={{
                 language: this.state.language,

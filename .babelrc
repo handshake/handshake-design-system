@@ -1,11 +1,5 @@
 {
-    "presets": [[
-        "@babel/env", {
-            "targets": {
-                "browsers": ["last 2 Chrome versions"]
-            }
-        }
-    ], "@babel/react"],
+    "presets": ["module:metro-react-native-babel-preset"],
     "plugins": [
         "@babel/plugin-proposal-class-properties",
         ["wildcard", { "noModifyCase": true, "exts": ["js", "json", "svg"] }],

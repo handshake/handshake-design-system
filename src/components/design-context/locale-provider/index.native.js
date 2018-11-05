@@ -2,6 +2,7 @@ import _ from "lodash";
 import { IntlProvider } from "react-intl";
 import AntDLocaleProvider from "antd-mobile/es/locale-provider";
 import React, { Component } from "react";
+import Text from "antd-mobile-rn/lib/text";
 
 import {
     ALL_SUPPORTED_LOCALES,
@@ -46,6 +47,7 @@ export default class LocaleProvider extends Component {
                     <IntlProvider
                         locale={this.state.language}
                         messages={this.state.messages}
+                        textComponent={Text}
                     >
                         { this.props.children }
                     </IntlProvider>

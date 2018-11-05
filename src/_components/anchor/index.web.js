@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/anchor";
-import "antd/es/anchor/style";
+export { default } from "antd/lib/anchor";
+import "antd/lib/anchor/style";

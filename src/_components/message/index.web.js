@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/message";
-import "antd/es/message/style";
+export { default } from "antd/lib/message";
+import "antd/lib/message/style";

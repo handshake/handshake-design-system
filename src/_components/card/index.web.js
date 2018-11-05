@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/card";
-import "antd/es/card/style";
+export { default } from "antd/lib/card";
+import "antd/lib/card/style";

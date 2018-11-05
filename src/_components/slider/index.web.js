@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/slider";
-import "antd/es/slider/style";
+export { default } from "antd/lib/slider";
+import "antd/lib/slider/style";

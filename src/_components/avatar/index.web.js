@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/avatar";
-import "antd/es/avatar/style";
+export { default } from "antd/lib/avatar";
+import "antd/lib/avatar/style";

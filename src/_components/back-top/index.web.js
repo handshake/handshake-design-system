@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/back-top";
-import "antd/es/back-top/style";
+export { default } from "antd/lib/back-top";
+import "antd/lib/back-top/style";

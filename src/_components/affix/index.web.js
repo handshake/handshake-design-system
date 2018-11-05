@@ -6,6 +6,6 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/affix";
-import "antd/es/affix/style";
+export { default } from "antd/lib/affix";
+import "antd/lib/affix/style";
 

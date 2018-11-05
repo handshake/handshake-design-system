@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/input-number";
-import "antd/es/input-number/style";
+export { default } from "antd/lib/input-number";
+import "antd/lib/input-number/style";

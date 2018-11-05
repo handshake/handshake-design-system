@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd-mobile/es/result";
-import "antd-mobile/es/result/style";
+export { default } from "antd-mobile/lib/result";
+import "antd-mobile/lib/result/style";

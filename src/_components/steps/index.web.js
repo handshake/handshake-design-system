@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/steps";
-import "antd/es/steps/style";
+export { default } from "antd/lib/steps";
+import "antd/lib/steps/style";

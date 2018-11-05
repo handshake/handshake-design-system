@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/tooltip";
-import "antd/es/tooltip/style";
+export { default } from "antd/lib/tooltip";
+import "antd/lib/tooltip/style";

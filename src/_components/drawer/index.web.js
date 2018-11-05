@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/drawer";
-import "antd/es/drawer/style";
+export { default } from "antd/lib/drawer";
+import "antd/lib/drawer/style";

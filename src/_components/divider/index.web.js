@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/divider";
-import "antd/es/divider/style";
+export { default } from "antd/lib/divider";
+import "antd/lib/divider/style";

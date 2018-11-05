@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/modal";
-import "antd/es/modal/style";
+export { default } from "antd/lib/modal";
+import "antd/lib/modal/style";

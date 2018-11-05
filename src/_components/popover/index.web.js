@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/popover";
-import "antd/es/popover/style";
+export { default } from "antd/lib/popover";
+import "antd/lib/popover/style";

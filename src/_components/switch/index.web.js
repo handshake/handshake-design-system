@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/switch";
-import "antd/es/switch/style";
+export { default } from "antd/lib/switch";
+import "antd/lib/switch/style";

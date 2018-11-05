@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd-mobile/es/swipe-action";
-import "antd-mobile/es/swipe-action/style";
+export { default } from "antd-mobile/lib/swipe-action";
+import "antd-mobile/lib/swipe-action/style";

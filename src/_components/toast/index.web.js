@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd-mobile/es/toast";
-import "antd-mobile/es/toast/style";
+export { default } from "antd-mobile/lib/toast";
+import "antd-mobile/lib/toast/style";

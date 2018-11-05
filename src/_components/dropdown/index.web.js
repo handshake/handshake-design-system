@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/dropdown";
-import "antd/es/dropdown/style";
+export { default } from "antd/lib/dropdown";
+import "antd/lib/dropdown/style";

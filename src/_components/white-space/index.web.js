@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd-mobile/es/white-space";
-import "antd-mobile/es/white-space/style";
+export { default } from "antd-mobile/lib/white-space";
+import "antd-mobile/lib/white-space/style";

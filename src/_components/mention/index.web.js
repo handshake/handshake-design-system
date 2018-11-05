@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/mention";
-import "antd/es/mention/style";
+export { default } from "antd/lib/mention";
+import "antd/lib/mention/style";

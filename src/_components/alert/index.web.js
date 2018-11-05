@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/alert";
-import "antd/es/alert/style";
+export { default } from "antd/lib/alert";
+import "antd/lib/alert/style";

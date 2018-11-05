@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/list";
-import "antd/es/list/style";
+export { default } from "antd/lib/list";
+import "antd/lib/list/style";

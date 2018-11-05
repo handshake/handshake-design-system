@@ -32,7 +32,7 @@ storiesOf("AntD/DatePicker", module)
                 size={select("Size", ["large", "default", "small"], "default")}
                 style={object("Style", {})}
                 transitionName={select("Transition", [
-                    // all transitions are found in antd/es/style/core/motion
+                    // all transitions are found in antd/lib/style/core/motion
                     "fade",
                     "move-down", "move-left", "move-right", "move-up",
                     "slide-down", "slide-left", "slide-right", "slide-up",

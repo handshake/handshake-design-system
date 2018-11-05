@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/carousel";
-import "antd/es/carousel/style";
+export { default } from "antd/lib/carousel";
+import "antd/lib/carousel/style";

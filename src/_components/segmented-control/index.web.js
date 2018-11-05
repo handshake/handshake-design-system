@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd-mobile/es/segmented-control";
-import "antd-mobile/es/segmented-control/style";
+export { default } from "antd-mobile/lib/segmented-control";
+import "antd-mobile/lib/segmented-control/style";

@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/form";
-import "antd/es/form/style";
+export { default } from "antd/lib/form";
+import "antd/lib/form/style";

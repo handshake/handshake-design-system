@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/checkbox";
-import "antd/es/checkbox/style";
+export { default } from "antd/lib/checkbox";
+import "antd/lib/checkbox/style";

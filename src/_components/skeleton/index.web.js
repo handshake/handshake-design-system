@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/skeleton";
-import "antd/es/skeleton/style";
+export { default } from "antd/lib/skeleton";
+import "antd/lib/skeleton/style";

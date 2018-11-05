@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/tree";
-import "antd/es/tree/style";
+export { default } from "antd/lib/tree";
+import "antd/lib/tree/style";

@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/calendar";
-import "antd/es/calendar/style";
+export { default } from "antd/lib/calendar";
+import "antd/lib/calendar/style";

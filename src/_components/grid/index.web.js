@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { Row, Col } from "antd/es/grid";
-import "antd/es/grid/style";
+export { Row, Col } from "antd/lib/grid";
+import "antd/lib/grid/style";

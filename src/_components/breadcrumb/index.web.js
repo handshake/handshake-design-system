@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/breadcrumb";
-import "antd/es/breadcrumb/style";
+export { default } from "antd/lib/breadcrumb";
+import "antd/lib/breadcrumb/style";

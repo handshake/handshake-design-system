@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd-mobile/es/wing-blank";
-import "antd-mobile/es/wing-blank/style";
+export { default } from "antd-mobile/lib/wing-blank";
+import "antd-mobile/lib/wing-blank/style";

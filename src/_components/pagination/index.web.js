@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/pagination";
-import "antd/es/pagination/style";
+export { default } from "antd/lib/pagination";
+import "antd/lib/pagination/style";

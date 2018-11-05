@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/select";
-import "antd/es/select/style";
+export { default } from "antd/lib/select";
+import "antd/lib/select/style";

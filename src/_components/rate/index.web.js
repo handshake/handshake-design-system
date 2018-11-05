@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/rate";
-import "antd/es/rate/style";
+export { default } from "antd/lib/rate";
+import "antd/lib/rate/style";

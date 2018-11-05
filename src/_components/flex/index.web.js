@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd-mobile/es/flex";
-import "antd-mobile/es/flex/style";
+export { default } from "antd-mobile/lib/flex";
+import "antd-mobile/lib/flex/style";

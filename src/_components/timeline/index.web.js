@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/timeline";
-import "antd/es/timeline/style";
+export { default } from "antd/lib/timeline";
+import "antd/lib/timeline/style";

@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/progress";
-import "antd/es/progress/style";
+export { default } from "antd/lib/progress";
+import "antd/lib/progress/style";

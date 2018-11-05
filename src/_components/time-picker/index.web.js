@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/time-picker";
-import "antd/es/time-picker/style";
+export { default } from "antd/lib/time-picker";
+import "antd/lib/time-picker/style";

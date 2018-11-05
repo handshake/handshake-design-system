@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/tabs";
-import "antd/es/tabs/style";
+export { default } from "antd/lib/tabs";
+import "antd/lib/tabs/style";

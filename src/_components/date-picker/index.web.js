@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/date-picker";
-import "antd/es/date-picker/style";
+export { default } from "antd/lib/date-picker";
+import "antd/lib/date-picker/style";

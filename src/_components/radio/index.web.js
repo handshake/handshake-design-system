@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/radio";
-import "antd/es/radio/style";
+export { default } from "antd/lib/radio";
+import "antd/lib/radio/style";

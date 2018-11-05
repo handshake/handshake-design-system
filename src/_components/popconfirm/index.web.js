@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd/es/popconfirm";
-import "antd/es/popconfirm/style";
+export { default } from "antd/lib/popconfirm";
+import "antd/lib/popconfirm/style";

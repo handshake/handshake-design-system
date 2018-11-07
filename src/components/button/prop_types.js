@@ -52,8 +52,50 @@ export function mapPropsForMobile (props) {
         // icon: props.icon, // handled separately
         loading: props.loading,
         onClick: props.onClick,
-        size: ((size) => ({ default: "large" })[size] || size)(props.size),
+        size: ((size) => ({ default: "defaultSize" })[size] || size)(props.size),
         style: props.style,
         type: props.type
     };
 }
+
+export const themes = {
+    light: {
+        primary: {
+            default: {
+                backgroundColor: "hs-color-primary",
+                borderColor: "hs-color-primary",
+                color: "hs-color-white-1",
+            },
+            active: {
+                backgroundColor: "darken(_, 5)",
+                borderColor: "darken(_, 5)",
+                color: "_",
+            },
+            disabled: {
+                backgroundColor: "hs-color-gray-1",
+                borderColor: "hs-color-gray-3",
+                color: "hs-color-gray-7",
+            },
+            hover: {
+                backgroundColor: "brighten(_, 10)",
+                borderColor: "brighten(_, 10)",
+                color: "_",
+            },
+            loading: {
+
+            }
+        },
+        secondary: {
+
+        },
+        confirm: {
+
+        },
+        danger: {
+
+        },
+        link: {
+
+        },
+    },
+};

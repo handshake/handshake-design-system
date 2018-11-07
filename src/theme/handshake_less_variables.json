@@ -3,5 +3,19 @@
     "btn-padding-lg": "0 25px",
     "btn-primary-bg": "#ff5800",
     "card-head-background": "#ff5800",
-    "font-family": "BrandonText,\"Chinese Quote\",-apple-system,BlinkMacSystemFont,\"Segoe UI\",\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"Helvetica Neue\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\""
+    "font-family": "BrandonText,\"Chinese Quote\",-apple-system,BlinkMacSystemFont,\"Segoe UI\",\"PingFang SC\",\"Hiragino Sans GB\",\"Microsoft YaHei\",\"Helvetica Neue\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\"",
+
+    "hs-color-primary": "#ff5800",
+    "hs-color-confirm": "#72c44a",
+    "hs-color-danger": "#f5222d",
+    "hs-color-help": "#00b2dd",
+
+    "hs-color-white-1": "#ffffff",
+    "hs-color-gray-1": "#fafafa",
+    "hs-color-gray-2": "#e8e8e8",
+    "hs-color-gray-3": "#d9d9d9",
+    "hs-color-gray-4": "#b7b7b7",
+    "hs-color-gray-5": "#999999",
+    "hs-color-gray-6": "#666666",
+    "hs-color-gray-7": "#333333"
 }

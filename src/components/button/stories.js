@@ -12,7 +12,7 @@ import { Button as NativeButton } from "../../index.native";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
-storiesOf("Button", module)
+storiesOf("Web/Button", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
@@ -48,7 +48,7 @@ storiesOf("Button", module)
         }
     );
 
-storiesOf("Button/Native", module)
+storiesOf("Mobile/Button", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
@@ -64,7 +64,7 @@ storiesOf("Button/Native", module)
                     icon={select("Icon", [undefined, ...Icon.ALL_TYPES], undefined)}
                     loading={boolean("Loading", false)}
                     onClick={action("clicked")}
-                    size={select("Size", ["small", "large"], "large")}
+                    size={select("Size", ["small", "default", "large"], "default")}
                     type={select("Type", ["default", "primary", "ghost", "warning"], "default")}
                 >
                     {text("Text", "Button Intro")}

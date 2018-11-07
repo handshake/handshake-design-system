@@ -100,7 +100,7 @@ export default class Spinner extends Component {
                 <SpinnerFrame>
                     <SpinnerBox>
                         <ThemeSubscriber>
-                            {theme => (
+                            {({theme}) => (
                                 <ActivityIndicator
                                     size={size || "large"}
                                     style={style}
@@ -116,7 +116,7 @@ export default class Spinner extends Component {
 
         return (
             <ThemeSubscriber>
-                {theme => (
+                {({theme}) => (
                     <ActivityIndicator
                         size={size || "small"}
                         style={style}

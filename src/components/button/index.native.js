@@ -3,8 +3,8 @@ import Button from "antd-mobile-rn/es/button";
 import React, { Component } from "react";
 import Text from "antd-mobile-rn/es/text";
 import Icon from "../icon/index.native";
-import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
-import { ThemeSubscriber } from "../design-context/theme-provider";
+import propTypes, { defaultProps, mapPropsForMobile, themes } from "./prop_types";
+import WithTheme from "../design-context/theme-provider/with_theme";
 
 // List of all theme variables this component uses.
 // Eventually, I'd like to automate generating this data.
@@ -36,116 +36,125 @@ const THEME_VARIABLES = [
 
 // original: antd-mobile-rn/es/button/style/index.native.js
 // maintenance task: check ^^ for changes anytime we update antd-mobile-rn
-function styles (theme) {
+function styles (lookup, variables) {
     return {
         container: {
             flexDirection: "row",
         },
         defaultHighlight: {
-            backgroundColor: theme.fillTap,
-            borderColor: theme.borderColorBase,
+            backgroundColor: variables.fillTap,
+            borderColor: variables.borderColorBase,
         },
         primaryHighlight: {
-            backgroundColor: theme.primaryButtonFillTap,
-            borderColor: theme.primaryButtonFill,
+            backgroundColor: lookup("primary.active.backgroundColor"),
+            borderColor: lookup("primary.active.borderColor"),
         },
         ghostHighlight: {
             backgroundColor: "transparent",
-            borderColor: theme.ghostButtonFillTap,
+            borderColor: variables.ghostButtonFillTap,
         },
         warningHighlight: {
-            backgroundColor: theme.warningButtonFillTap,
-            borderColor: theme.warningButtonFill,
+            backgroundColor: variables.warningButtonFillTap,
+            borderColor: variables.warningButtonFill,
         },
         wrapperStyle: {
             alignItems: "center",
             justifyContent: "center",
-            borderRadius: theme.radiusMd,
+            borderRadius: variables.radiusMd,
             borderWidth: 1,
         },
         largeRaw: {
-            height: theme.buttonHeight,
-            paddingLeft: theme.hSpacingLg,
-            paddingRight: theme.hSpacingLg,
+            height: variables.buttonHeight,
+            paddingLeft: variables.hSpacingLg,
+            paddingRight: variables.hSpacingLg,
+        },
+        defaultSizeRaw: {
+            height: 40,
+            paddingLeft: variables.hSpacingMd,
+            paddingRight: variables.hSpacingMd,
         },
         smallRaw: {
-            height: theme.buttonHeightSm,
-            paddingLeft: theme.hSpacingSm,
-            paddingRight: theme.hSpacingSm,
+            height: variables.buttonHeightSm,
+            paddingLeft: variables.hSpacingSm,
+            paddingRight: variables.hSpacingSm,
         },
         defaultRaw: {
-            backgroundColor: theme.fillBase,
-            borderColor: theme.borderColorBase,
+            backgroundColor: variables.fillBase,
+            borderColor: variables.borderColorBase,
         },
         primaryRaw: {
-            backgroundColor: theme.primaryButtonFill,
-            borderColor: theme.primaryButtonFill,
+            backgroundColor: lookup("primary.default.backgroundColor"),
+            borderColor: lookup("primary.default.borderColor"),
         },
         ghostRaw: {
             backgroundColor: "transparent",
-            borderColor: theme.ghostButtonColor,
+            borderColor: variables.ghostButtonColor,
         },
         warningRaw: {
-            backgroundColor: theme.warningButtonFill,
-            borderColor: theme.warningButtonFill,
+            backgroundColor: variables.warningButtonFill,
+            borderColor: variables.warningButtonFill,
         },
         defaultDisabledRaw: {
-            backgroundColor: theme.fillDisabled,
-            borderColor: theme.fillDisabled,
+            backgroundColor: variables.fillDisabled,
+            borderColor: variables.fillDisabled,
         },
         primaryDisabledRaw: {
-            opacity: 0.4,
+            backgroundColor: lookup("primary.disabled.backgroundColor"),
+            borderColor: lookup("primary.disabled.borderColor"),
         },
         ghostDisabledRaw: {
-            borderColor: `${theme.colorTextBase}1A`,
+            borderColor: `${variables.colorTextBase}1A`,
         },
         warningDisabledRaw: {
             opacity: 0.4,
         },
         defaultHighlightText: {
-            color: theme.colorTextBase,
+            color: variables.colorTextBase,
         },
         primaryHighlightText: {
-            color: `${theme.colorTextBaseInverse}4D`,
+            color: lookup("primary.active.color"),
         },
         ghostHighlightText: {
-            color: theme.ghostButtonFillTap,
+            color: variables.ghostButtonFillTap,
         },
         warningHighlightText: {
-            color: `${theme.colorTextBaseInverse}4D`,
+            color: `${variables.colorTextBaseInverse}4D`,
         },
         largeRawText: {
-            fontSize: theme.buttonFontSize,
+            fontSize: variables.buttonFontSize,
+        },
+        defaultSizeRawText: {
+            fontSize: 15,
         },
         smallRawText: {
-            fontSize: theme.buttonFontSizeSm,
+            fontSize: variables.buttonFontSizeSm,
         },
         defaultRawText: {
-            color: theme.colorTextBase,
+            color: variables.colorTextBase,
         },
         primaryRawText: {
-            color: theme.colorTextBaseInverse,
+            color: lookup("primary.default.color"),
         },
         ghostRawText: {
-            color: theme.ghostButtonColor,
+            color: variables.ghostButtonColor,
         },
         warningRawText: {
-            color: theme.colorTextBaseInverse,
+            color: variables.colorTextBaseInverse,
         },
         defaultDisabledRawText: {
-            color: `${theme.colorTextBase}4D`,
+            color: `${variables.colorTextBase}4D`,
         },
         primaryDisabledRawText: {
-            color: `${theme.colorTextBaseInverse}99`,
+            color: lookup("primary.disabled.color")
         },
         ghostDisabledRawText: {
-            color: `${theme.colorTextBase}1A`,
+            color: `${variables.colorTextBase}1A`,
         },
         warningDisabledRawText: {
-            color: `${theme.colorTextBaseInverse}99`,
+            color: `${variables.colorTextBaseInverse}99`,
         },
         indicator: {
-            marginRight: theme.hSpacingMd,
+            marginRight: variables.hSpacingMd,
         },
     };
 }
@@ -160,10 +169,10 @@ class ButtonWrapper extends Component {
 
     render () {
         const content = (
-            <ThemeSubscriber>
-                {theme => (
+            <WithTheme themes={themes}>
+                {({ lookup, variables }) => (
                     <Button
-                        styles={styles(theme)}
+                        styles={styles(lookup, variables)}
                         {...mapPropsForMobile(this.props)}
                     >
                         {(this.props.icon && !this.props.loading) ?
@@ -199,7 +208,7 @@ class ButtonWrapper extends Component {
                         }
                     </Button>
                 )}
-            </ThemeSubscriber>
+            </WithTheme>
         );
         return this.props.block ? content : <Text>{content}</Text>;
     }

@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { ThemeSubscriber } from "../../src/components/design-context/theme-provider";
 import THEME, { base } from "../../src/theme";
 
-import { EVENT_SET_THEME } from "./constants";
+import { EVENT_SET_THEME_VARIABLES } from "./constants";
 
 const objDiff = (a, b) => _.omitBy(b, (v, k) => a[k] === v);
 
@@ -35,17 +35,17 @@ class ThemeCustomizer extends Component {
         this.channel = addons.getChannel();
     }
 
-    themeChanged (theme) {
-        const diff = objDiff(THEME, theme);
-        this.channel.emit(EVENT_SET_THEME, diff);
+    themeVariablesChanged (themeVariables) {
+        const diff = objDiff(THEME, themeVariables);
+        this.channel.emit(EVENT_SET_THEME_VARIABLES, diff);
     }
     
-    resetTheme () {
-        this.channel.emit(EVENT_SET_THEME, {});
+    resetThemeVariables () {
+        this.channel.emit(EVENT_SET_THEME_VARIABLES, {});
     }
     
-    copyTheme (theme) {
-        const diff = objDiff(base.camelCase, theme);
+    copyThemeVariables (themeVariables) {
+        const diff = objDiff(base.camelCase, themeVariables);
         navigator.clipboard.writeText(JSON.stringify(_.extend({
             "$comment": "Restart Storybook after any change to this file; it will not be picked up automatically.",
         }, _.mapKeys(diff, (__, key) => _.kebabCase(key))), null, 4));
@@ -61,16 +61,16 @@ class ThemeCustomizer extends Component {
 
         return (
             <ThemeSubscriber>
-                {theme => {
-                    const variables = this.props.variables || _.keys(theme);
+                {({ variables: themeVariables }) => {
+                    const variables = this.props.variables || _.keys(themeVariables);
                     return [
                         <form key="knobs">
                             {_.map(variables, key => {
                                 let KnobType = knobs.text;
-                                let value = theme[key];
+                                let value = themeVariables[key];
                                 let onChange = (val) => {
-                                    theme[key] = val;
-                                    this.themeChanged(theme);
+                                    themeVariables[key] = val;
+                                    this.themeVariablesChanged(themeVariables);
                                 };
                                 let extra = null;
 
@@ -97,8 +97,8 @@ class ThemeCustomizer extends Component {
                                         KnobType = knobs.number;
                                         extra = <div>{value}{cssUnit}</div>;
                                         onChange = (val) => {
-                                            theme[key] = `${val}${cssUnit}`;
-                                            this.themeChanged(theme);
+                                            themeVariables[key] = `${val}${cssUnit}`;
+                                            this.themeVariablesChanged(themeVariables);
                                         };
                                     }
                                     // TODO?: arrays of numbers and other composites
@@ -126,17 +126,17 @@ class ThemeCustomizer extends Component {
                         inPanel ?
                             // ActionBar renders best in the addon panel
                             <ActionBar key="buttons">
-                                <ActionButton onClick={() => this.copyTheme(theme)}>COPY</ActionButton>
-                                <ActionButton onClick={() => this.resetTheme()}>RESET</ActionButton>
+                                <ActionButton onClick={() => this.copyThemeVariables(themeVariables)}>COPY</ActionButton>
+                                <ActionButton onClick={() => this.resetThemeVariables()}>RESET</ActionButton>
                             </ActionBar>
                         :
                             // but it is missing some css when rendered in the main panel
                             <ButtonGroup key="buttons">
                                 <li>
-                                    <button onClick={() => this.copyTheme(theme)}>Copy</button>
+                                    <button onClick={() => this.copyThemeVariables(themeVariables)}>Copy</button>
                                 </li>
                                 <li>
-                                    <button onClick={() => this.resetTheme()}>Reset</button>
+                                    <button onClick={() => this.resetThemeVariables()}>Reset</button>
                                 </li>
                             </ButtonGroup>
                     ];

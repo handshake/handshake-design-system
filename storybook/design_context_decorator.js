@@ -5,7 +5,12 @@ import { EVENT_GET_LOCALE_ID, EVENT_SET_LOCALE_ID } from "storybook-addon-intl/s
 import React, { Component } from "react";
 import DesignContext from "../src/components/design-context";
 
-import { EVENT_GET_THEME, EVENT_SET_THEME } from "./theme_customizer/constants";
+import {
+    EVENT_GET_THEME_NAME,
+    EVENT_SET_THEME_NAME,
+    EVENT_GET_THEME_VARIABLES,
+    EVENT_SET_THEME_VARIABLES,
+} from "./theme_customizer/constants";
 
 // Custom replacement for `storybook-addon-intl`'s `withIntl` decorator
 // so we can use our own `LocaleProvider` which combines both `react-intl`'s
@@ -18,7 +23,8 @@ export default class DesignContextDecorator extends Component {
         super(props);
         this.channel = addons.getChannel();
         this.setLocale = this.setLocale.bind(this);
-        this.setTheme = this.setTheme.bind(this);
+        this.setThemeName = this.setThemeName.bind(this);
+        this.setThemeVariables = this.setThemeVariables.bind(this);
 
         setIntlConfig({
             locales: DesignContext.LocaleProvider.ALL_SUPPORTED_LOCALES,
@@ -28,28 +34,36 @@ export default class DesignContextDecorator extends Component {
 
     state = {
         locale: "en-US",
-        theme: {}
+        theme: "light",
+        variables: {},
     }
 
     componentDidMount () {
         this.channel.on(EVENT_SET_LOCALE_ID, this.setLocale);
-        this.channel.on(EVENT_SET_THEME, this.setTheme);
+        this.channel.on(EVENT_SET_THEME_NAME, this.setThemeName);
+        this.channel.on(EVENT_SET_THEME_VARIABLES, this.setThemeVariables);
 
         this.channel.emit(EVENT_GET_LOCALE_ID);
-        this.channel.emit(EVENT_GET_THEME);
+        this.channel.emit(EVENT_GET_THEME_NAME);
+        this.channel.emit(EVENT_GET_THEME_VARIABLES);
     }
 
     componentWillUnmount () {
         this.channel.removeListener(EVENT_SET_LOCALE_ID, this.setLocale);
-        this.channel.removeListener(EVENT_SET_THEME, this.setTheme);
+        this.channel.removeListener(EVENT_SET_THEME_NAME, this.setThemeName);
+        this.channel.removeListener(EVENT_SET_THEME_VARIABLES, this.setThemeVariables);
     }
 
     setLocale (locale) {
         this.setState({ locale });
     }
 
-    setTheme (theme) {
-        this.setState({ theme: _.clone(theme) });
+    setThemeName (theme) {
+        this.setState({ theme });
+    }
+
+    setThemeVariables (variables) {
+        this.setState({ variables: _.clone(variables) });
     }
 
     render () {
@@ -57,6 +71,7 @@ export default class DesignContextDecorator extends Component {
             <DesignContext
                 locale={this.state.locale || DesignContext.LocaleProvider.DEFAULT_LOCALE}
                 theme={this.state.theme}
+                variables={this.state.variables}
             >
                 {this.props.children}
             </DesignContext>

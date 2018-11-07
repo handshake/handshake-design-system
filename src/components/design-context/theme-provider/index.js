@@ -1,27 +1,35 @@
 import _ from "lodash";
 import PropTypes from "prop-types";
 import React from "react";
-import { ThemeProvider as StyledThemeProvider, ThemeConsumer as ThemeSubscriber } from "styled-components";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import ThemeContext, { ctx } from "./context";
 
-import LESS_VARIABLES from "../../../theme";
-
-const ThemeProvider = ({ children, theme }) => {
-    return (
-        <StyledThemeProvider
-            theme={_.extend({}, LESS_VARIABLES, theme)}
-        >
-            {children}
-        </StyledThemeProvider>
-    );
-};
+const ThemeProvider = ({ children, theme, variables }) => (
+    <ThemeContext.Provider
+        value={ctx(theme, variables)}
+    >
+        <ThemeContext.Consumer>
+            {({ variables: themeVariables }) => (
+                <StyledThemeProvider
+                    theme={themeVariables}
+                >
+                    {children}
+                </StyledThemeProvider>
+            )}
+        </ThemeContext.Consumer>
+    </ThemeContext.Provider>
+);
 
 ThemeProvider.propTypes = {
     children: PropTypes.node.isRequired,
-    theme: PropTypes.object,
+    theme: PropTypes.string,
+    variables: PropTypes.object,
+};
+
+ThemeProvider.defaultProps = {
+    theme: "light",
 };
 
 export default ThemeProvider;
 
-export {
-    ThemeSubscriber
-};
+export const ThemeSubscriber = ThemeContext.Consumer;

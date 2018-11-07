@@ -12,7 +12,7 @@ import { Spinner as NativeSpinner } from "../../index.native";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
-storiesOf("Spinner", module)
+storiesOf("Web/Spinner", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
@@ -45,7 +45,7 @@ storiesOf("Spinner", module)
         }
     );
 
-storiesOf("Spinner/Native", module)
+storiesOf("Mobile/Spinner", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)

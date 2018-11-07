@@ -12,7 +12,7 @@ import { Icon as NativeIcon } from "../../index.native";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
-storiesOf("Icon", module)
+storiesOf("Web/Icon", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
@@ -43,7 +43,7 @@ storiesOf("Icon", module)
         }
     );
 
-storiesOf("Icon/Native", module)
+storiesOf("Mobile/Icon", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)

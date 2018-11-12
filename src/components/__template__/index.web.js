@@ -1,4 +1,4 @@
-import Antd__TEMPLATE__ from "antd/es/button";
+import Antd__TEMPLATE__ from "antd/es/__TEMPLATE__";
 import styled, { keyframes } from "styled-components";
 import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";

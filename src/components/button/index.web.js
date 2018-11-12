@@ -1,152 +1,11 @@
 import AntdButton from "antd/es/button";
+import Icon from "../icon";
 import styled, { keyframes } from "styled-components";
 import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
-import antdColorPalette from "../../util/antd_color_palette";
-import t from "../../util/theme_variable_helper";
-
-// List of all theme variables this component uses.
-// Eventually, I'd like to automate generating this data.
-// This is currently only used by the Storybook Theme Customizer Addon Panel,
-// but there are other potential use cases, so, I'm putting this here instead of
-// hard coding it in the the stories file.
-const THEME_VARIABLES = [
-    "borderColorBase",
-    "btnBorderRadiusBase",
-    "btnBorderRadiusSm",
-    "btnDangerColor",
-    "btnDefaultBg",
-    "btnDefaultBorder",
-    "btnDefaultColor",
-    "btnDisableBg",
-    "btnDisableBorder",
-    "btnDisableColor",
-    "btnPaddingBase",
-    "btnPaddingLg",
-    "btnPaddingSm",
-    "btnPrimaryBg",
-    "btnPrimaryColor",
-    "fontSizeBase",
-    "fontSizeLg",
-    "fontSizeSm",
-    "lineHeightBase",
-    "primary5",
-    "primary7",
-];
-
-const VARIABLE_LOOKUP = {
-    backgroundColor: {
-        default: {
-            active: "btnDefaultBg",
-            default: "btnDefaultBg",
-            focus: "btnDefaultBg",
-            hover: "btnDefaultBg",
-        },
-        disabled: "btnDisableBg",
-        ghost: {
-            active: () => "transparent",
-            default: () => "transparent",
-            focus: () => "transparent",
-            hover: () => "transparent",
-        },
-        primary: {
-            active: (theme) => antdColorPalette(theme.btnPrimaryBg, 7),
-            default: "btnPrimaryBg",
-            focus: (theme) => antdColorPalette(theme.btnPrimaryBg, 5),
-            hover: (theme) => antdColorPalette(theme.btnPrimaryBg, 5),
-        },
-        danger: {
-            active: (theme) => antdColorPalette(theme.btnDangerColor, 7),
-            default: "btnDangerBg",
-            focus: () => "#fff",
-            hover: (theme) => antdColorPalette(theme.btnDangerColor, 5),
-        },
-    },
-    borderColor: {
-        default: {
-            active: "primary7",
-            default: "btnDefaultBorder",
-            focus: "primary5",
-            hover: "primary5",
-        },
-        disabled: "btnDisableBorder",
-        ghost: {
-            active: "primary7",
-            default: "borderColorBase",
-            focus: "primary5",
-            hover: "primary5",
-        },
-        primary: {
-            active: (theme) => antdColorPalette(theme.btnPrimaryBg, 7),
-            default: "btnPrimaryBg",
-            focus: (theme) => antdColorPalette(theme.btnPrimaryBg, 5),
-            hover: (theme) => antdColorPalette(theme.btnPrimaryBg, 5),
-        },
-        danger: {
-            active: (theme) => antdColorPalette(theme.btnDangerColor, 7),
-            default: "btnDangerBorder",
-            focus: (theme) => antdColorPalette(theme.btnDangerColor, 5),
-            hover: (theme) => antdColorPalette(theme.btnDangerColor, 5),
-        },
-    },
-    borderRadius: {
-        default: "btnBorderRadiusBase",
-        large: "btnBorderRadiusBase",
-        small: "btnBorderRadiusSm",
-    },
-    color: {
-        default: {
-            active: "primary7",
-            default: "btnDefaultColor",
-            focus: "primary5",
-            hover: "primary5",
-        },
-        disabled: "btnDisableColor",
-        ghost: {
-            active: "primary7",
-            default: "textColor",
-            focus: "primary5",
-            hover: "primary5",
-        },
-        primary: {
-            active: "btnPrimaryColor",
-            default: "btnPrimaryColor",
-            focus: "btnPrimaryColor",
-            hover: "btnPrimaryColor",
-        },
-        danger: {
-            active: "btnPrimaryColor",
-            default: "btnDangerColor",
-            focus: (theme) => antdColorPalette(theme.btnDangerColor, 5),
-            hover: "btnPrimaryColor",
-        },
-    },
-    fontSize: {
-        default: "fontSizeBase",
-        large: "fontSizeLg",
-        small: "fontSizeSm",
-    },
-    height: {
-        default: "btnHeightBase",
-        large: "btnHeightLg",
-        small: "btnHeightSm",
-    },
-    padding: {
-        default: "btnPaddingBase",
-        large: "btnPaddingLg",
-        small: "btnPaddingSm",
-    },
-    loadingPaddingLeft: {
-        default: "29px",
-        large: "29px",
-        small: "24px",
-    },
-    loadingIconMarginLeft: {
-        default: "-14px",
-        large: "-14px",
-        small: "-17px",
-    }
-};
+import themes from "./themes.json";
+import WithTheme, { lookup } from "../design-context/theme-provider/with_theme";
+import { FormattedMessage } from "react-intl";
 
 // Unimplemented CSS:
 // Circle shape
@@ -164,30 +23,35 @@ const loadingCircle = keyframes`
 `;
 
 const Button = styled(AntdButton)`
-    background-color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.backgroundColor[ghost ? "ghost" : type || "default"].default, theme)};
+    background-color: ${lookup`$(type).default.backgroundColor`};
     background-image: none;
-    border: ${({ theme }) => theme.borderWidthBase } transparent;
-    border-color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.borderColor[ghost ? "ghost" : type || "default"].default, theme)};
-    border-radius: ${({ size, theme }) => t(VARIABLE_LOOKUP.borderRadius[size || "default"], theme)};
-    border-style: ${({ dashed, theme }) => (dashed ? "dashed" : theme.borderStyleBase) };
+    border:
+        ${lookup`$(type).default.borderWidth`}
+        ${lookup`$(type).default.borderStyle`}
+        ${lookup`$(type).default.borderColor`};
+    border-radius: ${lookup`$(size).borderRadius`};
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
-    color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.color[ghost ? "ghost" : type || "default"].default, theme)};
+    color: ${lookup`$(type).default.color`};
     cursor: pointer;
     display: inline-block;
-    font-family: ${({ theme }) => theme.fontFamily };
-    font-size: ${({ size, theme }) => t(VARIABLE_LOOKUP.fontSize[size || "default"], theme)};
-    font-weight: ${({ theme }) => theme.btnFontWeight };
-    height: ${({ size, theme }) => t(VARIABLE_LOOKUP.height[size || "default"], theme)};
-    line-height: ${({ theme }) => theme.lineHeightBase };
-    padding: ${({ size, theme }) => t(VARIABLE_LOOKUP.padding[size || "default"], theme)};
-    padding-left: ${({ loading, size, theme }) => loading ?
-        t(VARIABLE_LOOKUP.loadingPaddingLeft[size || "default"], theme) :
-        t(VARIABLE_LOOKUP.padding[size || "default"], theme).split(" ")[1]};
+    font-family: ${lookup`$(type).default.fontFamily`};
+    font-size: ${lookup`$(size).size`};
+    font-weight: ${lookup`$(size).weight`};
+    height: ${lookup`$(size).height`};
+    line-height: ${lookup`$(size).lineHeight`};
+    padding:
+        ${lookup`$(size).margin.vertical`}
+        ${lookup`$(size).margin.horizontal`}
+        ${lookup`$(size).margin.vertical`}
+        ${lookup(({ size, loading }) => loading
+            ? `${size}.margin.loading`
+            : `${size}.margin.horizontal`)};
     pointer-events: ${({ loading }) => loading ? "none" : "auto"};
     position: relative;
     text-align: center;
+    text-transform: ${lookup`$(type).default.textTransform`};
     touch-action: manipulation;
-    transition: all 0.3s ${({ theme }) => theme.easeInOut};
+    transition: all ${lookup`hs-transition-duration`} ${lookup`hs-transition-easing`};
     user-select: none;
     white-space: nowrap;
     width: ${({ block }) => block ? "100%" : "auto"};
@@ -212,22 +76,17 @@ const Button = styled(AntdButton)`
     }
 
     &:hover {
-        background-color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.backgroundColor[ghost ? "ghost" : type || "default"].hover, theme)};
-        border-color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.borderColor[ghost ? "ghost" : type || "default"].hover, theme)};
-        color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.color[ghost ? "ghost" : type || "default"].hover, theme)};
+        background-color: ${lookup`$(type).hover.backgroundColor`};
+        border-color: ${lookup`$(type).hover.borderColor`};
+        color: ${lookup`$(type).hover.color`};
     }
 
-    &:focus {
-        background-color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.backgroundColor[ghost ? "ghost" : type || "default"].focus, theme)};
-        border-color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.borderColor[ghost ? "ghost" : type || "default"].focus, theme)};
-        color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.color[ghost ? "ghost" : type || "default"].focus, theme)};
-    }
-
+    &:focus,
     &:active,
     &.active {
-        background-color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.backgroundColor[ghost ? "ghost" : type || "default"].active, theme)};
-        border-color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.borderColor[ghost ? "ghost" : type || "default"].active, theme)};
-        color: ${({ ghost, theme, type }) => t(VARIABLE_LOOKUP.color[ghost ? "ghost" : type || "default"].active, theme)};
+        background-color: ${lookup`$(type).active.backgroundColor`};
+        border-color: ${lookup`$(type).active.borderColor`};
+        color: ${lookup`$(type).active.color`};
     }
 
     &:not([disabled]):hover {
@@ -249,10 +108,10 @@ const Button = styled(AntdButton)`
         &:focus,
         &:active,
         &.active {
-            background-color: ${({ theme }) => t(VARIABLE_LOOKUP.backgroundColor.disabled, theme)};
-            border-color: ${({ theme }) => t(VARIABLE_LOOKUP.borderColor.disabled, theme)};
+            background-color: ${lookup`$(type).disabled.backgroundColor`};
+            border-color: ${lookup`$(type).disabled.borderColor`};
             box-shadow: none;
-            color: ${({ theme }) => t(VARIABLE_LOOKUP.color.disabled, theme)};
+            color: ${lookup`$(type).disabled.color`};
             text-shadow: none;
         }
 
@@ -290,14 +149,14 @@ const Button = styled(AntdButton)`
         display: inline-block;
         font-style: normal;
         line-height: 1;
-        margin-left: ${({ loading, size, theme }) => loading ?
-            t(VARIABLE_LOOKUP.loadingIconMarginLeft[size || "default"], theme) :
-            0};
+        margin-left: ${lookup(({ size, loading }) => loading
+            ? `${size}.margin.loadingIcon`
+            : 0)};
         vertical-align: -0.125em;
         text-align: center;
         text-transform: none;
         text-rendering: optimizeLegibility;
-        transition: margin-left 0.3s ${({ theme }) => theme.easeInOut};
+        transition: margin-left ${lookup`hs-transition-duration`} ${lookup`hs-transition-easing`};
 
         > * {
             line-height: 1;
@@ -344,6 +203,96 @@ const Button = styled(AntdButton)`
     }
 `;
 
+const Link = styled.a`
+    color: ${lookup`$(type).default.color`};
+    cursor: pointer;
+    font-family: ${lookup`$(type).default.fontFamily`};
+    font-size: ${lookup`$(size).size`};
+    font-weight: ${lookup`$(size).weight`};
+    pointer-events: ${({ loading }) => loading ? "none" : "auto"};
+    text-transform: ${lookup`$(type).default.textTransform`};
+    touch-action: manipulation;
+    transition: all ${lookup`hs-transition-duration`} ${lookup`hs-transition-easing`};
+    
+    &,
+    &:active,
+    &:focus {
+        outline: 0;
+    }
+
+    &,
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+        text-decoration: none;
+    }
+
+    &:hover {
+        color: ${lookup`$(type).hover.color`};
+    }
+
+    &:focus,
+    &:active,
+    &.active {
+        color: ${lookup`$(type).active.color`};
+    }
+
+    &.disabled,
+    &[disabled] {
+        cursor: not-allowed;
+
+        &,
+        &:hover,
+        &:focus,
+        &:active,
+        &.active {
+            color: ${lookup`$(type).disabled.color`};
+        }
+
+        > * {
+            pointer-events: none;
+        }
+    }
+
+    .anticon {
+        color: inherit;
+        display: inline-block;
+        font-size: inherit;
+        font-style: normal;
+        line-height: 1;
+        margin-left: 0
+        vertical-align: -0.125em;
+        text-align: center;
+        text-transform: none;
+        text-rendering: optimizeLegibility;
+        transition: margin-left ${lookup`hs-transition-duration`} ${lookup`hs-transition-easing`};
+
+        > * {
+            line-height: 1;
+        }
+
+        svg {
+            display: inline-block;
+        }
+
+        svg:not(:root) {
+            overflow: hidden;
+        }
+    }
+
+    /* To ensure that a space will be placed between character and Icon. */
+    > .anticon + span,
+    > span + .anticon {
+        margin-left: 8px;
+    }
+
+    > i,
+    > span {
+        pointer-events: none;
+    }
+`;
+
 class ButtonWrapper extends Component {
     static propTypes = propTypes;
     static defaultProps = {
@@ -351,10 +300,30 @@ class ButtonWrapper extends Component {
         webHtmlType: "button",
         ...defaultProps
     };
-    static THEME_VARIABLES = THEME_VARIABLES;
 
     render () {
-        return <Button {...mapPropsForWeb(this.props)} />;
+        const { children, icon, loading, type } = this.props;
+        const ButtonOrLink = (type === "link" ? Link : Button);
+        return (
+            <WithTheme themes={themes}>
+                {({ lkp }) => (
+                    <ButtonOrLink lkp={lkp} {...mapPropsForWeb(this.props)}>
+                        {(type === "link" && loading
+                            && [
+                                <Icon key="icon" type="loading" />,
+                                <FormattedMessage key="text" id={"ds.button.loading"} />,
+                            ])
+                        || (loading && <FormattedMessage id={"ds.button.loading"} />)
+                        || (type === "link" && icon
+                            && [
+                                <Icon key="icon" type={icon} />,
+                                <span key="text">{children}</span>,
+                            ])
+                        || children}
+                    </ButtonOrLink>
+                )}
+            </WithTheme>
+        );
     }
 }
 

@@ -1,6 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 import React from "react";
+import themes from "./themes.json";
 import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 import { withInfo } from "@storybook/addon-info";
 import { withKnobs, array, boolean, button, color, date, knob, number, object, text, select } from "@storybook/addon-knobs";
@@ -16,21 +17,18 @@ storiesOf("Web/Button", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(Button.THEME_VARIABLES))
+    .addDecorator(withThemeVariables(themes))
     .add(
         "options",
         () => (
             <Button
                 block={boolean("Block", false)}
                 disabled={boolean("Disabled", false)}
-                // ghost={boolean("Ghost", false)}
-                webHtmlType={select("HTML element type", ["button", "reset", "submit"], "button")}
                 icon={select("Icon", [undefined, ...Icon.ALL_TYPES], undefined)}
                 loading={boolean("Loading", false)}
                 onClick={action("clicked")}
-                // shape={select("Shape", ["circle", "circle-outline"], undefined)}
-                size={select("Size", ["small", "default", "large"], "default")}
-                type={select("Type", ["default", "primary", "ghost", "warning"], "default")}
+                size={select("Size", ["small", "large"], "large")}
+                type={select("Type", ["primary", "secondary", "confirm", "danger", "link"], "secondary")}
             >
                 {text("Text", "Button Intro")}
             </Button>
@@ -52,7 +50,7 @@ storiesOf("Mobile/Button", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(NativeButton.THEME_VARIABLES))
+    .addDecorator(withThemeVariables(themes))
     .add(
         "options",
         () => (
@@ -64,8 +62,8 @@ storiesOf("Mobile/Button", module)
                     icon={select("Icon", [undefined, ...Icon.ALL_TYPES], undefined)}
                     loading={boolean("Loading", false)}
                     onClick={action("clicked")}
-                    size={select("Size", ["small", "default", "large"], "default")}
-                    type={select("Type", ["default", "primary", "ghost", "warning"], "default")}
+                    size={select("Size", ["small", "large"], "large")}
+                    type={select("Type", ["primary", "secondary", "confirm", "danger"], "secondary")}
                 >
                     {text("Text", "Button Intro")}
                 </NativeButton>

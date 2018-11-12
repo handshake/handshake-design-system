@@ -1,5 +1,5 @@
 import _ from "lodash";
-import __TEMPLATE__ from "antd-mobile-rn/es/button";
+import __TEMPLATE__ from "antd-mobile-rn/es/__TEMPLATE__";
 import React, { Component } from "react";
 import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
 import { ThemeSubscriber } from "../design-context/theme-provider";

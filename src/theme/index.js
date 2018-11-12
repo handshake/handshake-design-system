@@ -2,7 +2,9 @@ import _ from "lodash";
 import ANTD_LESS_VARIABLES from "./antd_less_variables.json";
 import ANTD_MOBILE_LESS_VARIABLES from "./antd_mobile_less_variables.json";
 import ANTD_RN_VARIABLES from "./antd_less_variables.json";
+import flatten from "flat";
 import HS_LESS_VARIABLES from "./handshake_less_variables.json";
+import variableTypes from "./variable_types.json";
 
 let baseVariables = _.omit(
     _.extend(
@@ -20,7 +22,7 @@ let themeVariables = _.omit(
     _.extend(
         {},
         baseVariables,
-        HS_LESS_VARIABLES,
+        flatten(HS_LESS_VARIABLES, { delimiter: "-" }),
     ),
     "$comment",
     "comment",
@@ -39,4 +41,4 @@ const theme = {
 };
 
 export default theme.camelCase;
-export { base, theme };
+export { base, theme, variableTypes };

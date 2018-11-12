@@ -3,7 +3,9 @@ import Button from "antd-mobile-rn/es/button";
 import React, { Component } from "react";
 import Text from "antd-mobile-rn/es/text";
 import Icon from "../icon/index.native";
-import propTypes, { defaultProps, mapPropsForMobile, themes } from "./prop_types";
+import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
+import { css } from "styled-components";
+import themes from "./themes.json";
 import WithTheme from "../design-context/theme-provider/with_theme";
 
 // List of all theme variables this component uses.
@@ -32,6 +34,12 @@ const THEME_VARIABLES = [
     "radiusMd",
     "warningButtonFill",
     "warningButtonFillTap",
+
+    "hsColorPrimary",
+    "hsColorWhite1",
+    "hsColorGray1",
+    "hsColorGray3",
+    "hsColorGray7",
 ];
 
 // original: antd-mobile-rn/es/button/style/index.native.js

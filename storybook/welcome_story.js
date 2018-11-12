@@ -23,5 +23,5 @@ storiesOf("Welcome", module)
         height: "100vh",
         overflowX: "hidden",
     }))
-    .add("Theme Customization", () => <ThemeCustomizer />)
+    .add("Theme Customization", () => <ThemeCustomizer prefix="hs" />)
     .add("Playground", () => <Playground web mobile />);

@@ -14,8 +14,8 @@ export default {
 }
 
 export const defaultProps = {
-    color: "#000",
-    size: "default",
+    // color: "#000",
+    // size: "default",
     spin: false,
     style: {},
     theme: "outlined",

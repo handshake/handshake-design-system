@@ -1,6 +1,8 @@
 import addons from "@storybook/addons";
 import {
     ADDON_ID,
+    EVENT_GET_COMMON_PREFIX,
+    EVENT_SET_COMMON_PREFIX,
     EVENT_GET_THEME_NAME,
     EVENT_SET_THEME_NAME,
     EVENT_GET_THEME_VARIABLES,
@@ -28,6 +30,15 @@ addons.register(ADDON_ID, (api) => {
 
     channel.on(EVENT_GET_THEME_VARIABLES, () => {
         channel.emit(EVENT_SET_THEME_VARIABLES, variables);
+    });
+
+    let commonPrefix = "";
+    channel.on(EVENT_SET_COMMON_PREFIX, (prefix) => {
+        commonPrefix = prefix;
+    });
+
+    channel.on(EVENT_GET_COMMON_PREFIX, () => {
+        channel.emit(EVENT_SET_COMMON_PREFIX, commonPrefix);
     });
 
     addons.addPanel(ADDON_ID, {

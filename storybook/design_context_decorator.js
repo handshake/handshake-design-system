@@ -6,6 +6,7 @@ import React, { Component } from "react";
 import DesignContext from "../src/components/design-context";
 
 import {
+    EVENT_SET_COMMON_PREFIX,
     EVENT_GET_THEME_NAME,
     EVENT_SET_THEME_NAME,
     EVENT_GET_THEME_VARIABLES,
@@ -46,6 +47,8 @@ export default class DesignContextDecorator extends Component {
         this.channel.emit(EVENT_GET_LOCALE_ID);
         this.channel.emit(EVENT_GET_THEME_NAME);
         this.channel.emit(EVENT_GET_THEME_VARIABLES);
+
+        this.channel.emit(EVENT_SET_COMMON_PREFIX, "hs");
     }
 
     componentWillUnmount () {

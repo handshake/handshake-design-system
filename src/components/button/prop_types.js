@@ -8,19 +8,17 @@ export default {
     loading: PropTypes.bool,
     onClick: PropTypes.func,
     // shape: PropTypes.oneOf(["circle", "circle-outline"]), // FIXME: Not supported on mobile yet
-    size: PropTypes.oneOf(["large", "default", "small"]),
-    type: PropTypes.oneOf(["default", "primary", "ghost", "warning"]), // TODO: add `dashed` for RN
-    webHtmlType: PropTypes.oneOf(["submit", "button", "reset"]),
+    size: PropTypes.oneOf(["large", "small"]),
+    type: PropTypes.oneOf(["primary", "secondary", "confirm", "danger", "link"]),
 }
 
 export const defaultProps = {
     // block: WEB ? false : true,
     disabled: false,
     loading: false,
-    size: "default",
+    size: "large",
     style: {},
-    type: "default",
-    // webHtmlType: "button",
+    type: "secondary",
 };
 
 export function mapPropsForWeb (props) {
@@ -29,17 +27,14 @@ export function mapPropsForWeb (props) {
         children: props.children,
         className: props.className,
         disabled: props.disabled,
-        ghost: props.type === "ghost",
+        ghost: false,
         icon: props.icon,
         loading: props.loading,
         onClick: props.onClick,
         // shape: props.shape,
-        size: props.size,
+        size: ((size) => ({ default: "large" })[size] || size)(props.size),
         style: props.style,
-        type: ((type) => ({
-            ghost: "default",
-            warning: "danger",
-        }[type] || type))(props.type),
+        type: props.type,
         htmlType: props.webHtmlType,
     };
 }
@@ -52,50 +47,8 @@ export function mapPropsForMobile (props) {
         // icon: props.icon, // handled separately
         loading: props.loading,
         onClick: props.onClick,
-        size: ((size) => ({ default: "defaultSize" })[size] || size)(props.size),
+        size: ((size) => ({ default: "large" })[size] || size)(props.size),
         style: props.style,
         type: props.type
     };
 }
-
-export const themes = {
-    light: {
-        primary: {
-            default: {
-                backgroundColor: "hs-color-primary",
-                borderColor: "hs-color-primary",
-                color: "hs-color-white-1",
-            },
-            active: {
-                backgroundColor: "darken(_, 5)",
-                borderColor: "darken(_, 5)",
-                color: "_",
-            },
-            disabled: {
-                backgroundColor: "hs-color-gray-1",
-                borderColor: "hs-color-gray-3",
-                color: "hs-color-gray-7",
-            },
-            hover: {
-                backgroundColor: "brighten(_, 10)",
-                borderColor: "brighten(_, 10)",
-                color: "_",
-            },
-            loading: {
-
-            }
-        },
-        secondary: {
-
-        },
-        confirm: {
-
-        },
-        danger: {
-
-        },
-        link: {
-
-        },
-    },
-};

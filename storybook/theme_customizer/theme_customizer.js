@@ -1,6 +1,7 @@
 import _ from "lodash";
 import { ActionBar, ActionButton } from "@storybook/components";
 import addons from "@storybook/addons";
+import { unflatten } from "flat";
 import knobs from "@storybook/addon-knobs/dist/components/types";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
@@ -9,7 +10,7 @@ import ButtonGroup from "./button_group";
 import KnobLine from "./knob_line";
 import styled from "styled-components";
 import { ThemeSubscriber } from "../../src/components/design-context/theme-provider";
-import THEME, { base } from "../../src/theme";
+import THEME, { base, variableTypes } from "../../src/theme";
 
 import { EVENT_SET_THEME_VARIABLES } from "./constants";
 
@@ -22,8 +23,114 @@ const ColorPicker = styled(knobs.color)`
     flex-grow: 0;
 `;
 
+function inferType (value) {
+    if (typeof value === "boolean") {
+        return "boolean";
+    } else if (typeof value === "number") {
+        return "number";
+    } else if (typeof value === "string") {
+        if (tinycolor(value)._ok) {
+            return "color";
+        } else if (CSS_UNIT_RE.test(value)) {
+            return "unit";
+        }
+    }
+    return "string";
+}
+
+class VariableEditor extends Component {
+    static propTypes = {
+        name: PropTypes.string,
+        value: PropTypes.any,
+        onChange: PropTypes.func,
+    }
+
+    state = {
+        type: "string",
+    }
+
+    static getDerivedStateFromProps (nextProps, prevState) {
+        return {
+            type: variableTypes[nextProps.name] || inferType(nextProps.value) || prevState.type,
+        };
+    }
+
+    render () {
+        const { name, value, onChange } = this.props;
+        const { type } = this.state;
+
+        switch (type) {
+        case "boolean": {
+            const Knob = knobs.boolean;
+            return (
+                <Knob
+                    knob={{ name, value }}
+                    onChange={onChange}
+                />
+            );
+        }
+        case "number": {
+            const Knob = knobs.number;
+            return (
+                <Knob
+                    knob={{ name, value }}
+                    onChange={onChange}
+                />
+            );
+        }
+        case "unit": {
+            const Knob = knobs.number;
+            const [cssValue, cssUnit] = value.match(CSS_UNIT_RE).slice(1);
+            return [
+                <Knob
+                    key={`${name}-number`}
+                    knob={{ name, value: _.toNumber(cssValue) }}
+                    onChange={val =>
+                        onChange(`${val}${cssUnit}`)
+                    }
+                />,
+                <div key={`${name}-unit`}>
+                    <span style="color: transparent;">{value}</span>
+                    {cssUnit}
+                </div>
+            ];
+        }
+        case "color": {
+            const Knob = knobs.text;
+            return [
+                <Knob
+                    key={`${name}-text`}
+                    knob={{ name, value }}
+                    onChange={onChange}
+                />,
+                <ColorPicker
+                    key={`${name}-color`}
+                    knob={{ name, value }}
+                    onChange={onChange}
+                />
+            ];
+        }
+        // TODO?: arrays of numbers and other composites
+        // TODO?: font picker
+        // TODO?: bezier curve editor
+        case "string":
+        default: {
+            const Knob = knobs.text;
+            return (
+                <Knob
+                    knob={{ name, value }}
+                    onChange={onChange}
+                />
+            );
+        }
+        }
+    }
+}
+
 class ThemeCustomizer extends Component {
     static propTypes = {
+        prefix: PropTypes.string,
+        themeName: PropTypes.string, // not used yet
         variables: PropTypes.oneOfType([
             PropTypes.arrayOf(PropTypes.string),
             PropTypes.bool,
@@ -46,27 +153,29 @@ class ThemeCustomizer extends Component {
     
     copyThemeVariables (themeVariables) {
         const diff = objDiff(base.camelCase, themeVariables);
-        navigator.clipboard.writeText(JSON.stringify(_.extend({
+        navigator.clipboard.writeText(JSON.stringify(unflatten(_.extend({
             "$comment": "Restart Storybook after any change to this file; it will not be picked up automatically.",
-        }, _.mapKeys(diff, (__, key) => _.kebabCase(key))), null, 4));
+        }, _.mapKeys(diff, (__, key) => _.kebabCase(key))), { delimiter: "-" }), null, 4));
         console.log("Copied theme overrides to clipboard!");
     }
 
     render () {
-        const inPanel = !!(this.props.variables && this.props.variables.length);
+        const { prefix, variables: propVariables } = this.props;
+        const inPanel = !!(propVariables && propVariables.length);
 
-        if (this.props.variables === false) {
+        if (propVariables === false) {
             return null;
         }
 
         return (
             <ThemeSubscriber>
                 {({ variables: themeVariables }) => {
-                    const variables = this.props.variables || _.keys(themeVariables);
+                    const variables = (propVariables || _.keys(themeVariables))
+                        .filter(k => k.startsWith(prefix))
+                        .map(_.camelCase);
                     return [
                         <form key="knobs">
                             {_.map(variables, key => {
-                                let KnobType = knobs.text;
                                 let value = themeVariables[key];
                                 let onChange = (val) => {
                                     themeVariables[key] = val;
@@ -74,51 +183,18 @@ class ThemeCustomizer extends Component {
                                 };
                                 let extra = null;
 
-                                if (typeof value === "boolean") {
-                                    KnobType = knobs.boolean;
-                                } else if (typeof value === "number") {
-                                    KnobType = knobs.number;
-                                } else if (typeof value === "string") {
-                                    if (tinycolor(value)._ok) {
-                                        // KnobType = knobs.color;
-                                        extra = (
-                                            <ColorPicker
-                                                knob={{
-                                                    name: key,
-                                                    value,
-                                                }}
-                                                onChange={onChange}
-                                            />
-                                        );
-                                        // TODO: try to format value to hex
-                                    } else if (CSS_UNIT_RE.test(value)) {
-                                        const [__, cssValue, cssUnit] = value.match(CSS_UNIT_RE);
-                                        value = _.toNumber(cssValue);
-                                        KnobType = knobs.number;
-                                        extra = <div>{value}{cssUnit}</div>;
-                                        onChange = (val) => {
-                                            themeVariables[key] = `${val}${cssUnit}`;
-                                            this.themeVariablesChanged(themeVariables);
-                                        };
-                                    }
-                                    // TODO?: arrays of numbers and other composites
-                                    // TODO?: font picker
-                                    // TODO?: bezier curve editor
-                                }
-
                                 return (
                                     <KnobLine key={key} inPanel={inPanel}>
-                                        <span><span>{_.words(_.startCase(key)).join(" ")}</span></span>
-                                        <div>
-                                            <KnobType
-                                                knob={{
-                                                    name: key,
-                                                    value,
-                                                }}
-                                                onChange={onChange}
-                                            />
-                                            {extra}
-                                        </div>
+                                        <span><span>{
+                                            _.words(_.startCase(
+                                                key.replace(new RegExp(`^${prefix}-?`), "")
+                                            )).join(" ")
+                                        }</span></span>
+                                        <VariableEditor
+                                            name={key}
+                                            value={value}
+                                            onChange={onChange}
+                                        />
                                     </KnobLine>
                                 );
                             })}

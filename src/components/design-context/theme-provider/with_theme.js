@@ -1,11 +1,12 @@
 /* global keys, window */
 import _ from "lodash";
 import { Component } from "react";
+import flatten from "flat";
 import { generate as generatePalette } from "ant-design-palettes"
 import ThemeContext from "./context";
 import TinyColor from "tinycolor2";
 
-const FN_REGEX = /^(\w+)\(([^,]+(?:,\s*[^,]+)*)\)$/;
+const FN_REGEX = /^(\w+)\(([^\)]*)\)$/;
 
 const fns = {
     palette: (color, i) => generatePalette(color)[i],
@@ -22,60 +23,70 @@ const fns = {
     splitcomplement: (color, i) => new TinyColor(color).splitcomplement()[i].toString(),
     triad: (color, i) => new TinyColor(color).triad()[i].toString(),
     tetrad: (color, i) => new TinyColor(color).tetrad()[i].toString(),
+    mostReadable: (baseColor, ...colorList) => TinyColor.mostReadable(baseColor, colorList).toString(),
 }
 
 export function withTheme (callback, { themes, themeName, variables }) {
     const theme = themes[themeName];
 
-    function lookupFn (value, defaultValue, extraArgs) {
-        const data = value.match(FN_REGEX);
-        if (!data) {
-            return null;
+    function expand (value, path, extraArgs) {
+        const valueTokens = value.toString().split(".");
+        const pathTokens = path.toString().split(".");
+        let newPath;
+        if (valueTokens.length > 1) {
+            pathTokens.splice(
+                pathTokens.length - valueTokens.length + 1,
+                valueTokens.length - 1,
+                ...valueTokens.slice(1),
+            );
+            newPath = pathTokens.join(".");
+            if (_.has(theme, newPath)) {
+                return innerLookup(newPath, newPath, extraArgs);
+            }
         }
+        let i = pathTokens.length;
+        while (i >= 0) {
+            i -= 1;
+            newPath = [...pathTokens.slice(0, i - 1), "default", ...pathTokens.slice(i)].join(".");
+            if (newPath !== path && _.has(theme, newPath)) {
+                return innerLookup(newPath, newPath, extraArgs);
+            }
+        }
+    }
+
+    function lookupFn (value, origPath, extraArgs) {
+        const data = value.match(FN_REGEX);
         let [fn, args] = data.slice(1);
         args = args.split(/,\s*/g).map((arg) => {
-            if (arg === "_") {
-                return defaultValue;
+            if (/^_/.test(arg)) {
+                arg = expand(arg, origPath, extraArgs);
             }
             try {
                 return JSON.parse(arg);
             } catch (e) {
-                return innerLookup(arg, defaultValue, extraArgs);
+                return innerLookup(arg, origPath, extraArgs);
             }
         });
         return fns[fn](...args);
     }
 
-    function lookupDefault (path, extraArgs) {
-        const tokens = path.toString().split(".");
-        let i = tokens.length;
-        while (i >= 0) {
-            i -= 1;
-            const defaultPath = [...tokens.slice(0, i - 1), "default", ...tokens.slice(i)].join(".");
-            if (defaultPath !== path && _.has(theme, defaultPath)) {
-                return innerLookup(defaultPath, "", extraArgs);
-            }
-        }
-        return null; // oh no!
-    }
-
-    function innerLookup (path, defaultValue, extraArgs) {
-        let value = _.get(theme, path) || path;
+    function innerLookup (path, origPath, extraArgs) {
+        let value = _.get(theme, path) || (/\w+(?:\.\w+)+/.test(path) ? "_" : path);
         if (typeof value === "function") {
             value = value(...extraArgs);
         }
-        if (value === "_") {
-            value = defaultValue;
-        } else if (variables[_.camelCase(value)]) {
+        if (/^_/.test(value)) {
+            value = expand(value, origPath, extraArgs);
+        } else if (/^hs/.test(value) && variables[_.camelCase(value)]) {
             value = variables[_.camelCase(value)];
         } else if (FN_REGEX.test(value)) {
-            value = lookupFn(value, defaultValue, extraArgs);
+            value = lookupFn(value, origPath, extraArgs);
         }
         return value;
     }
 
-    function lookup (path, ...extraArgs) {
-        const value = innerLookup(path, lookupDefault(path, extraArgs), extraArgs);
+    function outerLookup (path, ...extraArgs) {
+        const value = innerLookup(path, path, extraArgs);
         if (typeof keys === "function" && keys.toString().indexOf("Command Line API") !== -1) {
             if (TinyColor(value)._ok) {
                 console.log("%s = %s %c  ", path, value,
@@ -88,7 +99,7 @@ export function withTheme (callback, { themes, themeName, variables }) {
     }
 
     if (window.STORYBOOK_ENV) {
-        window.lookup = lookup;
+        window.lookup = outerLookup;
 
         function colorDifference (_a, _b) {
             const a = TinyColor(_a).toRgb();
@@ -102,7 +113,7 @@ export function withTheme (callback, { themes, themeName, variables }) {
 
         window.__deriveColorTransformation__ = (original, target) => {
             console.log("********");
-            console.log("Original = %c  ", `background: ${lookup(original)}; font-size: x-large;`);
+            console.log("Original = %c  ", `background: ${outerLookup(original)}; font-size: x-large;`);
             console.log("Target = %c  ", `background: ${target}; font-size: x-large;`);
             console.log("********");
 
@@ -112,7 +123,7 @@ export function withTheme (callback, { themes, themeName, variables }) {
             let lastDifference = colorDifference(original, target);
 
             function test (path) {
-                const value = lookup(path);
+                const value = outerLookup(path);
                 const difference = colorDifference(value, target);
                 if (difference < lastDifference) {
                     closest = path;
@@ -122,7 +133,6 @@ export function withTheme (callback, { themes, themeName, variables }) {
                         console.log("********");
                         console.log("EXACT MATCH! WE HAVE A WINNER!");
                         console.log(path);
-                        suppressLoggingLookupResult = false;
                         return true;
                     }
                 }
@@ -159,7 +169,7 @@ export function withTheme (callback, { themes, themeName, variables }) {
                 if (test(`desaturate(${origString}, ${i})`)) return;
             }
 
-            if (test(`greyscale(${origString}`)) return;
+            if (test(`greyscale(${origString})`)) return;
 
             for (let i = 1; i <= 5; i += 1) {
                 if (test(`analogous(${origString}, 6, 30, ${i})`)) return;
@@ -173,7 +183,7 @@ export function withTheme (callback, { themes, themeName, variables }) {
                 if (test(`spin(${origString}, ${i})`)) return;
             }
 
-            if (test(`complement(${origString}`)) return;
+            if (test(`complement(${origString})`)) return;
 
             for (let i = 1; i <= 2; i += 1) {
                 if (test(`triad(${origString}, ${i})`)) return;
@@ -188,7 +198,7 @@ export function withTheme (callback, { themes, themeName, variables }) {
             }
 
             console.log("********");
-            const closestValue = lookup(closest);
+            const closestValue = outerLookup(closest);
             console.log("NO EXACT MATCH. THE CLOSEST IS OFF BY %s%: %s", (lastDifference * 100).toFixed(2), closest);
             console.log("COMPARE target (%s) %c  %c to match (%s) %c  ",
                 target,
@@ -201,7 +211,15 @@ export function withTheme (callback, { themes, themeName, variables }) {
     }
 
     return callback({
-        lookup,
+        // wrapped this way to avoid a React DOM warning:
+        //     Warning: Invalid value for prop `lookup` on <button> tag.
+        //     Either remove it from the element, or pass a string or number
+        //     value to keep it in the DOM.
+        // in the case that this is passed to a low level DOM model,
+        // e.g. `div` or `button`; if anyone can think of a better name,
+        // please let Kevan know and we'll swap it out.
+        lkp: { fn: outerLookup },
+        lookup: outerLookup,
         theme,
         variables,
     });
@@ -216,4 +234,16 @@ export default class WithTheme extends Component {
 
         return withTheme(fn, { themes, themeName: themeName || ctxThemeName, variables });
     }
+}
+
+export function getThemeVariables (themes, themeName = "light") {
+    return _.uniq(_.values(flatten(themes[themeName])).filter(v => /^hs/.test(v)));
+}
+
+export function lookup (cb) {
+    return ({ lkp: { fn }, ...props }) => fn(
+        typeof cb === "function"
+            ? cb(props)
+            : cb[0].replace(/\$\((\w+)\)/g, (__, k) => props[k])
+    );
 }

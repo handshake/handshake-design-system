@@ -4,7 +4,7 @@
             "borderRadius": "4px",
             "height": "36px",
             "lineHeight": 1.2,
-            "size": "hs-typography-size-h4",
+            "fontSize": "hs-typography-size-h4",
             "margin": {
                 "horizontal": "20px",
                 "loading": "29px",
@@ -17,7 +17,7 @@
             "borderRadius": "4px",
             "height": "25px",
             "lineHeight": 1.3,
-            "size": "hs-typography-size-h5",
+            "fontSize": "hs-typography-size-h5",
             "margin": {
                 "horizontal": "10px",
                 "loading": "24px",

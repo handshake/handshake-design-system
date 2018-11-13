@@ -1,11 +1,11 @@
 import AntdButton from "antd/es/button";
+import { FormattedMessage } from "react-intl";
 import Icon from "../icon";
 import styled, { keyframes } from "styled-components";
 import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
 import themes from "./themes.json";
 import WithTheme, { lookup } from "../design-context/theme-provider/with_theme";
-import { FormattedMessage } from "react-intl";
 
 // Unimplemented CSS:
 // Circle shape
@@ -35,7 +35,7 @@ const Button = styled(AntdButton)`
     cursor: pointer;
     display: inline-block;
     font-family: ${lookup`$(type).default.fontFamily`};
-    font-size: ${lookup`$(size).size`};
+    font-size: ${lookup`$(size).fontSize`};
     font-weight: ${lookup`$(size).weight`};
     height: ${lookup`$(size).height`};
     line-height: ${lookup`$(size).lineHeight`};

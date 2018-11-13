@@ -1,171 +1,67 @@
 import _ from "lodash";
 import Button from "antd-mobile-rn/es/button";
+import { FormattedMessage } from "react-intl";
 import React, { Component } from "react";
 import Text from "antd-mobile-rn/es/text";
 import Icon from "../icon/index.native";
 import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
-import { css } from "styled-components";
 import themes from "./themes.json";
 import WithTheme from "../design-context/theme-provider/with_theme";
 
-// List of all theme variables this component uses.
-// Eventually, I'd like to automate generating this data.
-// This is currently only used by the Storybook Theme Customizer Addon Panel,
-// but there are other potential use cases, so, I'm putting this here instead of
-// hard coding it in the the stories file.
-const THEME_VARIABLES = [
-    "borderColorBase",
-    "buttonFontSize",
-    "buttonFontSizeSm",
-    "buttonHeight",
-    "buttonHeightSm",
-    "colorTextBase",
-    "colorTextBaseInverse",
-    "fillBase",
-    "fillDisabled",
-    "fillTap",
-    "ghostButtonColor",
-    "ghostButtonFillTap",
-    "hSpacingLg",
-    "hSpacingMd",
-    "hSpacingSm",
-    "primaryButtonFill",
-    "primaryButtonFillTap",
-    "radiusMd",
-    "warningButtonFill",
-    "warningButtonFillTap",
-
-    "hsColorPrimary",
-    "hsColorWhite1",
-    "hsColorGray1",
-    "hsColorGray3",
-    "hsColorGray7",
-];
-
 // original: antd-mobile-rn/es/button/style/index.native.js
 // maintenance task: check ^^ for changes anytime we update antd-mobile-rn
-function styles (lookup, variables) {
+function styles (lookup, { loading, size, type }) {
     return {
+        [`${type}Raw`]: {
+            backgroundColor: lookup(`${type}.${loading ? "loading" : "default"}.backgroundColor`),
+            borderColor: lookup(`${type}.${loading ? "loading" : "default"}.borderColor`),
+        },
+        [`${type}Highlight`]: {
+            backgroundColor: lookup(`${type}.active.backgroundColor`),
+            borderColor: lookup(`${type}.active.borderColor`),
+        },
+        [`${type}DisabledRaw`]: {
+            backgroundColor: lookup(`${type}.disabled.backgroundColor`),
+            borderColor: lookup(`${type}.disabled.borderColor`),
+        },
+        [`${type}RawText`]: {
+            color: lookup(`${type}.default.color`),
+            fontFamily: lookup(`${type}.default.fontFamily`), // TODO: might need different values for each environment
+            textTransform: lookup(`${type}.default.textTransform`),
+        },
+        [`${type}HighlightText`]: {
+            color: lookup(`${type}.active.color`),
+        },
+        [`${type}DisabledRawText`]: {
+            color: lookup(`${type}.${loading ? "loading" : "disabled"}.color`)
+        },
+
+        [`${size}Raw`]: {
+            height: lookup(`${size}.height`),
+            paddingLeft: lookup(`${size}.margin.horizontal`),
+            paddingRight: lookup(`${size}.margin.horizontal`),
+        },
+        [`${size}RawText`]: {
+            fontSize: lookup(`${size}.fontSize`),
+            fontWeight: lookup(`${size}.weight`),
+        },
+
         container: {
             flexDirection: "row",
-        },
-        defaultHighlight: {
-            backgroundColor: variables.fillTap,
-            borderColor: variables.borderColorBase,
-        },
-        primaryHighlight: {
-            backgroundColor: lookup("primary.active.backgroundColor"),
-            borderColor: lookup("primary.active.borderColor"),
-        },
-        ghostHighlight: {
-            backgroundColor: "transparent",
-            borderColor: variables.ghostButtonFillTap,
-        },
-        warningHighlight: {
-            backgroundColor: variables.warningButtonFillTap,
-            borderColor: variables.warningButtonFill,
         },
         wrapperStyle: {
             alignItems: "center",
             justifyContent: "center",
-            borderRadius: variables.radiusMd,
-            borderWidth: 1,
-        },
-        largeRaw: {
-            height: variables.buttonHeight,
-            paddingLeft: variables.hSpacingLg,
-            paddingRight: variables.hSpacingLg,
-        },
-        defaultSizeRaw: {
-            height: 40,
-            paddingLeft: variables.hSpacingMd,
-            paddingRight: variables.hSpacingMd,
-        },
-        smallRaw: {
-            height: variables.buttonHeightSm,
-            paddingLeft: variables.hSpacingSm,
-            paddingRight: variables.hSpacingSm,
-        },
-        defaultRaw: {
-            backgroundColor: variables.fillBase,
-            borderColor: variables.borderColorBase,
-        },
-        primaryRaw: {
-            backgroundColor: lookup("primary.default.backgroundColor"),
-            borderColor: lookup("primary.default.borderColor"),
-        },
-        ghostRaw: {
-            backgroundColor: "transparent",
-            borderColor: variables.ghostButtonColor,
-        },
-        warningRaw: {
-            backgroundColor: variables.warningButtonFill,
-            borderColor: variables.warningButtonFill,
-        },
-        defaultDisabledRaw: {
-            backgroundColor: variables.fillDisabled,
-            borderColor: variables.fillDisabled,
-        },
-        primaryDisabledRaw: {
-            backgroundColor: lookup("primary.disabled.backgroundColor"),
-            borderColor: lookup("primary.disabled.borderColor"),
-        },
-        ghostDisabledRaw: {
-            borderColor: `${variables.colorTextBase}1A`,
-        },
-        warningDisabledRaw: {
-            opacity: 0.4,
-        },
-        defaultHighlightText: {
-            color: variables.colorTextBase,
-        },
-        primaryHighlightText: {
-            color: lookup("primary.active.color"),
-        },
-        ghostHighlightText: {
-            color: variables.ghostButtonFillTap,
-        },
-        warningHighlightText: {
-            color: `${variables.colorTextBaseInverse}4D`,
-        },
-        largeRawText: {
-            fontSize: variables.buttonFontSize,
-        },
-        defaultSizeRawText: {
-            fontSize: 15,
-        },
-        smallRawText: {
-            fontSize: variables.buttonFontSizeSm,
-        },
-        defaultRawText: {
-            color: variables.colorTextBase,
-        },
-        primaryRawText: {
-            color: lookup("primary.default.color"),
-        },
-        ghostRawText: {
-            color: variables.ghostButtonColor,
-        },
-        warningRawText: {
-            color: variables.colorTextBaseInverse,
-        },
-        defaultDisabledRawText: {
-            color: `${variables.colorTextBase}4D`,
-        },
-        primaryDisabledRawText: {
-            color: lookup("primary.disabled.color")
-        },
-        ghostDisabledRawText: {
-            color: `${variables.colorTextBase}1A`,
-        },
-        warningDisabledRawText: {
-            color: `${variables.colorTextBaseInverse}99`,
+            borderRadius: lookup(`${size}.borderRadius`),
+            borderWidth: lookup(`${type}.default.borderWidth`),
         },
         indicator: {
-            marginRight: variables.hSpacingMd,
+            marginRight: "8px",
         },
     };
 }
+
+// TODO: `link` type && icons don't use `active` color
 
 class ButtonWrapper extends Component {
     static propTypes = propTypes;
@@ -173,52 +69,48 @@ class ButtonWrapper extends Component {
         block: true,
         ...defaultProps
     };
-    static THEME_VARIABLES = THEME_VARIABLES;
 
     render () {
+        const {
+            block,
+            children,
+            disabled,
+            icon,
+            loading,
+            size,
+            type,
+        } = this.props;
+        const kids = loading
+            ? <FormattedMessage key="text" id={"ds.button.loading"} />
+            : children;
         const content = (
             <WithTheme themes={themes}>
-                {({ lookup, variables }) => (
+                {({ lookup }) => (
                     <Button
-                        styles={styles(lookup, variables)}
+                        styles={styles(lookup, this.props)}
                         {...mapPropsForMobile(this.props)}
                     >
-                        {(this.props.icon && !this.props.loading) ?
+                        {(icon && !loading) ?
                             [
                                 <Icon
                                     key="icon"
-                                    color={(() => {
-                                        switch (this.props.type) {
-                                        case "primary":
-                                        case "warning":
-                                            return this.props.disabled ?
-                                                `${theme.colorTextBaseInverse}99` :
-                                                theme.colorTextBaseInverse;
-                                        case "ghost":
-                                            return this.props.disabled ?
-                                                `${theme.colorTextBase}1A` :
-                                                theme.ghostButtonColor;
-                                        case "default":
-                                        default:
-                                            return this.props.disabled ?
-                                                `${theme.colorTextBase}4D` :
-                                                theme.colorTextBase;
-                                        }
-                                    })()}
-                                    size={this.props.size === "large" ? 16 : "small"}
-                                    type={this.props.icon}
+                                    color={lookup(
+                                        `${type}.${disabled ? "disabled" : "default"}.color`
+                                    )}
+                                    size={lookup(`${size}.fontSize`)}
+                                    type={icon}
                                 />,
                                 <Text key="gap">&nbsp;&nbsp;</Text>,
-                                this.props.children,
+                                kids,
                             ]
                         :
-                            this.props.children
+                            (kids)
                         }
                     </Button>
                 )}
             </WithTheme>
         );
-        return this.props.block ? content : <Text>{content}</Text>;
+        return block ? content : <Text>{content}</Text>;
     }
 }
 

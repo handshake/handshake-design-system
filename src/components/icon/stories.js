@@ -16,7 +16,7 @@ storiesOf("Web/Icon", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(Icon.THEME_VARIABLES))
+    // .addDecorator(withThemeVariables(Icon.THEME_VARIABLES))
     .add(
         "options",
         () => {
@@ -47,7 +47,7 @@ storiesOf("Mobile/Icon", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(NativeIcon.THEME_VARIABLES))
+    // .addDecorator(withThemeVariables(NativeIcon.THEME_VARIABLES))
     .add(
         "options",
         () => {

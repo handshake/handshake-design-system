@@ -46,7 +46,7 @@ function getSize (size) {
         default: 24,
         large: 48,
         small: 12,
-    }[size] || size);
+    }[size] || parseInt(size));
 }
 
 export function mapPropsForWeb (props) {

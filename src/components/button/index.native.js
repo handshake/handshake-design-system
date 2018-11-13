@@ -1,5 +1,5 @@
 import _ from "lodash";
-import Button from "antd-mobile-rn/es/button";
+import { Button, Link } from "./styles.native";
 import { FormattedMessage } from "react-intl";
 import React, { Component } from "react";
 import Text from "antd-mobile-rn/es/text";
@@ -7,59 +7,6 @@ import Icon from "../icon/index.native";
 import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
 import themes from "./themes.json";
 import WithTheme from "../design-context/theme-provider/with_theme";
-
-// original: antd-mobile-rn/es/button/style/index.native.js
-// maintenance task: check ^^ for changes anytime we update antd-mobile-rn
-function styles (lookup, { loading, size, type }) {
-    return {
-        [`${type}Raw`]: {
-            backgroundColor: lookup(`${type}.${loading ? "loading" : "default"}.backgroundColor`),
-            borderColor: lookup(`${type}.${loading ? "loading" : "default"}.borderColor`),
-        },
-        [`${type}Highlight`]: {
-            backgroundColor: lookup(`${type}.active.backgroundColor`),
-            borderColor: lookup(`${type}.active.borderColor`),
-        },
-        [`${type}DisabledRaw`]: {
-            backgroundColor: lookup(`${type}.disabled.backgroundColor`),
-            borderColor: lookup(`${type}.disabled.borderColor`),
-        },
-        [`${type}RawText`]: {
-            color: lookup(`${type}.default.color`),
-            fontFamily: lookup(`${type}.default.fontFamily`), // TODO: might need different values for each environment
-            textTransform: lookup(`${type}.default.textTransform`),
-        },
-        [`${type}HighlightText`]: {
-            color: lookup(`${type}.active.color`),
-        },
-        [`${type}DisabledRawText`]: {
-            color: lookup(`${type}.${loading ? "loading" : "disabled"}.color`)
-        },
-
-        [`${size}Raw`]: {
-            height: lookup(`${size}.height`),
-            paddingLeft: lookup(`${size}.margin.horizontal`),
-            paddingRight: lookup(`${size}.margin.horizontal`),
-        },
-        [`${size}RawText`]: {
-            fontSize: lookup(`${size}.fontSize`),
-            fontWeight: lookup(`${size}.weight`),
-        },
-
-        container: {
-            flexDirection: "row",
-        },
-        wrapperStyle: {
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: lookup(`${size}.borderRadius`),
-            borderWidth: lookup(`${type}.default.borderWidth`),
-        },
-        indicator: {
-            marginRight: "8px",
-        },
-    };
-}
 
 // TODO: `link` type && icons don't use `active` color
 
@@ -80,33 +27,42 @@ class ButtonWrapper extends Component {
             size,
             type,
         } = this.props;
-        const kids = loading
-            ? <FormattedMessage key="text" id={"ds.button.loading"} />
-            : children;
+        const ButtonOrLink = (type === "link" ? Link : Button);
         const content = (
             <WithTheme themes={themes}>
-                {({ lookup }) => (
-                    <Button
-                        styles={styles(lookup, this.props)}
+                {({ lkp, lookup }) => (
+                    <ButtonOrLink
+                        lkp={lkp}
                         {...mapPropsForMobile(this.props)}
                     >
-                        {(icon && !loading) ?
-                            [
-                                <Icon
-                                    key="icon"
-                                    color={lookup(
-                                        `${type}.${disabled ? "disabled" : "default"}.color`
-                                    )}
-                                    size={lookup(`${size}.fontSize`)}
-                                    type={icon}
-                                />,
-                                <Text key="gap">&nbsp;&nbsp;</Text>,
-                                kids,
-                            ]
-                        :
-                            (kids)
-                        }
-                    </Button>
+                        {(type === "link" && loading && [
+                            <Icon
+                                key="icon"
+                                color={lookup(
+                                    `${type}.${disabled ? "disabled" : "default"}.color`
+                                )}
+                                size={parseInt(lookup(`${size}.fontSize`))}
+                                spin
+                                type="loading"
+                            />,
+                            <Text key="gap">&nbsp;&nbsp;</Text>,
+                            <FormattedMessage key="text" id={"ds.button.loading"} />,
+                        ])
+                        || (loading && <FormattedMessage id={"ds.button.loading"} />)
+                        || (icon && [
+                            <Icon
+                                key="icon"
+                                color={lookup(
+                                    `${type}.${disabled ? "disabled" : "default"}.color`
+                                )}
+                                size={parseInt(lookup(`${size}.fontSize`))}
+                                type={icon}
+                            />,
+                            <Text key="gap">&nbsp;&nbsp;</Text>,
+                            <span key="text">{children}</span>,
+                        ])
+                        || children}
+                    </ButtonOrLink>
                 )}
             </WithTheme>
         );

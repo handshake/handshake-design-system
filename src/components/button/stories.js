@@ -63,7 +63,7 @@ storiesOf("Mobile/Button", module)
                     loading={boolean("Loading", false)}
                     onClick={action("clicked")}
                     size={select("Size", ["small", "large"], "large")}
-                    type={select("Type", ["primary", "secondary", "confirm", "danger"], "secondary")}
+                    type={select("Type", ["primary", "secondary", "confirm", "danger", "link"], "secondary")}
                 >
                     {text("Text", "Button Intro")}
                 </NativeButton>

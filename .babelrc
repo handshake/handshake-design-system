@@ -1,7 +1,14 @@
 {
     "presets": ["module:metro-react-native-babel-preset"],
     "plugins": [
-        ["wildcard", { "noModifyCase": true, "exts": ["js", "json", "svg"] }],
-        "@quickbaseoss/babel-plugin-styled-components-css-namespace"
+        ["wildcard", { "noModifyCase": true, "exts": ["js", "json", "svg"] }]
+    ],
+    "overrides": [
+        {
+            "test": "*.web.js",
+            "plugins": [
+                "@quickbaseoss/babel-plugin-styled-components-css-namespace"
+            ]
+        }
     ]
 }

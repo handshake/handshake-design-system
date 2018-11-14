@@ -1,71 +1,41 @@
 import AntdButton from "antd-mobile-rn/es/button";
-import React from "react";
 import styled from "styled-components/native";
-import Text from "antd-mobile-rn/es/text";
-import themes from "./themes.json";
-import WithTheme, { lookup } from "../design-context/theme-provider/with_theme";
+import { lookup } from "../design-context/theme-provider/with_theme";
 
-export const Button = props => {
-    const { loading, size, type } = props;
-    return (
-        <WithTheme themes={themes}>
-            {({ lookup }) =>
-                <AntdButton
-                    styles={{
-                        [`${type}Raw`]: {
-                            backgroundColor: lookup(`${type}.${loading ? "loading" : "default"}.backgroundColor`),
-                            borderColor: lookup(`${type}.${loading ? "loading" : "default"}.borderColor`),
-                        },
-                        [`${type}Highlight`]: {
-                            backgroundColor: lookup(`${type}.active.backgroundColor`),
-                            borderColor: lookup(`${type}.active.borderColor`),
-                        },
-                        [`${type}DisabledRaw`]: {
-                            backgroundColor: lookup(`${type}.disabled.backgroundColor`),
-                            borderColor: lookup(`${type}.disabled.borderColor`),
-                        },
-                        [`${type}RawText`]: {
-                            color: lookup(`${type}.default.color`),
-                            fontFamily: lookup(`${type}.default.fontFamily`), // TODO: might need different values for each environment
-                            textTransform: lookup(`${type}.default.textTransform`),
-                        },
-                        [`${type}HighlightText`]: {
-                            color: lookup(`${type}.active.color`),
-                        },
-                        [`${type}DisabledRawText`]: {
-                            color: lookup(`${type}.${loading ? "loading" : "disabled"}.color`)
-                        },
-                        [`${size}Raw`]: {
-                            height: lookup(`${size}.height`),
-                            paddingLeft: lookup(`${size}.margin.horizontal`),
-                            paddingRight: lookup(`${size}.margin.horizontal`),
-                        },
-                        [`${size}RawText`]: {
-                            fontSize: lookup(`${size}.fontSize`),
-                            fontWeight: lookup(`${size}.weight`),
-                        },
-                        container: {
-                            flexDirection: "row",
-                        },
-                        wrapperStyle: {
-                            alignItems: "center",
-                            justifyContent: "center",
-                            borderRadius: lookup(`${size}.borderRadius`),
-                            borderWidth: lookup(`${type}.default.borderWidth`),
-                        },
-                        indicator: {
-                            marginRight: "8px",
-                        },
-                    }}
-                    {...props}
-                />
-            }
-        </WithTheme>
-    );
-};
-
-const StyledLink = styled(Text)`
-    color: ${lookup`$(type).default.color`};
+export default styled(AntdButton).attrs({
+    // RN Styled Components doesn't support nested selectors like the web version does
+    // so, we still need to provide nested styles this way:
+    styles: ({ disabled, loading, lkp: { fn: lookup }, size, type }) => ({
+        [`${type}Highlight`]: {
+            backgroundColor: lookup(`${type}.active.backgroundColor`),
+            borderColor: lookup(`${type}.active.borderColor`),
+        },
+        [`${type}HighlightText`]: {
+            color: lookup(`${type}.active.color`),
+        },
+        [`${type}RawText`]: {
+            color: lookup(`${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.color`),
+            fontFamily: lookup(`${type}.default.fontFamily`), // TODO: might need different values for each environment
+            fontSize: lookup(`${size}.${type}.fontSize`),
+            fontWeight: lookup(`${size}.${type}.weight`),
+            textTransform: lookup(`${type}.default.textTransform`),
+        },
+        container: {
+            flexDirection: "row",
+        },
+        indicator: {
+            marginRight: "8px",
+        },
+    }),
+})`
+    align-items: center;
+    background-color: ${lookup(({ disabled, type, loading }) =>
+        `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.backgroundColor`)};
+    border-color: ${lookup(({ disabled, type, loading }) =>
+        `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.borderColor`)};
+    border-radius: ${lookup`$(size).$(type).borderRadius`};
+    border-width: ${lookup`$(type).default.borderWidth`};
+    height: ${lookup`$(size).$(type).height`};
+    justify-content: center;
+    padding: 0 ${lookup`$(size).$(type).margin.horizontal`};
 `;
-
-export const Link = ({ loading, ...props }) => (<StyledLink {...props} />);

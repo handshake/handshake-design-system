@@ -1,4 +1,4 @@
-import { Button, Link } from "./styles.web";
+import Button from "./styles.web";
 import { FormattedMessage } from "react-intl";
 import Icon from "../icon";
 import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
@@ -10,17 +10,15 @@ class ButtonWrapper extends Component {
     static propTypes = propTypes;
     static defaultProps = {
         block: false,
-        webHtmlType: "button",
         ...defaultProps
     };
 
     render () {
         const { children, icon, loading, type } = this.props;
-        const ButtonOrLink = (type === "link" ? Link : Button);
         return (
             <WithTheme themes={themes}>
                 {({ lkp }) => (
-                    <ButtonOrLink
+                    <Button
                         lkp={lkp}
                         {...mapPropsForWeb(this.props)}
                     >
@@ -34,7 +32,7 @@ class ButtonWrapper extends Component {
                             <span key="text">{children}</span>,
                         ])
                         || children}
-                    </ButtonOrLink>
+                    </Button>
                 )}
             </WithTheme>
         );

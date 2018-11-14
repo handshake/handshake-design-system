@@ -5,7 +5,7 @@
     ],
     "overrides": [
         {
-            "test": "*.web.js",
+            "test": "**/*.web.js",
             "plugins": [
                 "@quickbaseoss/babel-plugin-styled-components-css-namespace"
             ]

@@ -8,30 +8,30 @@ const loadingCircle = keyframes`
     }
 `;
 
-export const Button = styled(AntdButton)`
+export default styled(AntdButton)`
     background-color: ${lookup`$(type).default.backgroundColor`};
     background-image: none;
     border:
         ${lookup`$(type).default.borderWidth`}
         ${lookup`$(type).default.borderStyle`}
         ${lookup`$(type).default.borderColor`};
-    border-radius: ${lookup`$(size).borderRadius`};
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+    border-radius: ${lookup`$(size).$(type).borderRadius`};
+    box-shadow: ${lookup`$(type).default.boxShadow`};
     color: ${lookup`$(type).default.color`};
     cursor: pointer;
     display: inline-block;
     font-family: ${lookup`$(type).default.fontFamily`};
-    font-size: ${lookup`$(size).fontSize`};
-    font-weight: ${lookup`$(size).weight`};
-    height: ${lookup`$(size).height`};
-    line-height: ${lookup`$(size).lineHeight`};
+    font-size: ${lookup`$(size).$(type).fontSize`};
+    font-weight: ${lookup`$(size).$(type).weight`};
+    height: ${lookup`$(size).$(type).height`};
+    line-height: ${lookup`$(size).$(type).lineHeight`};
     padding:
-        ${lookup`$(size).margin.vertical`}
-        ${lookup`$(size).margin.horizontal`}
-        ${lookup`$(size).margin.vertical`}
-        ${lookup(({ size, loading }) => loading
-            ? `${size}.margin.loading`
-            : `${size}.margin.horizontal`)};
+        ${lookup`$(size).$(type).margin.vertical`}
+        ${lookup`$(size).$(type).margin.horizontal`}
+        ${lookup`$(size).$(type).margin.vertical`}
+        ${lookup(({ loading, size, type }) => loading
+            ? `${size}.${type}.margin.loading`
+            : `${size}.${type}.margin.horizontal`)};
     pointer-events: ${({ loading }) => loading ? "none" : "auto"};
     position: relative;
     text-align: center;
@@ -136,7 +136,7 @@ export const Button = styled(AntdButton)`
         font-style: normal;
         line-height: 1;
         margin-left: ${lookup(({ size, loading }) => loading
-            ? `${size}.margin.loadingIcon`
+            ? `${size}.$(type).margin.loadingIcon`
             : 0)};
         vertical-align: -0.125em;
         text-align: center;
@@ -181,96 +181,6 @@ export const Button = styled(AntdButton)`
             right: 0;
             background: transparent;
         }
-    }
-
-    > i,
-    > span {
-        pointer-events: none;
-    }
-`;
-
-export const Link = styled.a`
-    color: ${lookup`$(type).default.color`};
-    cursor: pointer;
-    font-family: ${lookup`$(type).default.fontFamily`};
-    font-size: ${lookup`$(size).size`};
-    font-weight: ${lookup`$(size).weight`};
-    pointer-events: ${({ loading }) => loading ? "none" : "auto"};
-    text-transform: ${lookup`$(type).default.textTransform`};
-    touch-action: manipulation;
-    transition: all ${lookup`hs-transition-duration`} ${lookup`hs-transition-easing`};
-    
-    &,
-    &:active,
-    &:focus {
-        outline: 0;
-    }
-
-    &,
-    &:hover,
-    &:focus,
-    &:active,
-    &.active {
-        text-decoration: none;
-    }
-
-    &:hover {
-        color: ${lookup`$(type).hover.color`};
-    }
-
-    &:focus,
-    &:active,
-    &.active {
-        color: ${lookup`$(type).active.color`};
-    }
-
-    &.disabled,
-    &[disabled] {
-        cursor: not-allowed;
-
-        &,
-        &:hover,
-        &:focus,
-        &:active,
-        &.active {
-            color: ${lookup`$(type).disabled.color`};
-        }
-
-        > * {
-            pointer-events: none;
-        }
-    }
-
-    .anticon {
-        color: inherit;
-        display: inline-block;
-        font-size: inherit;
-        font-style: normal;
-        line-height: 1;
-        margin-left: 0
-        vertical-align: -0.125em;
-        text-align: center;
-        text-transform: none;
-        text-rendering: optimizeLegibility;
-        transition: margin-left ${lookup`hs-transition-duration`} ${lookup`hs-transition-easing`};
-
-        > * {
-            line-height: 1;
-        }
-
-        svg {
-            display: inline-block;
-        }
-
-        svg:not(:root) {
-            overflow: hidden;
-        }
-    }
-
-    /* To ensure that a space will be placed between character and Icon. */
-    > .anticon + span,
-    > span + .anticon {
-        margin-left: 8px;
     }
 
     > i,

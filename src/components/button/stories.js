@@ -10,6 +10,7 @@ import { withViewport } from "@storybook/addon-viewport";
 
 import { Button, Icon } from "../..";
 import { Button as NativeButton } from "../../index.native";
+import Text from "antd-mobile-rn/es/text";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
@@ -21,17 +22,21 @@ storiesOf("Web/Button", module)
     .add(
         "options",
         () => (
-            <Button
-                block={boolean("Block", false)}
-                disabled={boolean("Disabled", false)}
-                icon={select("Icon", [undefined, ...Icon.ALL_TYPES], undefined)}
-                loading={boolean("Loading", false)}
-                onClick={action("clicked")}
-                size={select("Size", ["small", "large"], "large")}
-                type={select("Type", ["primary", "secondary", "confirm", "danger", "link"], "secondary")}
-            >
-                {text("Text", "Button Intro")}
-            </Button>
+            <div>
+                <span>Before</span>
+                <Button
+                    block={boolean("Block", false)}
+                    disabled={boolean("Disabled", false)}
+                    icon={select("Icon", [undefined, ...Icon.ALL_TYPES], undefined)}
+                    loading={boolean("Loading", false)}
+                    onClick={action("clicked")}
+                    size={select("Size", ["small", "large"], "large")}
+                    type={select("Type", ["primary", "secondary", "confirm", "danger", "link"], "secondary")}
+                >
+                    {text("Text", "Button Intro")}
+                </Button>
+                <span>After</span>
+            </div>
         ),
         {
             info: {
@@ -53,22 +58,41 @@ storiesOf("Mobile/Button", module)
     .addDecorator(withThemeVariables(themes))
     .add(
         "options",
-        () => (
-            <WingBlank  size="lg">
-                <WhiteSpace size="lg" />
+        () => {
+            const block = boolean("Block", true);
+            const type = select("Type", ["primary", "secondary", "confirm", "danger", "link"], "secondary");
+            const btn = (
                 <NativeButton
+                    key="btn"
                     block={boolean("Block", true)}
                     disabled={boolean("Disabled", false)}
                     icon={select("Icon", [undefined, ...Icon.ALL_TYPES], undefined)}
                     loading={boolean("Loading", false)}
                     onClick={action("clicked")}
                     size={select("Size", ["small", "large"], "large")}
-                    type={select("Type", ["primary", "secondary", "confirm", "danger", "link"], "secondary")}
+                    type={type}
                 >
                     {text("Text", "Button Intro")}
                 </NativeButton>
-            </WingBlank>
-        ),
+            );
+            return (
+                <WingBlank  size="lg">
+                    <WhiteSpace size="lg" />
+                    {!block || type === "link"
+                        ? (<Text>
+                            Before
+                            {btn}
+                            After
+                        </Text>)
+                        : ([
+                            <Text key="before">Before</Text>,
+                            btn,
+                            <Text key="after">After</Text>,
+                        ])
+                    }
+                </WingBlank>
+            );
+        },
         {
             info: {
                 header: false,

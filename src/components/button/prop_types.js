@@ -45,7 +45,7 @@ export function mapPropsForMobile (props) {
         // children: props.children, // handled separately
         disabled: props.disabled,
         // icon: props.icon, // handled separately
-        loading: props.loading,
+        // loading: props.loading, // handled separately
         onClick: props.onClick,
         size: ((size) => ({ default: "large" })[size] || size)(props.size),
         style: props.style,

@@ -5,6 +5,7 @@ import React, { Component } from "react";
 import propTypes, { defaultProps, mapPropsForMobile, ALL_TYPES } from "./prop_types";
 import { renderIconDefinitionToSVGElement } from "@ant-design/icons/lib/helpers";
 import rnSvgParser from "@target-corp/react-native-svg-parser";
+import Text from "antd-mobile-rn/es/text";
 import { ThemeSubscriber } from "../design-context/theme-provider";
 import colorPalette from "../../util/antd_color_palette";
 
@@ -48,10 +49,10 @@ class IconWrapper extends Component {
             content = rnSvgParser(renderIconDefinitionToSVGElement(icon, { placeholders: {
                 primaryColor: color, 
                 secondaryColor: colorPalette(color, 0),
-            }}), "", { height: pxSize, width: pxSize, ...style });
+            }}), "", { height: pxSize, width: pxSize });
         } else {
             fillPaths(icon.icon, color);
-            content = rnSvgParser(renderIconDefinitionToSVGElement(icon), "", { height: pxSize, width: pxSize, ...style });
+            content = rnSvgParser(renderIconDefinitionToSVGElement(icon), "", { height: pxSize, width: pxSize });
         }
 
         if (spin) {
@@ -60,13 +61,13 @@ class IconWrapper extends Component {
                     animation="rotate"
                     easing="linear"
                     iterationCount="infinite"
-                    style={{ width: pxSize }}
+                    style={{ width: pxSize, display: "inline-block", ...style }} // display bit is a hack for web preview only
                 >
                     {content}
                 </AnimatableText>
             );
         }
-        return content;
+        return <Text style={style}>{content}</Text>;
     }
 }
 

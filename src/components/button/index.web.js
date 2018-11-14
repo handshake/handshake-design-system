@@ -22,11 +22,7 @@ class ButtonWrapper extends Component {
                         lkp={lkp}
                         {...mapPropsForWeb(this.props)}
                     >
-                        {(type === "link" && loading && [
-                            <Icon key="icon" type="loading" />,
-                            <FormattedMessage key="text" id={"ds.button.loading"} />,
-                        ])
-                        || (loading && <FormattedMessage id={"ds.button.loading"} />)
+                        {(loading && <FormattedMessage id={"ds.button.loading"} />)
                         || (type === "link" && icon && [
                             <Icon key="icon" type={icon} />,
                             <span key="text">{children}</span>,

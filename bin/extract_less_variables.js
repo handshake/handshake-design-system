@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 require("@babel/register")();
-const fs = require("fs");
 const _ = require("lodash");
-const extract = require("../src/theme/extract_less_variables").default;
+const fs = require("fs");
 const antdRnVariables = require("antd-mobile-rn/lib/style/themes/default.native");
+const extract = require("../src/theme/extract_less_variables").default;
 
 const extractToFile = (from, to) => 
     extract(from)

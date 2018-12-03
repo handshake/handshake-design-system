@@ -1,8 +1,8 @@
 import ActivityIndicator from "antd-mobile-rn/es/activity-indicator";
 import React, { Component } from "react";
 import styled from "styled-components";
-import View from "antd-mobile-rn/es/view"; // NOTE: is a straight re-export from react-native
 import { ThemeSubscriber } from "../design-context/theme-provider";
+import View from "antd-mobile-rn/es/view"; // NOTE: is a straight re-export from react-native
 
 import propTypes, { defaultProps } from "./prop_types";
 
@@ -34,13 +34,13 @@ function styles (theme) {
             bottom: 0,
             right: 0,
             backgroundColor: "transparent",
-            zIndex: theme.toastZindex
+            zIndex: theme.toastZindex,
         },
         innerContainer: {
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
-            backgroundColor: "transparent"
+            backgroundColor: "transparent",
         },
         wrapper: {
             alignItems: "center",
@@ -48,24 +48,24 @@ function styles (theme) {
             width: 89,
             height: 89,
             borderRadius: theme.radiusMd,
-            backgroundColor: theme.toastFill
+            backgroundColor: theme.toastFill,
         },
         tip: {
             color: theme.colorTextBase,
             fontSize: theme.fontSizeBase,
-            marginLeft: theme.hSpacingMd
+            marginLeft: theme.hSpacingMd,
         },
         toast: {
             color: theme.colorTextBaseInverse,
             fontSize: theme.fontSizeBase,
-            marginTop: theme.vSpacingSm
+            marginTop: theme.vSpacingSm,
         },
         spinner: {
             flexDirection: "row",
             justifyContent: "center",
-            alignItems: "center"
-        }
-    }
+            alignItems: "center",
+        },
+    };
 }
 
 const SpinnerBox = styled(View)`
@@ -85,12 +85,21 @@ const SpinnerFrame = styled(View)`
 
 export default class Spinner extends Component {
     static propTypes = propTypes;
+
     static defaultProps = defaultProps;
+
     static THEME_VARIABLES = THEME_VARIABLES;
 
     render () {
-        const { enabled = true, block, size, style, text, toast } = this.props;
-        
+        const {
+            enabled = true,
+            block,
+            size,
+            style,
+            text,
+            toast,
+        } = this.props;
+
         if (!enabled) {
             return null;
         }
@@ -100,7 +109,7 @@ export default class Spinner extends Component {
                 <SpinnerFrame>
                     <SpinnerBox>
                         <ThemeSubscriber>
-                            {({theme}) => (
+                            {({ theme }) => (
                                 <ActivityIndicator
                                     size={size || "large"}
                                     style={style}
@@ -116,7 +125,7 @@ export default class Spinner extends Component {
 
         return (
             <ThemeSubscriber>
-                {({theme}) => (
+                {({ theme }) => (
                     <ActivityIndicator
                         size={size || "small"}
                         style={style}

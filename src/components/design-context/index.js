@@ -1,5 +1,5 @@
-import React from "react";
 import LocaleProvider, { LocaleSubscriber } from "./locale-provider";
+import React from "react";
 import ThemeProvider, { ThemeContext, ThemeSubscriber } from "./theme-provider";
 import WithTheme from "./theme-provider/with_theme";
 
@@ -42,5 +42,5 @@ export {
     ThemeContext,
     ThemeProvider,
     ThemeSubscriber,
-    WithTheme
-}
+    WithTheme,
+};

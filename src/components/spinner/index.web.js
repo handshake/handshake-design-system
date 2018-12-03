@@ -64,7 +64,7 @@ const Spin = styled(AntdSpin)`
     padding: 0;
     position: static;
     text-align: center;
-    transition: transform 0.3s${({ theme }) => theme.easeInOutCirc};
+    transition: transform 0.3s ${({ theme }) => theme.easeInOutCirc};
     vertical-align: middle;
 
     .ant-spin-dot {
@@ -159,11 +159,21 @@ const Toast = styled.div`
 
 export default class Spinner extends Component {
     static propTypes = propTypes;
+
     static defaultProps = defaultProps;
+
     static THEME_VARIABLES = THEME_VARIABLES;
 
     render () {
-        const { className, block, enabled = true, size, style, text, toast } = this.props;
+        const {
+            className,
+            block,
+            enabled = true,
+            size,
+            style,
+            text,
+            toast,
+        } = this.props;
 
         if (!enabled) {
             return null;
@@ -181,7 +191,7 @@ export default class Spinner extends Component {
                         />
                     </Toast>
                 </Toaster>
-            )
+            );
         }
 
         if (block) {

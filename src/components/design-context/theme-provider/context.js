@@ -10,4 +10,5 @@ export function ctx (theme = "light", variables = {}) {
     };
 }
 
-export default ThemeContext = React.createContext(ctx);
+const ThemeContext = React.createContext(ctx);
+export default ThemeContext;

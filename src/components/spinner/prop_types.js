@@ -36,7 +36,7 @@ export default {
     // natively supported by `ActivityIndicator`
     // and with by us for `Spin`
     toast: PropTypes.bool,
-}
+};
 
 export const defaultProps = {
     block: false,

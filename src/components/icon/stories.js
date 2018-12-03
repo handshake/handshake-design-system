@@ -1,10 +1,22 @@
 import { action } from "@storybook/addon-actions";
-import { storiesOf } from "@storybook/react";
+import {
+    array,
+    boolean,
+    button,
+    color,
+    date,
+    knob,
+    number,
+    object,
+    select,
+    text,
+    withKnobs,
+} from "@storybook/addon-knobs";
 import React from "react";
+import { storiesOf } from "@storybook/react";
 import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 import { withInfo } from "@storybook/addon-info";
-import { withKnobs, array, boolean, button, color, date, knob, number, object, text, select } from "@storybook/addon-knobs";
-import withStyles from "@sambego/storybook-styles"
+import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
 
 import { Icon } from "../..";
@@ -19,17 +31,15 @@ storiesOf("Web/Icon", module)
     // .addDecorator(withThemeVariables(Icon.THEME_VARIABLES))
     .add(
         "options",
-        () => {
-            return (
-                <Icon
-                    color={color("Color", "#ff0000")}
-                    size={select("Size", ["default", "large", "small"], "default")}
-                    spin={boolean("Spin", false)}
-                    theme={select("Theme", ["filled", "outlined", "twoTone"], "outlined")}
-                    type={select("Type", Icon.ALL_TYPES, Icon.ALL_TYPES[0])}
-                />
-            );
-        },
+        () => (
+            <Icon
+                color={color("Color", "#ff0000")}
+                size={select("Size", ["default", "large", "small"], "default")}
+                spin={boolean("Spin", false)}
+                theme={select("Theme", ["filled", "outlined", "twoTone"], "outlined")}
+                type={select("Type", Icon.ALL_TYPES, Icon.ALL_TYPES[0])}
+            />
+        ),
         {
             info: {
                 header: false,
@@ -39,8 +49,8 @@ storiesOf("Web/Icon", module)
                     import { Icon } from "@handshake/design-system";
                     ~~~
                 `,
-            }
-        }
+            },
+        },
     );
 
 storiesOf("Mobile/Icon", module)
@@ -50,20 +60,18 @@ storiesOf("Mobile/Icon", module)
     // .addDecorator(withThemeVariables(NativeIcon.THEME_VARIABLES))
     .add(
         "options",
-        () => {
-            return (
-                <WingBlank  size="lg">
-                    <WhiteSpace size="lg" />
-                    <NativeIcon
-                        color={color("Color", "#ff0000")}
-                        size={select("Size", ["default", "large", "small"])}
-                        spin={boolean("Spin", false)}
-                        theme={select("Theme", ["filled", "outlined", "twoTone"], "outlined")}
-                        type={select("Type", NativeIcon.ALL_TYPES, NativeIcon.ALL_TYPES[0])}
-                    />
-                </WingBlank>
-            );
-        },
+        () => (
+            <WingBlank size="lg">
+                <WhiteSpace size="lg" />
+                <NativeIcon
+                    color={color("Color", "#ff0000")}
+                    size={select("Size", ["default", "large", "small"])}
+                    spin={boolean("Spin", false)}
+                    theme={select("Theme", ["filled", "outlined", "twoTone"], "outlined")}
+                    type={select("Type", NativeIcon.ALL_TYPES, NativeIcon.ALL_TYPES[0])}
+                />
+            </WingBlank>
+        ),
         {
             info: {
                 header: false,
@@ -73,6 +81,6 @@ storiesOf("Mobile/Icon", module)
                     import { Icon } from "@handshake/design-system";
                     ~~~
                 `,
-            }
-        }
+            },
+        },
     );

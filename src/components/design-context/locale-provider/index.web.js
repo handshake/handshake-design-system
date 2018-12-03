@@ -1,6 +1,6 @@
 import _ from "lodash";
-import { IntlProvider } from "react-intl";
 import AntDLocaleProvider from "antd/es/locale-provider";
+import { IntlProvider } from "react-intl";
 import React, { Component } from "react";
 
 import {
@@ -15,9 +15,11 @@ import propTypes, { defaultProps } from "./prop_types";
 
 export default class LocaleProvider extends Component {
     static ALL_SUPPORTED_LOCALES = ALL_SUPPORTED_LOCALES
+
     static DEFAULT_LOCALE = DEFAULT_LOCALE
 
     static defaultProps = defaultProps
+
     static propTypes = propTypes
 
     static getDerivedStateFromProps (nextProps) {
@@ -32,19 +34,29 @@ export default class LocaleProvider extends Component {
     }
 
     render () {
+        const {
+            antdLocaleData,
+            language,
+            localeName,
+            messages,
+        } = this.state;
+        const { children } = this.props;
+
         return (
-            <LocaleContext.Provider value={{
-                language: this.state.language,
-                locale: this.state.localeName,
-            }}>
+            <LocaleContext.Provider
+                value={{
+                    language,
+                    locale: localeName,
+                }}
+            >
                 <AntDLocaleProvider
-                    locale={this.state.antdLocaleData}
+                    locale={antdLocaleData}
                 >
                     <IntlProvider
-                        locale={this.state.language}
-                        messages={this.state.messages}
+                        locale={language}
+                        messages={messages}
                     >
-                        { this.props.children }
+                        { children }
                     </IntlProvider>
                 </AntDLocaleProvider>
             </LocaleContext.Provider>

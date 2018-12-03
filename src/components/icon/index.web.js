@@ -1,7 +1,7 @@
 import AntdIcon from "antd/es/icon";
-import styled, { keyframes } from "styled-components";
-import propTypes, { defaultProps, mapPropsForWeb, ALL_TYPES } from "./prop_types";
+import propTypes, { ALL_TYPES, defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
+import styled, { keyframes } from "styled-components";
 
 const THEME_VARIABLES = false;
 
@@ -45,8 +45,11 @@ const Icon = styled(AntdIcon)`
 
 class IconWrapper extends Component {
     static propTypes = propTypes;
+
     static defaultProps = defaultProps;
+
     static THEME_VARIABLES = THEME_VARIABLES;
+
     static ALL_TYPES = ALL_TYPES;
 
     render () {

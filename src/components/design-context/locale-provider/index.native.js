@@ -1,6 +1,6 @@
 import _ from "lodash";
-import { IntlProvider } from "react-intl";
 import AntDLocaleProvider from "antd-mobile/es/locale-provider";
+import { IntlProvider } from "react-intl";
 import React, { Component } from "react";
 import Text from "antd-mobile-rn/lib/text";
 
@@ -16,9 +16,11 @@ import propTypes, { defaultProps } from "./prop_types";
 
 export default class LocaleProvider extends Component {
     static ALL_SUPPORTED_LOCALES = ALL_SUPPORTED_LOCALES
+
     static DEFAULT_LOCALE = DEFAULT_LOCALE
 
     static propTypes = propTypes
+
     static defaultProps = defaultProps
 
     static getDerivedStateFromProps (nextProps) {
@@ -33,23 +35,32 @@ export default class LocaleProvider extends Component {
     }
 
     render () {
+        const {
+            antdLocaleData,
+            language,
+            localeName,
+            messages,
+        } = this.state;
+        const { children } = this.props;
         console.log("LocaleContext.Provider", LocaleContext.Provider);
         console.log("AntDLocaleProvider", AntDLocaleProvider);
         console.log("IntlProvider", IntlProvider);
         return (
-            <LocaleContext.Provider value={{
-                language: this.state.language,
-                locale: this.state.localeName,
-            }}>
+            <LocaleContext.Provider
+                value={{
+                    language,
+                    locale: localeName,
+                }}
+            >
                 <AntDLocaleProvider
-                    locale={this.state.antdLocaleData}
+                    locale={antdLocaleData}
                 >
                     <IntlProvider
-                        locale={this.state.language}
-                        messages={this.state.messages}
+                        locale={language}
+                        messages={messages}
                         textComponent={Text}
                     >
-                        { this.props.children }
+                        {children}
                     </IntlProvider>
                 </AntDLocaleProvider>
             </LocaleContext.Provider>

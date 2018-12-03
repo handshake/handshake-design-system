@@ -1,11 +1,24 @@
+/* eslint-disable react-intl/string-is-marked-for-translation */
 import { action } from "@storybook/addon-actions";
-import { storiesOf } from "@storybook/react";
+import {
+    array,
+    boolean,
+    button,
+    color,
+    date,
+    knob,
+    number,
+    object,
+    select,
+    text,
+    withKnobs,
+} from "@storybook/addon-knobs";
 import React from "react";
+import { storiesOf } from "@storybook/react";
 import themes from "./themes.json";
 import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 import { withInfo } from "@storybook/addon-info";
-import { withKnobs, array, boolean, button, color, date, knob, number, object, text, select } from "@storybook/addon-knobs";
-import withStyles from "@sambego/storybook-styles"
+import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
 
 import { Button, Icon } from "../..";
@@ -47,8 +60,8 @@ storiesOf("Web/Button", module)
                     import { Button } from "@handshake/design-system";
                     ~~~
                 `,
-            }
-        }
+            },
+        },
     );
 
 storiesOf("Mobile/Button", module)
@@ -76,14 +89,16 @@ storiesOf("Mobile/Button", module)
                 </NativeButton>
             );
             return (
-                <WingBlank  size="lg">
+                <WingBlank size="lg">
                     <WhiteSpace size="lg" />
                     {!block || type === "link"
-                        ? (<Text>
-                            Before
-                            {btn}
-                            After
-                        </Text>)
+                        ? (
+                            <Text>
+                                Before
+                                {btn}
+                                After
+                            </Text>
+                        )
                         : ([
                             <Text key="before">Before</Text>,
                             btn,
@@ -102,6 +117,6 @@ storiesOf("Mobile/Button", module)
                     import { Button } from "@handshake/design-system";
                     ~~~
                 `,
-            }
-        }
+            },
+        },
     );

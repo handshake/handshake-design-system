@@ -1,14 +1,27 @@
-import { storiesOf } from "@storybook/react";
+/* eslint-disable react-intl/string-is-marked-for-translation */
+import {
+    array,
+    boolean,
+    button,
+    color,
+    date,
+    knob,
+    number,
+    object,
+    select,
+    text,
+    withKnobs,
+} from "@storybook/addon-knobs";
 import React from "react";
+import { storiesOf } from "@storybook/react";
 import Text from "antd-mobile-rn/es/text";
 import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 import { withInfo } from "@storybook/addon-info";
-import { withKnobs, array, boolean, button, color, date, knob, number, object, text, select } from "@storybook/addon-knobs";
-import withStyles from "@sambego/storybook-styles"
+import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
 
-import { Spinner } from "../../index.web";
 import { Spinner as NativeSpinner } from "../../index.native";
+import { Spinner } from "../../index.web";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
@@ -41,8 +54,8 @@ storiesOf("Web/Spinner", module)
                     import { Spinner } from "@handshake/design-system";
                     ~~~
                 `,
-            }
-        }
+            },
+        },
     );
 
 storiesOf("Mobile/Spinner", module)
@@ -95,6 +108,6 @@ storiesOf("Mobile/Spinner", module)
                     import { Spinner } from "@handshake/design-system";
                     ~~~
                 `,
-            }
-        }
+            },
+        },
     );

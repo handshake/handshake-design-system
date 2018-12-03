@@ -19,6 +19,15 @@ module.exports = (storybookBaseConfig, configType) => {
         /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-animatable)\/).*/;
     storybookBaseConfig.module.rules.push(
         {
+            enforce: "pre",
+            test: /handshake-design-system\/src\/.*(?!\/__tests__\/).+\.js$/,
+            use: [{
+                loader: "eslint-loader",
+            }, {
+                loader: "stylelint-custom-processor-loader",
+            }],
+        },
+        {
             test: /\.js$/,
             include: /node_modules\/react-native-menu/,
             use: [

@@ -29,10 +29,10 @@ export default styled(AntdButton)`
         ${lookup`$(size).$(type).margin.vertical`}
         ${lookup`$(size).$(type).margin.horizontal`}
         ${lookup`$(size).$(type).margin.vertical`}
-        ${lookup(({ loading, size, type }) => loading
+        ${lookup(({ loading, size, type }) => (loading
             ? `${size}.${type}.margin.loading`
-            : `${size}.${type}.margin.horizontal`)};
-    pointer-events: ${({ loading }) => loading ? "none" : "auto"};
+            : `${size}.${type}.margin.horizontal`))};
+    pointer-events: ${({ loading }) => (loading ? "none" : "auto")};
     position: relative;
     text-align: center;
     text-transform: ${lookup`$(type).default.textTransform`};
@@ -40,7 +40,7 @@ export default styled(AntdButton)`
     transition: all ${lookup`hs-transition-duration`} ${lookup`hs-transition-easing`};
     user-select: none;
     white-space: nowrap;
-    width: ${({ block }) => block ? "100%" : "auto"};
+    width: ${({ block }) => (block ? "100%" : "auto")};
 
     &,
     &:active,
@@ -111,7 +111,7 @@ export default styled(AntdButton)`
         border-radius: inherit;
         bottom: -1px;
         content: '';
-        display: ${({ loading }) => loading ? "block" : "none"};
+        display: ${({ loading }) => (loading ? "block" : "none")};
         left: -1px;
         opacity: 0.35;
         pointer-events: none;
@@ -135,9 +135,9 @@ export default styled(AntdButton)`
         display: inline-block;
         font-style: normal;
         line-height: 1;
-        margin-left: ${lookup(({ size, loading }) => loading
+        margin-left: ${lookup(({ size, loading }) => (loading
             ? `${size}.$(type).margin.loadingIcon`
-            : 0)};
+            : 0))};
         vertical-align: -0.125em;
         text-align: center;
         text-transform: none;

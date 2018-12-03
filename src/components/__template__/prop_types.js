@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 export default {
     // TODO
-}
+};
 
 export const defaultProps = {
     // TODO

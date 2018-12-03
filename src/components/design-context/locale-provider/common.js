@@ -7,16 +7,16 @@ import React from "react";
 // These imports depend on using `babel-plugin-wildcard`
 // with the following options: `{ "noModifyCase": true, "exts": ["js", "json", "svg"] }`
 // see our .babelrc for an example usage
-import * as ALL_ANTD_WEB_LOCALES from "../../../../node_modules/antd/es/locale-provider";
 import * as ALL_ANTD_MOBILE_LOCALES from "../../../../node_modules/antd-mobile/es/locale-provider";
+import * as ALL_ANTD_WEB_LOCALES from "../../../../node_modules/antd/es/locale-provider";
 // NOTE: there is also data for React-Native at "../../../../node_modules/antd-mobile-rn/es/locale-provider"
 // but it is just a subset of the mobile locale data, and it has some syntax errors (wat?) in one
 // of the locales (sv_SE) so, I'm going to ignore it.
 
+import * as ALL_HS_LOCALES from "../../../locales";
 // TODO: maybe replace below wildcard import with "react-intl/locale-data/index.js" which is a pre-compiled aggregate;
 // antd doesn't have any equivalent, so we would still need the wildcard babel plugin
 import * as ALL_REACT_INTL_LOCALES from "../../../../node_modules/react-intl/locale-data";
-import * as ALL_HS_LOCALES from "../../../locales";
 
 delete ALL_ANTD_WEB_LOCALES.default;
 delete ALL_ANTD_WEB_LOCALES.index;
@@ -32,29 +32,28 @@ const DEFAULT_REGION = "US";
 const DEFAULT_LOCALE = `${DEFAULT_LANGUAGE}-${DEFAULT_REGION}`;
 const DEFAULT_ANTD_LOCALE = `${DEFAULT_LANGUAGE}_${DEFAULT_REGION}`;
 
-const DEFAULT_ANTD_LOCALES_GROUPED_BY_LANG =
-    _.merge(
-        _.mapValues(
-            _.groupBy(_.keys(ALL_ANTD_WEB_LOCALES), code => code.slice(0, 2)),
-            (codes, key) => {
-                if (codes.length === 1) {
-                    return codes[0];
-                }
-                const defCode = `${key}_${key.toUpperCase()}`;
-                if (codes.includes(defCode)) {
-                    return defCode;
-                }
-                return null; // will be added below
-            },
-        ),
-        {
-            // e.g. ant has both `en_US` and `en_GB`, but which one wins? Sorry Limeys.
-            en: "en_US",
-            // same, but for mainland China (`zh_CN`) vs Taiwan (`zh_TW`)
-            zh: "zh_CN",
+const DEFAULT_ANTD_LOCALES_GROUPED_BY_LANG = _.merge(
+    _.mapValues(
+        _.groupBy(_.keys(ALL_ANTD_WEB_LOCALES), code => code.slice(0, 2)),
+        (codes, key) => {
+            if (codes.length === 1) {
+                return codes[0];
+            }
+            const defCode = `${key}_${key.toUpperCase()}`;
+            if (codes.includes(defCode)) {
+                return defCode;
+            }
+            return null; // will be added below
         },
-    );
-const ALL_SUPPORTED_LOCALES = _.uniq(_.keys(ALL_HS_LOCALES).map(locale => {
+    ),
+    {
+        // e.g. ant has both `en_US` and `en_GB`, but which one wins? Sorry Limeys.
+        en: "en_US",
+        // same, but for mainland China (`zh_CN`) vs Taiwan (`zh_TW`)
+        zh: "zh_CN",
+    },
+);
+const ALL_SUPPORTED_LOCALES = _.uniq(_.keys(ALL_HS_LOCALES).map((locale) => {
     if (locale.split("-").length === 2) {
         return locale;
     }
@@ -70,7 +69,7 @@ function getLocaleData (locale, getAdditionalMessages) {
     if (!cache[locale]) {
         const antdLocaleName = `${language}_${region}`;
 
-        let antdLocaleData = _.merge(
+        const antdLocaleData = _.merge(
             {},
             // AntD web + mobile/rn locale data can be merged cleanly because they have ZERO overlaps.
             // That lack of overlap is an issue of it's own, but it does mean we don't have to worry
@@ -81,13 +80,16 @@ function getLocaleData (locale, getAdditionalMessages) {
 
         if (language !== "en") {
             // `en` is the default react-intl locale, so, we don't need to load it.
-            addLocaleData([...(ALL_REACT_INTL_LOCALES[language] || ALL_REACT_INTL_LOCALES[DEFAULT_LANGUAGE])]);
+            addLocaleData([...(
+                ALL_REACT_INTL_LOCALES[language]
+                || ALL_REACT_INTL_LOCALES[DEFAULT_LANGUAGE]),
+            ]);
         }
 
         const messages = flatten(
-            ALL_HS_LOCALES[localeName] || // look for `es-ES` first
-            ALL_HS_LOCALES[language] || // then `es`
-            ALL_HS_LOCALES[DEFAULT_LANGUAGE] // and finally default to `en`
+            ALL_HS_LOCALES[localeName] // look for `es-ES` first
+            || ALL_HS_LOCALES[language] // then `es`
+            || ALL_HS_LOCALES[DEFAULT_LANGUAGE], // and finally default to `en`
         );
 
         cache[locale] = {
@@ -104,7 +106,7 @@ function getLocaleData (locale, getAdditionalMessages) {
         _.extend(result.messages, flatten(getAdditionalMessages({ language, locale: localeName })));
     }
 
-    return result
+    return result;
 }
 
 const LocaleContext = React.createContext({
@@ -118,4 +120,4 @@ export {
     DEFAULT_LOCALE,
     getLocaleData,
     LocaleContext,
-}
+};

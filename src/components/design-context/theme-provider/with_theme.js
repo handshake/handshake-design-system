@@ -1,12 +1,14 @@
+/* eslint-disable no-use-before-define */
 /* global keys, window */
 import _ from "lodash";
 import { Component } from "react";
 import flatten from "flat";
-import { generate as generatePalette } from "ant-design-palettes"
+import { generate as generatePalette } from "ant-design-palettes";
+import PropTypes from "prop-types";
 import ThemeContext from "./context";
 import TinyColor from "tinycolor2";
 
-const FN_REGEX = /^(\w+)\(([^\)]*)\)$/;
+const FN_REGEX = /^(\w+)\(([^)]*)\)$/;
 
 const fns = {
     palette: (color, i) => generatePalette(color)[i],
@@ -15,16 +17,16 @@ const fns = {
     darken: (color, amount) => new TinyColor(color).darken(amount).toString(),
     desaturate: (color, amount) => new TinyColor(color).desaturate(amount).toString(),
     saturate: (color, amount) => new TinyColor(color).saturate(amount).toString(),
-    greyscale: (color) => new TinyColor(color).greyscale().toString(),
+    greyscale: color => new TinyColor(color).greyscale().toString(),
     spin: (color, amount) => new TinyColor(color).spin(amount).toString(),
     analogous: (color, num, slices, i) => new TinyColor(color).analogous(num, slices)[i].toString(),
-    complement: (color) => new TinyColor(color).complement().toString(),
+    complement: color => new TinyColor(color).complement().toString(),
     monochromatic: (color, num, i) => new TinyColor(color).monochromatic(num)[i].toString(),
     splitcomplement: (color, i) => new TinyColor(color).splitcomplement()[i].toString(),
     triad: (color, i) => new TinyColor(color).triad()[i].toString(),
     tetrad: (color, i) => new TinyColor(color).tetrad()[i].toString(),
     mostReadable: (baseColor, ...colorList) => TinyColor.mostReadable(baseColor, colorList).toString(),
-}
+};
 
 export function withTheme (callback, { themes, themeName, variables }) {
     const theme = themes[themeName];
@@ -52,13 +54,15 @@ export function withTheme (callback, { themes, themeName, variables }) {
                 return innerLookup(newPath, newPath, extraArgs);
             }
         }
+        return null;
     }
 
     function lookupFn (value, origPath, extraArgs) {
         const data = value.match(FN_REGEX);
-        let [fn, args] = data.slice(1);
+        let [fn, args] = data.slice(1); // eslint-disable-line prefer-const
         args = args.split(/,\s*/g).map((arg) => {
             if (/^_/.test(arg)) {
+                // eslint-disable-next-line no-param-reassign
                 arg = expand(arg, origPath, extraArgs);
             }
             try {
@@ -98,18 +102,18 @@ export function withTheme (callback, { themes, themeName, variables }) {
         return value;
     }
 
+    function colorDifference (_a, _b) {
+        const a = TinyColor(_a).toRgb();
+        const b = TinyColor(_b).toRgb();
+        return (Math.abs(a.r - b.r)
+            + Math.abs(a.g - b.g)
+            + Math.abs(a.b - b.b)
+            + 100 * Math.abs(a.a - b.a)
+        ) / (255 * 3 + 100);
+    }
+
     if (window.STORYBOOK_ENV) {
         window.lookup = outerLookup;
-
-        function colorDifference (_a, _b) {
-            const a = TinyColor(_a).toRgb();
-            const b = TinyColor(_b).toRgb();
-            return (Math.abs(a.r - b.r)
-                + Math.abs(a.g - b.g)
-                + Math.abs(a.b - b.b)
-                + 100 * Math.abs(a.a - b.a)
-            ) / (255 * 3 + 100);
-        }
 
         window.__deriveColorTransformation__ = (original, target) => {
             console.log("********");
@@ -205,7 +209,7 @@ export function withTheme (callback, { themes, themeName, variables }) {
                 `background-color: ${target};`,
                 "background-color: transparent;",
                 closestValue,
-                `background-color: ${TinyColor(closestValue).toHexString()};`
+                `background-color: ${TinyColor(closestValue).toHexString()};`,
             );
         };
     }
@@ -228,6 +232,12 @@ export function withTheme (callback, { themes, themeName, variables }) {
 export default class WithTheme extends Component {
     static contextType = ThemeContext;
 
+    static propTypes = {
+        children: PropTypes.func,
+        themes: PropTypes.object,
+        themeName: PropTypes.string,
+    }
+
     render () {
         const { children: fn, themes, themeName } = this.props;
         const { theme: ctxThemeName, variables } = this.context;
@@ -244,6 +254,6 @@ export function lookup (cb) {
     return ({ lkp: { fn }, ...props }) => fn(
         typeof cb === "function"
             ? cb(props)
-            : cb[0].replace(/\$\((\w+)\)/g, (__, k) => props[k])
+            : cb[0].replace(/\$\((\w+)\)/g, (__, k) => props[k]),
     );
 }

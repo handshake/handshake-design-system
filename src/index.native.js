@@ -24,23 +24,23 @@ antd.View = View;
 
 import {
     FormattedDate,
-    FormattedTime,
-    FormattedRelative,
+    // FormattedHTMLMessage,
+    FormattedMessage,
     FormattedNumber,
     FormattedPlural,
-    FormattedMessage,
-    // FormattedHTMLMessage,
+    FormattedRelative,
+    FormattedTime,
     injectIntl,
     intlShape,
 } from "react-intl";
 
 export const intl = {
     FormattedDate,
-    FormattedTime,
-    FormattedRelative,
+    FormattedMessage,
     FormattedNumber,
     FormattedPlural,
-    FormattedMessage,
+    FormattedRelative,
+    FormattedTime,
     // FormattedHTMLMessage,
     injectIntl,
     intlShape,
@@ -53,4 +53,4 @@ export { default as Spinner } from "./components/spinner/index.native";
 
 export {
     antd,
-}
+};

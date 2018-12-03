@@ -18,9 +18,22 @@ addDecorator(storyFn => (
     </DesignContextDecorator>
 ));
 
-function loadStories() {
+function importAll (req) {
+    req.keys().forEach(filename => req(filename));
+}
+
+function loadStories () {
     require("./welcome_story");
-    require("../src/stories");
+    importAll(require.context(
+        "../src/components",
+        true,
+        /(\b(?!__template__|__tests__)[\w-]+\/)stories\.js$/),
+    );
+    importAll(require.context(
+        "../src/components",
+        true,
+        /(\b(?!__template__|__tests__)[\w-]+\/)sketch_stories\.js$/),
+    );
 }
 
 configure(loadStories, module);

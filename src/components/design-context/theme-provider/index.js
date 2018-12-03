@@ -32,4 +32,9 @@ ThemeProvider.defaultProps = {
 
 export default ThemeProvider;
 
-export const ThemeSubscriber = ThemeContext.Consumer;
+const ThemeSubscriber = ThemeContext.Consumer;
+
+export {
+    ThemeContext,
+    ThemeSubscriber,
+};

@@ -1,11 +1,17 @@
 import AntdButton from "antd-mobile-rn/es/button";
-import styled from "styled-components/native";
 import { lookup } from "../design-context/theme-provider/with_theme";
+import styled from "styled-components/native";
 
 export default styled(AntdButton).attrs({
     // RN Styled Components doesn't support nested selectors like the web version does
     // so, we still need to provide nested styles this way:
-    styles: ({ disabled, loading, lkp: { fn: lookup }, size, type }) => ({
+    styles: ({
+        disabled,
+        loading,
+        lkp: { fn: lookup }, // eslint-disable-line no-shadow
+        size,
+        type,
+    }) => ({
         [`${type}Highlight`]: {
             backgroundColor: lookup(`${type}.active.backgroundColor`),
             borderColor: lookup(`${type}.active.borderColor`),
@@ -29,10 +35,11 @@ export default styled(AntdButton).attrs({
     }),
 })`
     align-items: center;
-    background-color: ${lookup(({ disabled, type, loading }) =>
-        `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.backgroundColor`)};
-    border-color: ${lookup(({ disabled, type, loading }) =>
-        `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.borderColor`)};
+    background-color: ${lookup(({ disabled, type, loading }) => (
+        // eslint-disable-next-line max-len
+        `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.backgroundColor`))};
+    border-color: ${lookup(({ disabled, type, loading }) => (
+        `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.borderColor`))};
     border-radius: ${lookup`$(size).$(type).borderRadius`};
     border-width: ${lookup`$(type).default.borderWidth`};
     height: ${lookup`$(size).$(type).height`};

@@ -1,9 +1,14 @@
 require("@babel/register")();
+const _ = require("lodash");
+const glob = require("glob");
+const COMPONENT_NAME_RE = /^\.\/src\/components\/([\w-]+)\/sketch_stories.js/;
+
 module.exports = {
     logo: "small",
+    // input: "storybook-static/iframe.html", // kinda broken :(
     output: "stories.asketch.json",
     url: "http://localhost:9001/iframe.html",
-    concurrency: 1,
+    // concurrency: 4,
     viewports: {
         standard: {
             width: 1920,
@@ -12,12 +17,12 @@ module.exports = {
         },
     },
     pageTitle: "Handshake Design System",
-    stories: [
-        {
-            kind: "Web/Button/💎",
-            // stories: [{ name: require("./src/components/button/sketch_stories").default[0] }],
-            stories: require("./src/components/button/sketch_stories").default
-                .map(name => ({ name })),
-        },
-    ],
+    stories: _.flatten(glob.sync("./src/components/*/sketch_stories.js")
+        .map(path =>
+            (require(path).envs || ["Web", "Mobile"]).map(env => ({
+                kind: `${env}/${_.upperFirst(_.camelCase(path.match(COMPONENT_NAME_RE)[1]))}/💎`,
+                stories: require(path).default.map(name => ({ name })),
+            }))
+        )
+    )
 };

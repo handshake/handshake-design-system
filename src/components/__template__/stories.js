@@ -1,13 +1,27 @@
 import { action } from "@storybook/addon-actions";
-import { storiesOf } from "@storybook/react";
+import {
+    array,
+    boolean,
+    button,
+    color,
+    date,
+    knob,
+    number,
+    object,
+    select,
+    text,
+    withKnobs,
+} from "@storybook/addon-knobs";
 import React from "react";
+import { storiesOf } from "@storybook/react";
+import themes from "./themes.json";
 import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 import { withInfo } from "@storybook/addon-info";
-import { withKnobs, array, boolean, button, color, date, knob, number, object, text, select } from "@storybook/addon-knobs";
-import withStyles from "@sambego/storybook-styles"
+import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
 
 import { __TEMPLATE__ } from "../..";
+// eslint-disable-next-line camelcase
 import { __TEMPLATE__ as Native__TEMPLATE__ } from "../../index.native";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
@@ -16,10 +30,11 @@ storiesOf("__TEMPLATE__", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(__TEMPLATE__.THEME_VARIABLES))
+    .addDecorator(withThemeVariables(themes))
     .add(
         "options",
         () => (
+            // eslint-disable-next-line react/jsx-pascal-case
             <__TEMPLATE__ />
         ),
         {
@@ -31,8 +46,8 @@ storiesOf("__TEMPLATE__", module)
                     import { __TEMPLATE__ } from "@handshake/design-system";
                     ~~~
                 `,
-            }
-        }
+            },
+        },
     );
 
 storiesOf("__TEMPLATE__/Native", module)
@@ -43,8 +58,9 @@ storiesOf("__TEMPLATE__/Native", module)
     .add(
         "options",
         () => (
-            <WingBlank  size="lg">
+            <WingBlank size="lg">
                 <WhiteSpace size="lg" />
+                {/* eslint-disable-next-line react/jsx-pascal-case */}
                 <Native__TEMPLATE__ />
             </WingBlank>
         ),
@@ -57,6 +73,6 @@ storiesOf("__TEMPLATE__/Native", module)
                     import { __TEMPLATE__ } from "@handshake/design-system";
                     ~~~
                 `,
-            }
-        }
+            },
+        },
     );

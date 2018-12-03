@@ -1,3 +1,4 @@
+import _ from "lodash";
 import iconManifest from "@ant-design/icons/lib/manifest";
 import PropTypes from "prop-types";
 
@@ -11,7 +12,7 @@ export default {
     theme: PropTypes.oneOf(["filled", "outlined", "twoTone"]),
     type: PropTypes.string.isRequired,
     // type: PropTypes.oneOf([TBD]).isRequired,
-}
+};
 
 export const defaultProps = {
     // color: "#000",
@@ -21,19 +22,26 @@ export const defaultProps = {
     theme: "outlined",
 };
 
-export const ALL_TYPES = _.union(iconManifest.fill, iconManifest.outline, iconManifest.twotone).sort();
+export const ALL_TYPES = _.union(
+    iconManifest.fill,
+    iconManifest.outline,
+    iconManifest.twotone,
+).sort();
 
 export function fallbackTheme (theme, type) {
     if (theme === "twoTone" && iconManifest.fill.includes(type)) {
         console.warn("There is no TwoTone Icon for %s, defaulting to Filled", type);
         return "filled";
-    } else if (theme === "twoTone" && iconManifest.outline.includes(type)) {
+    }
+    if (theme === "twoTone" && iconManifest.outline.includes(type)) {
         console.warn("There is no TwoTone Icon for %s, defaulting to Outlined", type);
         return "outline";
-    } else if (theme === "filled" && iconManifest.outline.includes(type)) {
+    }
+    if (theme === "filled" && iconManifest.outline.includes(type)) {
         console.warn("There is no Filled Icon for %s, defaulting to Outlined", type);
         return "outlined";
-    } else if (theme === "outlined" && iconManifest.fill.includes(type)) {
+    }
+    if (theme === "outlined" && iconManifest.fill.includes(type)) {
         console.warn("There is no Outlined Icon for %s, defaulting to Filled", type);
         return "filled";
     }
@@ -50,8 +58,9 @@ function getSize (size) {
 }
 
 export function mapPropsForWeb (props) {
-    let { theme, type } = props;
-    const manifestType =  (() => ({
+    let { theme } = props;
+    const { type } = props;
+    const manifestType = (() => ({
         filled: "fill",
         outlined: "outline",
         twoTone: "twotone",
@@ -70,7 +79,7 @@ export function mapPropsForWeb (props) {
             theme,
             twoToneColor: props.color,
             type,
-        }
+        };
     }
     return {
         className: props.className,
@@ -86,8 +95,9 @@ export function mapPropsForWeb (props) {
 }
 
 export function mapPropsForMobile (props) {
-    let { theme, type } = props;
-    const manifestType =  (() => ({
+    let { theme } = props;
+    const { type } = props;
+    const manifestType = (() => ({
         filled: "fill",
         outlined: "outline",
         twoTone: "twotone",

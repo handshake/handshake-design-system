@@ -8,4 +8,3 @@
 
 export { default } from "antd/lib/affix";
 import "antd/lib/affix/style";
-

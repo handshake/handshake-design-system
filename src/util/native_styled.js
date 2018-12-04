@@ -6,10 +6,10 @@ const EXTRACT_COMMENTS = /\/\*[^(*/)]*\*\//gm;
 const EXTRACT_KEY_VALUE_PAIRS = /\b([\w-]+): ([^;]+);/gm;
 const SPLIT_HERE = /\/\* SPLIT HERE: DO NOT DELETE \*\//;
 
-function parse (text) {
+function parse (css) {
     return (props) => {
         const styles = {};
-        text.map(t => (typeof t === "function" ? t(props) : t))
+        css.map(chunk => (typeof chunk === "function" ? chunk(props) : chunk))
             .join("")
             .replace(EXTRACT_COMMENTS, "")
             .replace(EXTRACT_RULESETS, (_1, name, rules) => {

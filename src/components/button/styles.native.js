@@ -1,8 +1,7 @@
-
 import AntdButton from "antd-mobile-rn/es/button";
 import { css } from "styled-components/native";
 import { lookup } from "../design-context/theme-provider/with_theme";
-import rnStyled from "../../util/native_css_parse";
+import rnStyled from "../../util/native_styled";
 
 export default rnStyled(AntdButton, css`
     align-items: center;

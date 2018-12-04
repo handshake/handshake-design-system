@@ -1,6 +1,8 @@
 require("@babel/register")();
+
 const _ = require("lodash");
 const glob = require("glob");
+
 const COMPONENT_NAME_RE = /^\.\/src\/components\/([\w-]+)\/sketch_stories.js/;
 
 module.exports = {
@@ -18,11 +20,12 @@ module.exports = {
     },
     pageTitle: "Handshake Design System",
     stories: _.flatten(glob.sync("./src/components/*/sketch_stories.js")
-        .map(path =>
-            (require(path).envs || ["Web", "Mobile"]).map(env => ({
+        .filter(path => path.match(COMPONENT_NAME_RE)[1] !== "__template__")
+        .map(path => (
+            require(path).envs || ["Web", "Mobile"]).map(env => ({
                 kind: `${env}/${_.upperFirst(_.camelCase(path.match(COMPONENT_NAME_RE)[1]))}/💎`,
                 stories: require(path).default.map(name => ({ name })),
-            }))
-        )
-    )
+            }),
+        )),
+    ),
 };

@@ -1,48 +1,49 @@
-import AntdButton from "antd-mobile-rn/es/button";
-import { lookup } from "../design-context/theme-provider/with_theme";
-import styled from "styled-components/native";
 
-export default styled(AntdButton).attrs({
-    // RN Styled Components doesn't support nested selectors like the web version does
-    // so, we still need to provide nested styles this way:
-    styles: ({
-        disabled,
-        loading,
-        lkp: { fn: lookup }, // eslint-disable-line no-shadow
-        size,
-        type,
-    }) => ({
-        [`${type}Highlight`]: {
-            backgroundColor: lookup(`${type}.active.backgroundColor`),
-            borderColor: lookup(`${type}.active.borderColor`),
-        },
-        [`${type}HighlightText`]: {
-            color: lookup(`${type}.active.color`),
-        },
-        [`${type}RawText`]: {
-            color: lookup(`${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.color`),
-            fontFamily: lookup(`${type}.default.fontFamily`), // TODO: might need different values for each environment
-            fontSize: lookup(`${size}.${type}.fontSize`),
-            fontWeight: lookup(`${size}.${type}.weight`),
-            textTransform: lookup(`${type}.default.textTransform`),
-        },
-        container: {
-            flexDirection: "row",
-        },
-        indicator: {
-            marginRight: "8px",
-        },
-    }),
-})`
+import AntdButton from "antd-mobile-rn/es/button";
+import { css } from "styled-components/native";
+import { lookup } from "../design-context/theme-provider/with_theme";
+import rnStyled from "../../util/native_css_parse";
+
+export default rnStyled(AntdButton, css`
     align-items: center;
-    background-color: ${lookup(({ disabled, type, loading }) => (
+    background-color: ${lookup(({ disabled, loading, type }) => (
         // eslint-disable-next-line max-len
         `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.backgroundColor`))};
-    border-color: ${lookup(({ disabled, type, loading }) => (
+    border-color: ${lookup(({ disabled, loading, type }) => (
         `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.borderColor`))};
     border-radius: ${lookup`$(size).$(type).borderRadius`};
     border-width: ${lookup`$(type).default.borderWidth`};
     height: ${lookup`$(size).$(type).height`};
     justify-content: center;
     padding: 0 ${lookup`$(size).$(type).margin.horizontal`};
-`;
+
+    /* SPLIT HERE: DO NOT DELETE */
+
+    #${p => p.type}Highlight {
+        background-color: ${lookup`$(type).active.backgroundColor`};
+        border-color: ${lookup`$(type).active.borderColor`};
+    }
+
+    #${p => p.type}HighlightText {
+        color: ${lookup`$(type).active.color`}
+    }
+
+    #${p => p.type}RawText {
+        color: ${lookup(({ disabled, loading, type }) => (
+            // eslint-disable-next-line max-len
+            `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.color`))};
+        /* TODO: might need different values for each environment */
+        font-family: ${lookup`$(type).default.fontFamily`};
+        font-size: ${lookup`$(size).$(type).fontSize`};
+        font-weight: ${lookup`$(size).$(type).weight`};
+        text-transform: ${lookup`$(type).default.textTransform`};
+    }
+
+    #container {
+        flex-direction: row;
+    }
+
+    #indicator {
+        margin-right: 8px;
+    }
+`);

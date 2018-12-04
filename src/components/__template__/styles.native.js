@@ -1,17 +1,13 @@
 // eslint-disable-next-line camelcase
 import Antd__TEMPLATE__ from "antd/es/__TEMPLATE__";
+import { css } from "styled-components/native";
 import { lookup } from "../design-context/theme-provider/with_theme";
-import styled from "styled-components/native";
+import rnStyled from "../../util/native_css_parse";
 
-export default styled(Antd__TEMPLATE__).attrs({
-    // RN Styled Components doesn't support nested selectors like the web version does
-    // so, we still need to provide nested styles this way:
-    // eslint-disable-next-line no-empty-pattern
-    styles: ({
-        // props go here
-    }) => ({
-        // nested styles go here
-    }),
-})`
-    /* styles go here */
-`;
+export default rnStyled(Antd__TEMPLATE__, css`
+    /* base styles go here */
+
+    /* SPLIT HERE: DO NOT DELETE */
+
+    /* nested styles go here */
+`);

@@ -1,16 +1,17 @@
+/* global navigator */
 import _ from "lodash";
 import { ActionBar, ActionButton } from "@storybook/components";
 import addons from "@storybook/addons";
-import { unflatten } from "flat";
+import ButtonGroup from "./button_group";
+import KnobLine from "./knob_line";
 import knobs from "@storybook/addon-knobs/dist/components/types";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import tinycolor from "tinycolor2";
-import ButtonGroup from "./button_group";
-import KnobLine from "./knob_line";
 import styled from "styled-components";
-import { ThemeSubscriber } from "../../src/components/design-context/theme-provider";
 import THEME, { base, variableTypes } from "../../src/theme";
+import { ThemeSubscriber } from "../../src/components/design-context/theme-provider";
+import tinycolor from "tinycolor2";
+import { unflatten } from "flat";
 
 import { EVENT_SET_THEME_VARIABLES } from "./constants";
 
@@ -26,12 +27,15 @@ const ColorPicker = styled(knobs.color)`
 function inferType (value) {
     if (typeof value === "boolean") {
         return "boolean";
-    } else if (typeof value === "number") {
+    }
+    if (typeof value === "number") {
         return "number";
-    } else if (typeof value === "string") {
+    }
+    if (typeof value === "string") {
         if (tinycolor(value)._ok) {
             return "color";
-        } else if (CSS_UNIT_RE.test(value)) {
+        }
+        if (CSS_UNIT_RE.test(value)) {
             return "unit";
         }
     }
@@ -85,14 +89,12 @@ class VariableEditor extends Component {
                 <Knob
                     key={`${name}-number`}
                     knob={{ name, value: _.toNumber(cssValue) }}
-                    onChange={val =>
-                        onChange(`${val}${cssUnit}`)
-                    }
+                    onChange={val => onChange(`${val}${cssUnit}`)}
                 />,
                 <div key={`${name}-unit`}>
-                    <span style="color: transparent;">{value}</span>
+                    <span style={{ color: "transparent" }}>{value}</span>
                     {cssUnit}
-                </div>
+                </div>,
             ];
         }
         case "color": {
@@ -107,7 +109,7 @@ class VariableEditor extends Component {
                     key={`${name}-color`}
                     knob={{ name, value }}
                     onChange={onChange}
-                />
+                />,
             ];
         }
         // TODO?: arrays of numbers and other composites
@@ -127,10 +129,11 @@ class VariableEditor extends Component {
     }
 }
 
+// eslint-disable-next-line react/no-multi-comp
 class ThemeCustomizer extends Component {
     static propTypes = {
         prefix: PropTypes.string,
-        themeName: PropTypes.string, // not used yet
+        // themeName: PropTypes.string, // not used yet
         variables: PropTypes.oneOfType([
             PropTypes.arrayOf(PropTypes.string),
             PropTypes.bool,
@@ -154,7 +157,7 @@ class ThemeCustomizer extends Component {
     copyThemeVariables (themeVariables) {
         const diff = objDiff(base.camelCase, themeVariables);
         navigator.clipboard.writeText(JSON.stringify(unflatten(_.extend({
-            "$comment": "Restart Storybook after any change to this file; it will not be picked up automatically.",
+            $comment: "Restart Storybook after any change to this file; it will not be picked up automatically.",
         }, _.mapKeys(diff, (__, key) => _.kebabCase(key))), { delimiter: "-" }), null, 4));
         console.log("Copied theme overrides to clipboard!");
     }
@@ -175,21 +178,25 @@ class ThemeCustomizer extends Component {
                         .map(_.camelCase);
                     return [
                         <form key="knobs">
-                            {_.map(variables, key => {
-                                let value = themeVariables[key];
-                                let onChange = (val) => {
+                            {_.map(variables, (key) => {
+                                const value = themeVariables[key];
+                                const onChange = (val) => {
+                                    // eslint-disable-next-line no-param-reassign
                                     themeVariables[key] = val;
                                     this.themeVariablesChanged(themeVariables);
                                 };
-                                let extra = null;
 
                                 return (
                                     <KnobLine key={key} inPanel={inPanel}>
-                                        <span><span>{
-                                            _.words(_.startCase(
-                                                key.replace(new RegExp(`^${prefix}-?`), "")
-                                            )).join(" ")
-                                        }</span></span>
+                                        <span>
+                                            <span>
+                                                {
+                                                    _.words(_.startCase(
+                                                        key.replace(new RegExp(`^${prefix}-?`), ""),
+                                                    )).join(" ")
+                                                }
+                                            </span>
+                                        </span>
                                         <VariableEditor
                                             name={key}
                                             value={value}
@@ -199,22 +206,43 @@ class ThemeCustomizer extends Component {
                                 );
                             })}
                         </form>,
-                        inPanel ?
-                            // ActionBar renders best in the addon panel
-                            <ActionBar key="buttons">
-                                <ActionButton onClick={() => this.copyThemeVariables(themeVariables)}>COPY</ActionButton>
-                                <ActionButton onClick={() => this.resetThemeVariables()}>RESET</ActionButton>
-                            </ActionBar>
-                        :
-                            // but it is missing some css when rendered in the main panel
-                            <ButtonGroup key="buttons">
-                                <li>
-                                    <button onClick={() => this.copyThemeVariables(themeVariables)}>Copy</button>
-                                </li>
-                                <li>
-                                    <button onClick={() => this.resetThemeVariables()}>Reset</button>
-                                </li>
-                            </ButtonGroup>
+                        inPanel
+                            ? ( // ActionBar renders best in the addon panel
+                                <ActionBar key="buttons">
+                                    <ActionButton
+                                        onClick={() => this.copyThemeVariables(themeVariables)}
+                                        // eslint-disable-next-line react-intl/string-is-marked-for-translation
+                                    >
+                                        COPY
+                                    </ActionButton>
+                                    <ActionButton
+                                        onClick={() => this.resetThemeVariables()}
+                                        // eslint-disable-next-line react-intl/string-is-marked-for-translation
+                                    >
+                                        RESET
+                                    </ActionButton>
+                                </ActionBar>)
+                            : ( // but it is missing some css when rendered in the main panel
+                                <ButtonGroup key="buttons">
+                                    <li>
+                                        <button
+                                            onClick={() => this.copyThemeVariables(themeVariables)}
+                                            type="button"
+                                            // eslint-disable-next-line react-intl/string-is-marked-for-translation
+                                        >
+                                            Copy
+                                        </button>
+                                    </li>
+                                    <li>
+                                        <button
+                                            onClick={() => this.resetThemeVariables()}
+                                            type="button"
+                                            // eslint-disable-next-line react-intl/string-is-marked-for-translation
+                                        >
+                                            Reset
+                                        </button>
+                                    </li>
+                                </ButtonGroup>),
                     ];
                 }}
             </ThemeSubscriber>

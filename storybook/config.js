@@ -1,7 +1,7 @@
 import { addDecorator, configure } from "@storybook/react";
-import { withOptions } from "@storybook/addon-options";
-import React from "react";
 import DesignContextDecorator from "./design_context_decorator";
+import React from "react";
+import { withOptions } from "@storybook/addon-options";
 
 import "@handshake/design-system-fonts/BrandonText.less";
 

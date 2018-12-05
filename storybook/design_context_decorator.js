@@ -1,15 +1,16 @@
 import _ from "lodash";
 import addons from "@storybook/addons";
-import { setIntlConfig } from "storybook-addon-intl";
+import DesignContext, { LocaleProvider } from "../src/components/design-context";
 import { EVENT_GET_LOCALE_ID, EVENT_SET_LOCALE_ID } from "storybook-addon-intl/src/shared";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
-import DesignContext from "../src/components/design-context";
+import { setIntlConfig } from "storybook-addon-intl";
 
 import {
-    EVENT_SET_COMMON_PREFIX,
     EVENT_GET_THEME_NAME,
-    EVENT_SET_THEME_NAME,
     EVENT_GET_THEME_VARIABLES,
+    EVENT_SET_COMMON_PREFIX,
+    EVENT_SET_THEME_NAME,
     EVENT_SET_THEME_VARIABLES,
 } from "./theme_customizer/constants";
 
@@ -17,8 +18,13 @@ import {
 // so we can use our own `LocaleProvider` which combines both `react-intl`'s
 // `IntlProvider` and AntD's `LocaleProvider`
 export default class DesignContextDecorator extends Component {
-    static ALL_SUPPORTED_LOCALES = DesignContext.LocaleProvider.ALL_SUPPORTED_LOCALES
-    static DEFAULT_LOCALE = DesignContext.LocaleProvider.DEFAULT_LOCALE
+    static ALL_SUPPORTED_LOCALES = LocaleProvider.ALL_SUPPORTED_LOCALES;
+
+    static DEFAULT_LOCALE = LocaleProvider.DEFAULT_LOCALE;
+
+    static propTypes = {
+        children: PropTypes.node,
+    };
 
     constructor (props) {
         super(props);
@@ -28,8 +34,8 @@ export default class DesignContextDecorator extends Component {
         this.setThemeVariables = this.setThemeVariables.bind(this);
 
         setIntlConfig({
-            locales: DesignContext.LocaleProvider.ALL_SUPPORTED_LOCALES,
-            defaultLocale: DesignContext.LocaleProvider.DEFAULT_LOCALE,
+            locales: LocaleProvider.ALL_SUPPORTED_LOCALES,
+            defaultLocale: LocaleProvider.DEFAULT_LOCALE,
         });
     }
 
@@ -70,13 +76,15 @@ export default class DesignContextDecorator extends Component {
     }
 
     render () {
+        const { children } = this.props;
+        const { locale, theme, variables } = this.state;
         return (
             <DesignContext
-                locale={this.state.locale || DesignContext.LocaleProvider.DEFAULT_LOCALE}
-                theme={this.state.theme}
-                variables={this.state.variables}
+                locale={locale || LocaleProvider.DEFAULT_LOCALE}
+                theme={theme}
+                variables={variables}
             >
-                {this.props.children}
+                {children}
             </DesignContext>
         );
     }

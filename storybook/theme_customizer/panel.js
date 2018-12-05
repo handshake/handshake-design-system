@@ -1,15 +1,22 @@
-import React, { Component } from "react";
+import DesignContextDecorator from "../design_context_decorator";
 import {
     EVENT_GET_COMMON_PREFIX,
-    EVENT_SET_COMMON_PREFIX,
     EVENT_GET_THEME_NAME,
+    EVENT_SET_COMMON_PREFIX,
     EVENT_SET_THEME_NAME,
     EVENT_SET_THEME_PANEL_VARIABLES,
 } from "./constants";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
 import ThemeCustomizer from "./theme_customizer";
-import DesignContextDecorator from "../design_context_decorator";
 
 export default class Panel extends Component {
+    static propTypes = {
+        active: PropTypes.bool,
+        api: PropTypes.object,
+        channel: PropTypes.object,
+    }
+
     constructor (props) {
         super(props);
         this.setPrefix = this.setPrefix.bind(this);
@@ -22,19 +29,23 @@ export default class Panel extends Component {
     }
 
     componentDidMount () {
-        this.props.channel.on(EVENT_SET_COMMON_PREFIX, this.setPrefix);
-        this.props.channel.on(EVENT_SET_THEME_NAME, this.setThemeName);
-        this.props.channel.on(EVENT_SET_THEME_PANEL_VARIABLES, this.setVariables);
+        const { channel } = this.props;
 
-        this.props.channel.emit(EVENT_GET_COMMON_PREFIX);
-        this.props.channel.emit(EVENT_GET_THEME_NAME);
+        channel.on(EVENT_SET_COMMON_PREFIX, this.setPrefix);
+        channel.on(EVENT_SET_THEME_NAME, this.setThemeName);
+        channel.on(EVENT_SET_THEME_PANEL_VARIABLES, this.setVariables);
+
+        channel.emit(EVENT_GET_COMMON_PREFIX);
+        channel.emit(EVENT_GET_THEME_NAME);
     }
 
     componentWillUnmount () {
-        this.channel.removeListener(EVENT_SET_COMMON_PREFIX, this.setPrefix);
-        this.channel.removeListener(EVENT_SET_THEME_NAME, this.setThemeName);
-        this.channel.removeListener(EVENT_SET_THEME_PANEL_VARIABLES, this.setVariables);
-        this.props.api.onStory(() => this.setState({ variables: [] }));
+        const { api, channel } = this.props;
+
+        channel.removeListener(EVENT_SET_COMMON_PREFIX, this.setPrefix);
+        channel.removeListener(EVENT_SET_THEME_NAME, this.setThemeName);
+        channel.removeListener(EVENT_SET_THEME_PANEL_VARIABLES, this.setVariables);
+        api.onStory(() => this.setState({ variables: [] }));
     }
 
     setPrefix (prefix) {

@@ -1,9 +1,10 @@
+/* eslint-disable react-intl/string-is-marked-for-translation */
 import _ from "lodash";
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import ThemeCustomizer from "./theme_customizer/theme_customizer";
 import { withOptions } from "@storybook/addon-options";
 import withStyles from "@sambego/storybook-styles"
-import ThemeCustomizer from "./theme_customizer/theme_customizer";
 
 import Playground from "./playground";
 

@@ -1,13 +1,13 @@
-import addons from "@storybook/addons";
 import {
     ADDON_ID,
     EVENT_GET_COMMON_PREFIX,
-    EVENT_SET_COMMON_PREFIX,
     EVENT_GET_THEME_NAME,
-    EVENT_SET_THEME_NAME,
     EVENT_GET_THEME_VARIABLES,
+    EVENT_SET_COMMON_PREFIX,
+    EVENT_SET_THEME_NAME,
     EVENT_SET_THEME_VARIABLES,
 } from "./constants";
+import addons from "@storybook/addons";
 import Panel from "./panel";
 import React from "react";
 

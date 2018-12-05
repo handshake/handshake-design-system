@@ -2,6 +2,7 @@ import addons, { makeDecorator } from "@storybook/addons";
 import { Component } from "react";
 import { EVENT_SET_THEME_PANEL_VARIABLES } from "./constants";
 import { getThemeVariables } from "../../src/components/design-context/theme-provider/with_theme";
+import PropTypes from "prop-types";
 
 const withThemeVariables = makeDecorator({
     name: "withThemeVariables",
@@ -18,7 +19,12 @@ const withThemeVariables = makeDecorator({
 
 export default withThemeVariables;
 export class WithThemeVariables extends Component {
-    render() {
+    static propTypes = {
+        children: PropTypes.node,
+        themes: PropTypes.object,
+    }
+
+    render () {
         const { children, themes } = this.props;
         const channel = addons.getChannel();
         const variables = getThemeVariables(themes); // TODO: themeName

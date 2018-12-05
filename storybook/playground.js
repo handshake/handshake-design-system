@@ -1,5 +1,6 @@
 import AceEditor from "react-ace";
 import JSXParser from "react-jsx-parser";
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
 import { WhiteSpace, WingBlank } from "antd-mobile-rn";
@@ -7,8 +8,8 @@ import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 import "brace/mode/jsx";
 import "brace/theme/github";
 
-import * as web from "../src/index.web";
-import * as mobile from "../src/index.native";
+import * as mobileComponents from "../src/index.native";
+import * as webComponents from "../src/index.web";
 
 // style (mostly) borrowed from storybook viewport addon
 const WebWrapper = styled.div`
@@ -46,60 +47,77 @@ const MobileWrapper = styled.div`
 `;
 
 class ErrorBoundary extends Component {
+    static propTypes = {
+        children: PropTypes.node,
+    };
+
     componentDidCatch (error, info) {
         console.error(error, info.componentStack);
     }
 
     render () {
-        return this.props.children;
+        const { children } = this.props;
+        return children;
     }
 }
 
+// eslint-disable-next-line react/no-multi-comp
 export default class Playground extends Component {
+    static propTypes = {
+        mobile: PropTypes.bool,
+        web: PropTypes.bool,
+    };
+
     state = {
-        jsx: ""
+        jsx: "",
     }
 
     render () {
+        const { mobile, web } = this.props;
+        const { jsx } = this.state;
         return (
             <div>
                 <AceEditor
                     mode="jsx"
-                    onChange={(jsx) => this.setState({ jsx })}
+                    onChange={newJsx => this.setState({ jsx: newJsx })}
                     style={{ borderBottom: "1px solid #f0f0f0", height: 200, width: "100%" }}
                     theme="github"
-                    value={this.state.jsx}
+                    value={jsx}
                 />
                 <ErrorBoundary>
-                    {this.props.web ?
-                        <WebWrapper>
-                            <div>
-                                <ErrorBoundary>
-                                    <JSXParser
-                                        components={web}
-                                        jsx={this.state.jsx}
-                                    />
-                                </ErrorBoundary>
-                            </div>
-                        </WebWrapper> : null
-                    }
-                    {this.props.mobile ?
-                        <MobileWrapper>
-                            <div>
-                                <WingBlank>
-                                    <WhiteSpace size="lg" />
+                    {web
+                        ? (
+                            <WebWrapper>
+                                <div>
                                     <ErrorBoundary>
                                         <JSXParser
-                                            allowUnknownElements={false}
-                                            components={mobile}
-                                            componentsOnly
-                                            jsx={this.state.jsx}
-                                            renderInWrapper={false}
+                                            components={webComponents}
+                                            jsx={jsx}
                                         />
                                     </ErrorBoundary>
-                                </WingBlank>
-                            </div>
-                        </MobileWrapper> : null
+                                </div>
+                            </WebWrapper>)
+                        : null
+                    }
+                    {mobile
+                        ? (
+                            <MobileWrapper>
+                                <div>
+                                    <WingBlank>
+                                        <WhiteSpace size="lg" />
+                                        <ErrorBoundary>
+                                            <JSXParser
+                                                allowUnknownElements={false}
+                                                components={mobileComponents}
+                                                componentsOnly
+                                                jsx={jsx}
+                                                renderInWrapper={false}
+                                            />
+                                        </ErrorBoundary>
+                                    </WingBlank>
+                                </div>
+                            </MobileWrapper>)
+                        : null
                     }
                 </ErrorBoundary>
             </div>

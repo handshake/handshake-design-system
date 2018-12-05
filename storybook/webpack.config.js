@@ -92,12 +92,24 @@ module.exports = (storybookBaseConfig, configType) => {
                 },
             ],
         },
+        {
+            test: /\.svg$/,
+            use: [
+                "babel-loader",
+                {
+                    loader: "react-svg-loader",
+                    options: {
+                        jsx: true, // true outputs JSX tags
+                    },
+                },
+            ],
+        },
     );
     storybookBaseConfig.plugins.push(
         new webpack.IgnorePlugin(/\.d\.ts$/),
         new webpack.NormalModuleReplacementPlugin(
             /antd-mobile-rn\/(es|lib)\/style\/themes\/default\.native\.js/,
-            path.resolve(__dirname, "../src/theme/antd_mobile_rn_variables.js")
+            path.resolve(__dirname, "../src/theme/antd_mobile_rn_variables.js"),
         ),
     );
 

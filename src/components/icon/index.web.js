@@ -1,4 +1,6 @@
+import _ from "lodash";
 import AntdIcon from "antd/es/icon";
+import getIcon from "./get_icon";
 import propTypes, { ALL_TYPES, defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
@@ -53,7 +55,21 @@ class IconWrapper extends Component {
     static ALL_TYPES = ALL_TYPES;
 
     render () {
-        return <Icon {...mapPropsForWeb(this.props)} />;
+        const icon = getIcon(this.props);
+        return (
+            <Icon
+                component={typeof icon === "string"
+                    ? () => (
+                        <div
+                            style={{ display: "inline-block", width: "1em" }}
+                            // eslint-disable-next-line react/no-danger
+                            dangerouslySetInnerHTML={{ __html: icon }}
+                        />)
+                    : icon
+                }
+                {...mapPropsForWeb(this.props)}
+            />
+        );
     }
 }
 

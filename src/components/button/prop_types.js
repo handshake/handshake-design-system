@@ -3,12 +3,14 @@ import PropTypes from "prop-types";
 export default {
     block: PropTypes.bool,
     children: PropTypes.node,
+    className: PropTypes.string,
     disabled: PropTypes.bool,
     icon: PropTypes.string,
     loading: PropTypes.bool,
     onClick: PropTypes.func,
     // shape: PropTypes.oneOf(["circle", "circle-outline"]), // FIXME: Not supported on mobile yet
     size: PropTypes.oneOf(["large", "small"]),
+    style: PropTypes.object,
     type: PropTypes.oneOf(["primary", "secondary", "confirm", "danger", "link"]),
 };
 

@@ -1,6 +1,7 @@
 require("@babel/register")();
 const path = require("path");
 const webpack = require("webpack");
+const { StatsWriterPlugin } = require("webpack-stats-plugin")
 
 const { kebabCase: LESS_VARIABLES } = require("../src/theme").theme;
 
@@ -35,7 +36,7 @@ module.exports = (storybookBaseConfig, configType) => {
                     loader: "babel-loader",
                     options: {
                         babelrc: false,
-                        presets: ["module:metro-react-native-babel-preset"]
+                        presets: ["module:metro-react-native-babel-preset"],
                     },
                 },
             ],
@@ -111,6 +112,12 @@ module.exports = (storybookBaseConfig, configType) => {
             /antd-mobile-rn\/(es|lib)\/style\/themes\/default\.native\.js/,
             path.resolve(__dirname, "../src/theme/antd_mobile_rn_variables.js"),
         ),
+        // uncomment this in order to generate stats (localhost:9001/stats.json)
+        // that can be visualized using https://chrisbateman.github.io/webpack-visualizer/
+        // recomment it at the end, because it's QUITE slow
+        // new StatsWriterPlugin({
+        //     fields: null,
+        // }),
     );
 
     return storybookBaseConfig;

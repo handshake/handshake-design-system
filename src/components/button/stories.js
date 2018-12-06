@@ -54,6 +54,7 @@ storiesOf("Web/Button", module)
         {
             info: {
                 header: false,
+                propTables: [Button],
                 text: `
                     ### Usage
                     ~~~js

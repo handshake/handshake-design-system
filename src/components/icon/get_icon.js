@@ -1,9 +1,26 @@
 import _ from "lodash";
 import * as ANTD_ICONS from "@ant-design/icons/lib/dist";
 import colorPalette from "../../util/antd_color_palette";
+import * as FA_ICONS from "react-icons/fa/index";
+import * as FI_ICONS from "react-icons/fi/index";
+import * as GO_ICONS from "react-icons/go/index";
 import * as HS_ICONS from "./icons/index";
 import iconManifest from "@ant-design/icons/lib/manifest";
+import * as IO_ICONS from "react-icons/io/index";
+import * as MD_ICONS from "react-icons/md/index";
+import PropTypes from "prop-types";
+import React from "react";
 import { renderIconDefinitionToSVGElement } from "@ant-design/icons/lib/helpers";
+import * as TI_ICONS from "react-icons/ti/index";
+
+const ALL_REACT_ICON_SETS = {
+    fa: FA_ICONS,
+    fi: FI_ICONS,
+    go: GO_ICONS,
+    io: IO_ICONS,
+    md: MD_ICONS,
+    ti: TI_ICONS,
+};
 
 const THEME_LOOKUP = {
     filled: "Fill",
@@ -20,66 +37,89 @@ function fillPaths (node, color) {
     }
 }
 
-export function fallbackAntTheme (theme, type) {
-    if (theme === "twoTone" && iconManifest.fill.includes(type)) {
-        console.warn("There is no TwoTone Icon for %s, defaulting to Filled", type);
-        return "filled";
-    }
-    if (theme === "twoTone" && iconManifest.outline.includes(type)) {
-        console.warn("There is no TwoTone Icon for %s, defaulting to Outlined", type);
-        return "outline";
-    }
-    if (theme === "filled" && iconManifest.outline.includes(type)) {
-        console.warn("There is no Filled Icon for %s, defaulting to Outlined", type);
-        return "outlined";
-    }
-    if (theme === "outlined" && iconManifest.fill.includes(type)) {
-        console.warn("There is no Outlined Icon for %s, defaulting to Filled", type);
-        return "filled";
-    }
-    console.error("There is no Icon for %s", type);
-    return false;
-}
-
-export default function getIcon (props) {
-    const { color, type } = props;
-    let { theme } = props;
-    const prefix = type.split("-")[0];
-    let unprefixedType = type.replace(/^\w+-/, "");
-    switch (prefix) {
-    case "ant":
-    case "antd": {
-        const manifestType = (() => ({
-            filled: "fill",
-            outlined: "outline",
-            twoTone: "twotone",
-        }[theme]))();
-        if (!iconManifest[manifestType].includes(unprefixedType)) {
-            theme = fallbackAntTheme(theme, unprefixedType);
-        }
-        const iconName = `${
-            _.upperFirst(_.camelCase(unprefixedType))}${THEME_LOOKUP[theme]}`;
-        const icon = _.cloneDeep(ANTD_ICONS[iconName]);
-
-        let content;
+const AntIconFactory = (icon) => {
+    const Wrapper = ({ fill, size, stroke }) => {
         if (typeof icon.icon === "function") {
-            content = renderIconDefinitionToSVGElement(icon, {
+            return renderIconDefinitionToSVGElement(icon, {
+                extraSVGAttrs: { width: size },
                 placeholders: {
-                    primaryColor: color,
-                    secondaryColor: colorPalette(color, 0),
+                    primaryColor: stroke,
+                    secondaryColor: fill,
                 },
             });
-        } else {
-            fillPaths(icon.icon, color);
-            content = renderIconDefinitionToSVGElement(icon);
         }
-        return content;
+        fillPaths(icon.icon, stroke);
+        return renderIconDefinitionToSVGElement(icon, {
+            extraSVGAttrs: { width: size },
+        });
+    };
+    Wrapper.propTypes = {
+        fill: PropTypes.string,
+        size: PropTypes.number,
+        stroke: PropTypes.string,
+    };
+    return Wrapper;
+};
+
+const ReactIconFactory = (Icon) => {
+    const Wrapper = ({ fill, size, stroke }) => (
+        <Icon
+            fill={fill}
+            size={size}
+            stroke={stroke}
+        />
+    );
+    Wrapper.propTypes = {
+        fill: PropTypes.string,
+        size: PropTypes.number,
+        stroke: PropTypes.string,
+    };
+    return Wrapper;
+};
+
+const HSIconFactory = (Icon) => {
+    const Wrapper = ({ fill, size, stroke }) => (
+        <Icon
+            // fill={fill}
+            width={size}
+            // stroke={stroke}
+            style={{ color: stroke }}
+        />
+    );
+    Wrapper.propTypes = {
+        fill: PropTypes.string,
+        size: PropTypes.number,
+        stroke: PropTypes.string,
+    };
+    return Wrapper;
+};
+
+export default function getIcon (props) {
+    const {
+        iconSet,
+        iconName,
+        theme,
+    } = props;
+    switch (iconSet) {
+    case "ant":
+    case "antd": {
+        return AntIconFactory(_.cloneDeep(ANTD_ICONS[`${
+            _.upperFirst(_.camelCase(iconName))}${THEME_LOOKUP[theme]}`]));
     }
+    case "fa":
+    case "fi":
+    case "go":
+        return ReactIconFactory(ALL_REACT_ICON_SETS[iconSet][_.upperFirst(_.camelCase(
+            `${iconSet}-${iconName}`,
+        ))]);
+    case "io":
+    case "md":
+    case "ti":
+        return ReactIconFactory(ALL_REACT_ICON_SETS[iconSet][_.upperFirst(_.camelCase(
+            `${iconSet}-${iconName}-${theme === "outlined" ? "outline" : ""}`,
+        ))]);
     case "hs":
     default:
-        if (prefix !== "hs") {
-            unprefixedType = type;
-        }
-        return HS_ICONS[unprefixedType];
+        return HSIconFactory(HS_ICONS[iconName]);
     }
 }

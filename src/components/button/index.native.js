@@ -1,16 +1,16 @@
 import _ from "lodash";
-import Button from "./styles.native";
 import { FormattedMessage } from "react-intl";
 import Icon from "../icon/index.native";
 import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
 import React, { Component } from "react";
+import StyledButton from "./styles.native";
 import Text from "antd-mobile-rn/es/text";
 import themes from "./themes.json";
 import WithTheme from "../design-context/theme-provider/with_theme";
 
 // FIXME: icons don't use `active` color; only an issue for `secondary` type
 
-class ButtonWrapper extends Component {
+class Button extends Component {
     static propTypes = propTypes;
 
     static defaultProps = {
@@ -32,7 +32,7 @@ class ButtonWrapper extends Component {
         const content = (
             <WithTheme themes={themes}>
                 {({ lkp, lookup }) => (
-                    <Button
+                    <StyledButton
                         lkp={lkp}
                         {...mapPropsForMobile(this.props)}
                     >
@@ -62,7 +62,7 @@ class ButtonWrapper extends Component {
                             <span key="text">{children}</span>,
                         ])
                         || children}
-                    </Button>
+                    </StyledButton>
                 )}
             </WithTheme>
         );
@@ -70,4 +70,4 @@ class ButtonWrapper extends Component {
     }
 }
 
-export default ButtonWrapper;
+export default Button;

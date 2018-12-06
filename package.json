@@ -71,7 +71,8 @@
     "stylelint-no-unsupported-browser-features": "^3.0.2",
     "stylelint-processor-styled-components": "^1.5.1",
     "url-loader": "^1.1.2",
-    "webpack-cli": "^3.1.2"
+    "webpack-cli": "^3.1.2",
+    "webpack-stats-plugin": "^0.2.1"
   },
   "scripts": {
     "build": "./bin/extract_less_variables.js && rm -rf lib && babel src --out-dir lib --ignore src/**/stories.js --ignore src/**/__tests__ --ignore src/components/__template__ && sed -i '' 's/.\\/..\\/..\\/..\\/..\\/node_modules\\///g' lib/components/design-context/locale-provider/common.js && cd src && find . \\( -name \"*.json\" \\) | cut -d'/' -f2- | cpio -p -dum ../lib",

@@ -1,7 +1,6 @@
 import _ from "lodash";
-import AntdIcon from "antd/es/icon";
-import getIcon from "./get_icon";
-import propTypes, { ALL_TYPES, defaultProps, mapPropsForWeb } from "./prop_types";
+// import AntdIcon from "antd/es/icon";
+import propTypes, { ALL_TYPES, defaultProps, mapProps } from "./prop_types";
 import React, { Component } from "react";
 import styled, { keyframes } from "styled-components";
 
@@ -13,37 +12,37 @@ const loadingCircle = keyframes`
     }
 `;
 
-const Icon = styled(AntdIcon)`
-    display: inline-block;
-    font-style: normal;
-    line-height: 0;
-    text-align: center;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-transform: none;
-    vertical-align: -0.125em;
+// const Icon = styled(AntdIcon)`
+//     display: inline-block;
+//     font-style: normal;
+//     line-height: 0;
+//     text-align: center;
+//     text-rendering: optimizeLegibility;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+//     text-transform: none;
+//     vertical-align: -0.125em;
 
-    > * {
-        line-height: 1;
-    }
+//     > * {
+//         line-height: 1;
+//     }
 
-    svg {
-        display: inline-block;
-    }
+//     svg {
+//         display: inline-block;
+//     }
 
-    .anticon-icon {
-        display: block;
-    }
-    .anticon-spin:before {
-        animation: ${loadingCircle} 1s infinite linear;
-        display: inline-block;
-    }
-    .anticon-spin {
-        animation: ${loadingCircle} 1s infinite linear;
-        display: inline-block;
-    }
-`;
+//     .anticon-icon {
+//         display: block;
+//     }
+//     .anticon-spin:before {
+//         animation: ${loadingCircle} 1s infinite linear;
+//         display: inline-block;
+//     }
+//     .anticon-spin {
+//         animation: ${loadingCircle} 1s infinite linear;
+//         display: inline-block;
+//     }
+// `;
 
 class IconWrapper extends Component {
     static propTypes = propTypes;
@@ -55,20 +54,42 @@ class IconWrapper extends Component {
     static ALL_TYPES = ALL_TYPES;
 
     render () {
-        const icon = getIcon(this.props);
+        const {
+            className,
+            icon: Icon,
+            iconSet,
+            fillColor,
+            size,
+            strokeColor,
+            style,
+        } = mapProps(this.props);
+        if (["ant", "antd"].includes(iconSet)) {
+            return (
+                <i
+                    className={className}
+                    style={{ color: fillColor, width: size, ...style }}
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={{
+                        __html: Icon({
+                            fill: fillColor,
+                            size,
+                            stroke: strokeColor,
+                        }),
+                    }}
+                />
+            );
+        }
         return (
-            <Icon
-                component={typeof icon === "string"
-                    ? () => (
-                        <div
-                            style={{ display: "inline-block", width: "1em" }}
-                            // eslint-disable-next-line react/no-danger
-                            dangerouslySetInnerHTML={{ __html: icon }}
-                        />)
-                    : icon
-                }
-                {...mapPropsForWeb(this.props)}
-            />
+            <i
+                className={className}
+                style={{ width: size, ...style }}
+            >
+                <Icon
+                    fill={fillColor}
+                    size={size}
+                    stroke={strokeColor}
+                />
+            </i>
         );
     }
 }

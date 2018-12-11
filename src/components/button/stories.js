@@ -25,7 +25,19 @@ import { Button, Icon } from "../..";
 import { Button as NativeButton } from "../../index.native";
 import Text from "antd-mobile-rn/es/text";
 
+import registry from "../icon/registry";
+
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
+
+// import "./sets/ant";
+// import "./sets/fa";
+// import "./sets/fi";
+// import "./sets/go";
+// import "./sets/io";
+// import "./sets/md";
+// import "./sets/ti";
+
+const ALL_ICONS = registry.keys();
 
 storiesOf("Web/Button", module)
     .addDecorator(withInfo)
@@ -40,7 +52,7 @@ storiesOf("Web/Button", module)
                 <Button
                     block={boolean("Block", false)}
                     disabled={boolean("Disabled", false)}
-                    icon={select("Icon", [undefined, ...Icon.ALL_TYPES], undefined)}
+                    icon={select("Icon", [undefined, ...ALL_ICONS], undefined)}
                     loading={boolean("Loading", false)}
                     onClick={action("clicked")}
                     size={select("Size", ["small", "large"], "large")}
@@ -80,7 +92,7 @@ storiesOf("Mobile/Button", module)
                     key="btn"
                     block={boolean("Block", true)}
                     disabled={boolean("Disabled", false)}
-                    icon={select("Icon", [undefined, ...Icon.ALL_TYPES], undefined)}
+                    icon={select("Icon", [undefined, ...ALL_ICONS], undefined)}
                     loading={boolean("Loading", false)}
                     onClick={action("clicked")}
                     size={select("Size", ["small", "large"], "large")}

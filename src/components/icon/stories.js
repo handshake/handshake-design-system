@@ -21,8 +21,19 @@ import { withViewport } from "@storybook/addon-viewport";
 
 import { Icon } from "../..";
 import { Icon as NativeIcon } from "../../index.native";
+import registry from "./registry";
 
-import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
+// import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
+
+import "./sets/ant";
+import "./sets/fa";
+import "./sets/fi";
+import "./sets/go";
+import "./sets/io";
+import "./sets/md";
+import "./sets/ti";
+
+const ALL_ICONS = registry.keys();
 
 storiesOf("Web/Icon", module)
     .addDecorator(withInfo)
@@ -36,8 +47,8 @@ storiesOf("Web/Icon", module)
                 color={color("Color", "#ff0000")}
                 size={select("Size", ["default", "large", "small"], "default")}
                 spin={boolean("Spin", false)}
-                theme={select("Theme", ["filled", "outlined", "twoTone"], "outlined")}
-                type={select("Type", Icon.ALL_TYPES, Icon.ALL_TYPES[0])}
+                type={select("Type", ["filled", "outlined", "twoTone"], "outlined")}
+                icon={select("Icon", ALL_ICONS, "logo")}
             />
         ),
         {
@@ -67,8 +78,8 @@ storiesOf("Mobile/Icon", module)
                     color={color("Color", "#ff0000")}
                     size={select("Size", ["default", "large", "small"])}
                     spin={boolean("Spin", false)}
-                    theme={select("Theme", ["filled", "outlined", "twoTone"], "outlined")}
-                    type={select("Type", NativeIcon.ALL_TYPES, NativeIcon.ALL_TYPES[0])}
+                    type={select("Type", ["filled", "outlined", "twoTone"], "outlined")}
+                    icon={select("Icon", ALL_ICONS, "logo")}
                 />
             </WingBlank>
         ),

@@ -43,7 +43,7 @@ class Button extends Component {
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 spin
                                 style={{ verticalAlign: "middle" }}
-                                type="loading"
+                                icon="loading"
                             />,
                             <Text key="gap">&nbsp;&nbsp;</Text>,
                             <FormattedMessage key="text" id="ds.button.loading" />,
@@ -56,7 +56,7 @@ class Button extends Component {
                                 )}
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 style={{ verticalAlign: "middle" }}
-                                type={icon}
+                                icon={icon}
                             />,
                             <Text key="gap">&nbsp;&nbsp;</Text>,
                             <span key="text">{children}</span>,

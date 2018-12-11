@@ -30,8 +30,8 @@ export function mapPropsForWeb (props) {
         className: props.className,
         disabled: props.disabled,
         ghost: false,
-        icon: props.icon,
-        loading: props.loading,
+        // icon: props.icon, // handled separately
+        // loading: props.loading, // handled separately
         onClick: props.onClick,
         // shape: props.shape,
         size: (size => ({ default: "large" })[size] || size)(props.size),

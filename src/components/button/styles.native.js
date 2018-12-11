@@ -18,13 +18,18 @@ export default rnStyled(AntdButton, css`
 
     /* SPLIT HERE: DO NOT DELETE */
 
+    [activeStyle] {
+        background-color: ${lookup`$(type).active.backgroundColor`};
+        border-color: ${lookup`$(type).active.borderColor`};
+    }
+
     #${p => p.type}Highlight {
         background-color: ${lookup`$(type).active.backgroundColor`};
         border-color: ${lookup`$(type).active.borderColor`};
     }
 
     #${p => p.type}HighlightText {
-        color: ${lookup`$(type).active.color`}
+        color: ${lookup`$(type).active.color`};
     }
 
     #${p => p.type}RawText {

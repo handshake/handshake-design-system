@@ -16,14 +16,20 @@ function parse (css) {
             .replace(EXTRACT_COMMENTS, "")
             .replace(EXTRACT_RULESETS, (_1, name, attr, rules) => {
                 const target = {};
+                let attrName;
                 if (attr) {
-                    attrs[attr.match(EXTRACT_ATTR_NAME)[1]] = target;
+                    [, attrName] = attr.match(EXTRACT_ATTR_NAME);
+                    attrs[attrName] = target;
                 } else {
                     styles[name] = target;
                 }
                 rules.replace(EXTRACT_KEY_VALUE_PAIRS, (_2, key, value) => {
                     target[_.camelCase(key)] = value;
                 });
+                if (attrName === "props") {
+                    _.extend(attrs, target);
+                    delete attrs.props;
+                }
             });
         return { styles, ...attrs };
     };

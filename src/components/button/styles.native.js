@@ -20,7 +20,7 @@ export default rnStyled(AntdButton, css`
 
     [activeStyle] {
         background-color: ${lookup`$(type).active.backgroundColor`};
-        border-color: ${lookup`$(type).active.borderColor`};
+        border-color: ${lookup`$(type).active.borderColor`}; /* doesn't work, but should */
     }
 
     #${p => p.type}Highlight {

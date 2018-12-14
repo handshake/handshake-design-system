@@ -1,10 +1,9 @@
 import ActivityIndicator from "antd-mobile-rn/es/activity-indicator";
-import styled, { css } from "styled-components/native";
 // import { lookup } from "../design-context/theme-provider/with_theme";
-import rnStyled from "../../util/native_styled";
+import styled, { css } from "../../util/styled.native";
 import View from "antd-mobile-rn/es/view"; // NOTE: is a straight re-export from react-native
 
-export default rnStyled(ActivityIndicator, css`
+export default styled(ActivityIndicator)`
     ${({ toast }) => (toast ? css`
         background-color: transparent;
         bottom: 0;
@@ -18,7 +17,6 @@ export default rnStyled(ActivityIndicator, css`
         flex-direction: row;
         justify-content: center;
     `)}
-    /* SPLIT HERE: DO NOT DELETE */
 
     .innerContainer {
         background-color: transparent;
@@ -47,9 +45,9 @@ export default rnStyled(ActivityIndicator, css`
         font-size: 14px;
         margin-left: 8px;
     }
-`);
+`;
 
-const SpinnerBox = styled(View)`
+const SpinnerBox = styled.View`
     align-items: center;
     background-color: #ffffff;
     border-color: #e8e8e8;
@@ -60,7 +58,7 @@ const SpinnerBox = styled(View)`
     min-height: 200px;
 `;
 
-const SpinnerFrame = styled(View)`
+const SpinnerFrame = styled.View`
     flex: 1;
 `;
 

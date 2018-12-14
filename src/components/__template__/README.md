@@ -70,12 +70,12 @@
             // etc...
         };
         ```
-        figure out which styles are applied to the outermost element, and which are nested. In your `styles.native.js`, copy the base styles to the block that reads `/* base styles go here */` in the same style as for web, e.g. it looks like css and use the `lookup` function, e.g.:
+        figure out which styles are applied to the outermost element, and which are nested. In your `styles.native.js`, copy the base styles to the block that reads `/* styles go here */` in the same style as for web, e.g. it looks like css and use the `lookup` function, e.g.:
         ```less
         css-prop-3: ${lookup`foo.bar.prop3`};
         css-prop-4: 8px;
         ```
-        And the nested styles go where it says `/* nested styles go here */`. One additional step is that the nested styles should be... well... nested... inside css selectors that correspond to the style names in the original file, e.g. `styleName1` in the example above:
+        And the nested styles go there also. One additional step is that the nested styles should be... well... nested... inside css selectors that correspond to the style names in the original file, e.g. `styleName1` in the example above:
         ```less
         .styleName1 {
             css-prop-1: ${lookup`foo.bar.prop1`};

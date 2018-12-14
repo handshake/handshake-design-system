@@ -1,9 +1,8 @@
 import AntdButton from "antd-mobile-rn/es/button";
-import { css } from "styled-components/native";
 import { lookup } from "../design-context/theme-provider/with_theme";
-import rnStyled from "../../util/native_styled";
+import styled from "../../util/styled.native";
 
-export default rnStyled(AntdButton, css`
+export default styled(AntdButton)`
     align-items: center;
     background-color: ${lookup(({ disabled, loading, type }) => (
         // eslint-disable-next-line max-len
@@ -15,8 +14,6 @@ export default rnStyled(AntdButton, css`
     height: ${lookup`$(size).$(type).height`};
     justify-content: center;
     padding: 0 ${lookup`$(size).$(type).margin.horizontal`};
-
-    /* SPLIT HERE: DO NOT DELETE */
 
     [activeStyle] {
         background-color: ${lookup`$(type).active.backgroundColor`};
@@ -50,4 +47,4 @@ export default rnStyled(AntdButton, css`
     #indicator {
         margin-right: 8px;
     }
-`);
+`;

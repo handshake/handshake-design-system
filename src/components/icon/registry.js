@@ -217,6 +217,4 @@ class IconRegistry {
 
 const registry = new IconRegistry();
 
-console.log(registry);
-
 export default registry;

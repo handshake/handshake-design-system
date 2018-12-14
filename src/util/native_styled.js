@@ -24,7 +24,8 @@ function parse (css) {
                     styles[name] = target;
                 }
                 rules.replace(EXTRACT_KEY_VALUE_PAIRS, (_2, key, value) => {
-                    target[_.camelCase(key)] = value;
+                    // eslint-disable-next-line no-restricted-globals
+                    target[_.camelCase(key)] = isNaN(value) ? value : parseFloat(value, 10);
                 });
                 if (attrName === "props") {
                     _.extend(attrs, target);

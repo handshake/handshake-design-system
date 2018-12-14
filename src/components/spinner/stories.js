@@ -22,6 +22,7 @@ import { withViewport } from "@storybook/addon-viewport";
 
 import { Spinner as NativeSpinner } from "../../index.native";
 import { Spinner } from "../../index.web";
+import themes from "./themes.json";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
@@ -29,7 +30,7 @@ storiesOf("Web/Spinner", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(Spinner.THEME_VARIABLES))
+    .addDecorator(withThemeVariables(themes))
     .add(
         "options",
         () => (
@@ -62,7 +63,7 @@ storiesOf("Mobile/Spinner", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(NativeSpinner.THEME_VARIABLES))
+    .addDecorator(withThemeVariables(themes))
     .add(
         "options",
         () => (

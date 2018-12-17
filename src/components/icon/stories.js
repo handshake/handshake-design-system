@@ -45,10 +45,12 @@ storiesOf("Web/Icon", module)
         () => (
             <Icon
                 color={color("Color", "#ff0000")}
+                flip={select("Flip", [undefined, "horizontal", "vertical"], undefined)}
+                icon={select("Icon", ALL_ICONS, "logo")}
+                rotate={number("Rotate", 0)}
                 size={select("Size", ["default", "large", "small"], "default")}
                 spin={boolean("Spin", false)}
                 type={select("Type", ["filled", "outlined", "twoTone"], "outlined")}
-                icon={select("Icon", ALL_ICONS, "logo")}
             />
         ),
         {
@@ -76,10 +78,12 @@ storiesOf("Mobile/Icon", module)
                 <WhiteSpace size="lg" />
                 <NativeIcon
                     color={color("Color", "#ff0000")}
+                    flip={select("Flip", [undefined, "horizontal", "vertical"], undefined)}
+                    icon={select("Icon", ALL_ICONS, "logo")}
+                    rotate={number("Rotate", 0)}
                     size={select("Size", ["default", "large", "small"])}
                     spin={boolean("Spin", false)}
                     type={select("Type", ["filled", "outlined", "twoTone"], "outlined")}
-                    icon={select("Icon", ALL_ICONS, "logo")}
                 />
             </WingBlank>
         ),

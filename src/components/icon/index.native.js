@@ -18,11 +18,26 @@ class Icon extends Component {
     render () {
         const {
             colors,
+            flip,
             icon: ActualIcon,
+            rotate,
             size,
             spin,
             style,
         } = mapProps(this.props);
+        const transform = [];
+        if (flip) {
+            transform.push(
+                (flip === "horizontal" && { scaleX: -1 })
+                || (flip === "vertical" && { scaleY: -1 }),
+            );
+        }
+        if (rotate) {
+            transform.push({ rotate: `${rotate}deg` });
+        }
+        if (transform.length) {
+            style.transform = transform;
+        }
         const content = (
             <ActualIcon
                 size={size}
@@ -42,7 +57,7 @@ class Icon extends Component {
                 </AnimatableText>
             );
         }
-        return <Text style={style}>{content}</Text>;
+        return <Text style={{ width: size, ...style }}>{content}</Text>;
     }
 }
 

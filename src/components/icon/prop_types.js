@@ -6,6 +6,9 @@ import registry from "./registry";
 export default {
     color: PropTypes.string,
     fillColor: PropTypes.string,
+    flip: PropTypes.oneOf(["horizontal", "vertical"]),
+    icon: PropTypes.string.isRequired,
+    rotate: PropTypes.number,
     size: PropTypes.oneOfType([
         PropTypes.oneOf(["default", "large", "small"]),
         PropTypes.number,
@@ -13,7 +16,6 @@ export default {
     spin: PropTypes.bool,
     strokeColor: PropTypes.string,
     type: PropTypes.oneOf(["filled", "outlined", "twoTone"]),
-    icon: PropTypes.string.isRequired,
 };
 
 export const iconPropTypes = {
@@ -41,7 +43,9 @@ function getSize (size) {
 export function mapProps (props) {
     const {
         className,
+        flip,
         icon: iconName,
+        rotate,
         size,
         spin,
         style,
@@ -54,7 +58,9 @@ export function mapProps (props) {
     return {
         className,
         colors,
+        flip,
         icon,
+        rotate: !spin && rotate,
         size: getSize(size),
         spin,
         style,

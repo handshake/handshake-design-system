@@ -1,7 +1,7 @@
 import _ from "lodash";
 import propTypes, { defaultProps, mapProps } from "./prop_types";
 import React, { Component } from "react";
-import styled, { css, keyframes } from "styled-components";
+import styled, { css, keyframes } from "../../util/styled.web";
 
 import "./sets/hs";
 
@@ -24,6 +24,17 @@ const IconWrapper = styled.i`
     text-transform: none;
     vertical-align: -0.125em;
 
+    ${({ flip, rotate }) => (flip || rotate) && css`
+        transform: ${() => (
+            (flip === "horizontal" && "scaleX(-1)")
+            || (flip === "vertical" && "scaleY(-1)")
+            || ""
+        )} ${() => (
+            // eslint-disable-next-line prefer-template
+            rotate && "rotate(" + rotate + "deg)")
+            || ""};
+    `}
+
     > * {
         display: inline-block;
 
@@ -44,7 +55,9 @@ class Icon extends Component {
         const {
             className,
             colors,
+            flip,
             icon: ActualIcon,
+            rotate,
             size,
             spin,
             style,
@@ -52,6 +65,8 @@ class Icon extends Component {
         return (
             <IconWrapper
                 className={className}
+                flip={flip}
+                rotate={rotate}
                 size={size}
                 spin={spin}
                 style={{ ...style }}

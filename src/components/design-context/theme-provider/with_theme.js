@@ -19,13 +19,15 @@ const fns = {
     saturate: (color, amount) => new TinyColor(color).saturate(amount).toString(),
     greyscale: color => new TinyColor(color).greyscale().toString(),
     spin: (color, amount) => new TinyColor(color).spin(amount).toString(),
-    analogous: (color, num, slices, i) => new TinyColor(color).analogous(num, slices)[i].toString(),
+    analogous: (color, num, slices, i) => new TinyColor(color)
+        .analogous(num, slices)[i].toString(),
     complement: color => new TinyColor(color).complement().toString(),
     monochromatic: (color, num, i) => new TinyColor(color).monochromatic(num)[i].toString(),
     splitcomplement: (color, i) => new TinyColor(color).splitcomplement()[i].toString(),
     triad: (color, i) => new TinyColor(color).triad()[i].toString(),
     tetrad: (color, i) => new TinyColor(color).tetrad()[i].toString(),
-    mostReadable: (baseColor, ...colorList) => TinyColor.mostReadable(baseColor, colorList).toString(),
+    mostReadable: (baseColor, ...colorList) => TinyColor
+        .mostReadable(baseColor, colorList).toString(),
 };
 
 export function withTheme (callback, { themes, themeName, variables }) {
@@ -117,7 +119,8 @@ export function withTheme (callback, { themes, themeName, variables }) {
 
         window.__deriveColorTransformation__ = (original, target) => {
             console.log("********");
-            console.log("Original = %c  ", `background: ${outerLookup(original)}; font-size: x-large;`);
+            console.log(
+                "Original = %c  ", `background: ${outerLookup(original)}; font-size: x-large;`);
             console.log("Target = %c  ", `background: ${target}; font-size: x-large;`);
             console.log("********");
 
@@ -203,7 +206,9 @@ export function withTheme (callback, { themes, themeName, variables }) {
 
             console.log("********");
             const closestValue = outerLookup(closest);
-            console.log("NO EXACT MATCH. THE CLOSEST IS OFF BY %s%: %s", (lastDifference * 100).toFixed(2), closest);
+            console.log(
+                "NO EXACT MATCH. THE CLOSEST IS OFF BY %s%: %s",
+                (lastDifference * 100).toFixed(2), closest);
             console.log("COMPARE target (%s) %c  %c to match (%s) %c  ",
                 target,
                 `background-color: ${target};`,

@@ -9,13 +9,15 @@ import React from "react";
 // see our .babelrc for an example usage
 import * as ALL_ANTD_MOBILE_LOCALES from "../../../../node_modules/antd-mobile/es/locale-provider";
 import * as ALL_ANTD_WEB_LOCALES from "../../../../node_modules/antd/es/locale-provider";
-// NOTE: there is also data for React-Native at "../../../../node_modules/antd-mobile-rn/es/locale-provider"
+// NOTE: there is also data for React-Native at
+// "../../../../node_modules/antd-mobile-rn/es/locale-provider"
 // but it is just a subset of the mobile locale data, and it has some syntax errors (wat?) in one
 // of the locales (sv_SE) so, I'm going to ignore it.
 
 import * as ALL_HS_LOCALES from "../../../locales";
-// TODO: maybe replace below wildcard import with "react-intl/locale-data/index.js" which is a pre-compiled aggregate;
-// antd doesn't have any equivalent, so we would still need the wildcard babel plugin
+// TODO: maybe replace below wildcard import with "react-intl/locale-data/index.js" which is
+// a pre-compiled aggregate; antd doesn't have any equivalent, so we would still need the
+// wildcard babel plugin
 import * as ALL_REACT_INTL_LOCALES from "../../../../node_modules/react-intl/locale-data";
 
 delete ALL_ANTD_WEB_LOCALES.default;
@@ -71,9 +73,9 @@ function getLocaleData (locale, getAdditionalMessages) {
 
         const antdLocaleData = _.merge(
             {},
-            // AntD web + mobile/rn locale data can be merged cleanly because they have ZERO overlaps.
-            // That lack of overlap is an issue of it's own, but it does mean we don't have to worry
-            // about any collisions.
+            // AntD web + mobile/rn locale data can be merged cleanly because they have ZERO
+            // overlaps. That lack of overlap is an issue of it's own, but it does mean we don't
+            // have to worry about any collisions.
             ALL_ANTD_WEB_LOCALES[antdLocaleName] || ALL_ANTD_WEB_LOCALES[DEFAULT_ANTD_LOCALE],
             ALL_ANTD_MOBILE_LOCALES[antdLocaleName] || ALL_ANTD_MOBILE_LOCALES[DEFAULT_ANTD_LOCALE],
         );

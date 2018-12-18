@@ -80,14 +80,15 @@ storiesOf("Mobile/Spinner", module)
             const { block, toast } = knobs;
             return (
                 // 568 == height of iphone5 viewport, e.g. full screen
-                // Toast centers itself vertically in its closest `relative` parent which is this View
+                // Toast centers itself vertically in its closest `relative`
+                // parent which is this View
                 <WingBlank size="lg" style={toast ? { height: 568 } : {}}>
                     <WhiteSpace size="lg" />
                     {block ? [
                         // Text forces anything nested inside to be inline, so, our block spinner
-                        // cannot be a child of a Text. On the flipside, Text itself is a block element,
-                        // so, our inline spinner cannot be a sibling of a Text. Hence, splitting it out
-                        // like this.
+                        // cannot be a child of a Text. On the flipside, Text itself is a block
+                        // element, so, our inline spinner cannot be a sibling of a Text.
+                        // Hence, splitting it out like this.
                         <Text key="before">Text Before</Text>,
                         render(NativeSpinner, knobs),
                         <Text key="after">Text After</Text>,

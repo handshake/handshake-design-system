@@ -51,7 +51,8 @@ class Icon extends Component {
                     animation="rotate"
                     easing="linear"
                     iterationCount="infinite"
-                    style={{ width: size, display: "inline-block", ...style }} // display bit is a hack for web preview only
+                    // display bit is a hack for web preview only
+                    style={{ width: size, display: "inline-block", ...style }}
                 >
                     {content}
                 </AnimatableText>

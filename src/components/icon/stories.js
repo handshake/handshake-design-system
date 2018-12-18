@@ -19,9 +19,9 @@ import { withInfo } from "@storybook/addon-info";
 import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
 
-import { Icon } from "../..";
 import { Icon as NativeIcon } from "../../index.native";
 import registry from "./registry";
+import { Icon as WebIcon } from "../..";
 
 // import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
@@ -35,6 +35,22 @@ import "./sets/ti";
 
 const ALL_ICONS = registry.keys();
 
+const commonKnobs = extraKnobs => ({
+    color: color("Color", "#ff0000"),
+    flip: select("Flip", [undefined, "horizontal", "vertical"], undefined),
+    icon: select("Icon", ALL_ICONS, "logo"),
+    rotate: number("Rotate", 0),
+    size: select("Size", ["default", "large", "small"], "default"),
+    spin: boolean("Spin", false),
+    type: select("Type", ["filled", "outlined", "twoTone"], "outlined"),
+    ...extraKnobs,
+});
+
+const render = (Icon, props) => (
+    // eslint-disable-next-line react/jsx-pascal-case
+    <Icon {...props} />
+);
+
 storiesOf("Web/Icon", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
@@ -43,19 +59,12 @@ storiesOf("Web/Icon", module)
     .add(
         "options",
         () => (
-            <Icon
-                color={color("Color", "#ff0000")}
-                flip={select("Flip", [undefined, "horizontal", "vertical"], undefined)}
-                icon={select("Icon", ALL_ICONS, "logo")}
-                rotate={number("Rotate", 0)}
-                size={select("Size", ["default", "large", "small"], "default")}
-                spin={boolean("Spin", false)}
-                type={select("Type", ["filled", "outlined", "twoTone"], "outlined")}
-            />
+            render(WebIcon, commonKnobs())
         ),
         {
             info: {
                 header: false,
+                propTables: [WebIcon],
                 text: `
                     ### Usage
                     ~~~js
@@ -76,20 +85,13 @@ storiesOf("Mobile/Icon", module)
         () => (
             <WingBlank size="lg">
                 <WhiteSpace size="lg" />
-                <NativeIcon
-                    color={color("Color", "#ff0000")}
-                    flip={select("Flip", [undefined, "horizontal", "vertical"], undefined)}
-                    icon={select("Icon", ALL_ICONS, "logo")}
-                    rotate={number("Rotate", 0)}
-                    size={select("Size", ["default", "large", "small"])}
-                    spin={boolean("Spin", false)}
-                    type={select("Type", ["filled", "outlined", "twoTone"], "outlined")}
-                />
+                {render(NativeIcon, commonKnobs())}
             </WingBlank>
         ),
         {
             info: {
                 header: false,
+                propTables: [NativeIcon],
                 text: `
                     ### Usage
                     ~~~js

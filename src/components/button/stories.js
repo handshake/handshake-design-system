@@ -21,23 +21,31 @@ import { withInfo } from "@storybook/addon-info";
 import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
 
-import { Button, Icon } from "../..";
 import { Button as NativeButton } from "../../index.native";
 import Text from "antd-mobile-rn/es/text";
+import { Button as WebButton } from "../../index.web";
 
 import registry from "../icon/registry";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
-// import "./sets/ant";
-// import "./sets/fa";
-// import "./sets/fi";
-// import "./sets/go";
-// import "./sets/io";
-// import "./sets/md";
-// import "./sets/ti";
-
 const ALL_ICONS = registry.keys();
+
+const commonKnobs = extraKnobs => ({
+    children: text("Text", "Button Intro"),
+    disabled: boolean("Disabled", false),
+    icon: select("Icon", [undefined, ...ALL_ICONS], undefined),
+    loading: boolean("Loading", false),
+    loadingText: text("Loading Text"),
+    onClick: action("clicked"),
+    size: select("Size", ["small", "large"], "large"),
+    type: select("Type", ["primary", "secondary", "confirm", "danger", "link"], "secondary"),
+    ...extraKnobs,
+});
+
+const render = (Button, props) => (
+    <Button {...props} />
+);
 
 storiesOf("Web/Button", module)
     .addDecorator(withInfo)
@@ -49,24 +57,14 @@ storiesOf("Web/Button", module)
         () => (
             <div>
                 <span>Before</span>
-                <Button
-                    block={boolean("Block", false)}
-                    disabled={boolean("Disabled", false)}
-                    icon={select("Icon", [undefined, ...ALL_ICONS], undefined)}
-                    loading={boolean("Loading", false)}
-                    onClick={action("clicked")}
-                    size={select("Size", ["small", "large"], "large")}
-                    type={select("Type", ["primary", "secondary", "confirm", "danger", "link"], "secondary")}
-                >
-                    {text("Text", "Button Intro")}
-                </Button>
+                {render(WebButton, commonKnobs({ block: boolean("Block", false) }))}
                 <span>After</span>
             </div>
         ),
         {
             info: {
                 header: false,
-                propTables: [Button],
+                propTables: [WebButton],
                 text: `
                     ### Usage
                     ~~~js
@@ -86,21 +84,8 @@ storiesOf("Mobile/Button", module)
         "options",
         () => {
             const block = boolean("Block", true);
-            const type = select("Type", ["primary", "secondary", "confirm", "danger", "link"], "secondary");
-            const btn = (
-                <NativeButton
-                    key="btn"
-                    block={boolean("Block", true)}
-                    disabled={boolean("Disabled", false)}
-                    icon={select("Icon", [undefined, ...ALL_ICONS], undefined)}
-                    loading={boolean("Loading", false)}
-                    onClick={action("clicked")}
-                    size={select("Size", ["small", "large"], "large")}
-                    type={type}
-                >
-                    {text("Text", "Button Intro")}
-                </NativeButton>
-            );
+            const knobs = commonKnobs({ block, key: "btn" });
+            const { type } = knobs;
             return (
                 <WingBlank size="lg">
                     <WhiteSpace size="lg" />
@@ -108,13 +93,13 @@ storiesOf("Mobile/Button", module)
                         ? (
                             <Text>
                                 Before
-                                {btn}
+                                {render(NativeButton, knobs)}
                                 After
                             </Text>
                         )
                         : ([
                             <Text key="before">Before</Text>,
-                            btn,
+                            render(NativeButton, knobs),
                             <Text key="after">After</Text>,
                         ])
                     }
@@ -124,6 +109,7 @@ storiesOf("Mobile/Button", module)
         {
             info: {
                 header: false,
+                propTables: [NativeButton],
                 text: `
                     ### Usage
                     ~~~js

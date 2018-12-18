@@ -14,17 +14,28 @@ import {
 } from "@storybook/addon-knobs";
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import themes from "./themes.json";
 import { WhiteSpace, WingBlank } from "antd-mobile-rn";
 import { withInfo } from "@storybook/addon-info";
 import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
 
-import { __TEMPLATE__ } from "../..";
 // eslint-disable-next-line camelcase
 import { __TEMPLATE__ as Native__TEMPLATE__ } from "../../index.native";
+import themes from "./themes.json";
+// eslint-disable-next-line camelcase
+import { __TEMPLATE__ as Web__TEMPLATE__ } from "../../index.web";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
+
+const commonKnobs = extraKnobs => ({
+    // TODO
+    ...extraKnobs,
+});
+
+const render = (__TEMPLATE__, props) => (
+    // eslint-disable-next-line react/jsx-pascal-case
+    <__TEMPLATE__ {...props} />
+);
 
 storiesOf("__TEMPLATE__", module)
     .addDecorator(withInfo)
@@ -34,12 +45,12 @@ storiesOf("__TEMPLATE__", module)
     .add(
         "options",
         () => (
-            // eslint-disable-next-line react/jsx-pascal-case
-            <__TEMPLATE__ />
+            render(Web__TEMPLATE__, commonKnobs())
         ),
         {
             info: {
                 header: false,
+                propTables: [Web__TEMPLATE__],
                 text: `
                     ### Usage
                     ~~~js
@@ -60,13 +71,13 @@ storiesOf("__TEMPLATE__/Native", module)
         () => (
             <WingBlank size="lg">
                 <WhiteSpace size="lg" />
-                {/* eslint-disable-next-line react/jsx-pascal-case */}
-                <Native__TEMPLATE__ />
+                {render(Native__TEMPLATE__, commonKnobs())}
             </WingBlank>
         ),
         {
             info: {
                 header: false,
+                propTables: [Native__TEMPLATE__],
                 text: `
                     ### Usage
                     ~~~js

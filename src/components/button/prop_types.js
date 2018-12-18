@@ -7,6 +7,7 @@ export default {
     disabled: PropTypes.bool,
     icon: PropTypes.string,
     loading: PropTypes.bool,
+    loadingText: PropTypes.string,
     onClick: PropTypes.func,
     // shape: PropTypes.oneOf(["circle", "circle-outline"]), // FIXME: Not supported on mobile yet
     size: PropTypes.oneOf(["large", "small"]),
@@ -32,6 +33,7 @@ export function mapPropsForWeb (props) {
         ghost: false,
         // icon: props.icon, // handled separately
         // loading: props.loading, // handled separately
+        // loadingText: props.loadingText, // handled separately
         onClick: props.onClick,
         // shape: props.shape,
         size: (size => ({ default: "large" })[size] || size)(props.size),
@@ -47,6 +49,7 @@ export function mapPropsForMobile (props) {
         disabled: props.disabled,
         // icon: props.icon, // handled separately
         // loading: props.loading, // handled separately
+        // loadingText: props.loadingText, // handled separately
         onClick: props.onClick,
         size: (size => ({ default: "large" })[size] || size)(props.size),
         style: props.style,

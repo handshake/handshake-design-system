@@ -25,6 +25,7 @@ class Button extends Component {
             disabled,
             icon,
             loading,
+            loadingText,
             size,
             type,
         } = this.props;
@@ -46,7 +47,9 @@ class Button extends Component {
                                 icon="loading"
                             />,
                             <Text key="gap">&nbsp;&nbsp;</Text>,
-                            <FormattedMessage key="text" id="ds.button.loading" />,
+                            loadingText
+                                ? <span key="text">{loadingText}</span>
+                                : <FormattedMessage key="text" id="ds.button.loading" />,
                         ])
                         || (icon && [
                             <Icon

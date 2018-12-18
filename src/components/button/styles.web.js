@@ -1,6 +1,6 @@
 import AntdButton from "antd/es/button";
 import { lookup } from "../design-context/theme-provider/with_theme";
-import styled, { keyframes } from "../../util/styled.web";
+import styled, { css, keyframes } from "../../util/styled.web";
 
 const loadingCircle = keyframes`
     100% {
@@ -9,12 +9,14 @@ const loadingCircle = keyframes`
 `;
 
 export default styled(AntdButton)`
-    background-color: ${lookup`$(type).default.backgroundColor`};
+    background-color: ${lookup(({ hsLoading, type }) => (
+        `${type}.${hsLoading ? "loading" : "default"}.backgroundColor`))};
     background-image: none;
     border:
         ${lookup`$(type).default.borderWidth`}
         ${lookup`$(type).default.borderStyle`}
-        ${lookup`$(type).default.borderColor`};
+        ${lookup(({ hsLoading, type }) => (
+            `${type}.${hsLoading ? "loading" : "default"}.borderColor`))};
     border-radius: ${lookup`$(size).$(type).borderRadius`};
     box-shadow: ${lookup`$(type).default.boxShadow`};
     color: ${lookup`$(type).default.color`};
@@ -29,10 +31,10 @@ export default styled(AntdButton)`
         ${lookup`$(size).$(type).margin.vertical`}
         ${lookup`$(size).$(type).margin.horizontal`}
         ${lookup`$(size).$(type).margin.vertical`}
-        ${lookup(({ loading, size, type }) => (loading
+        ${lookup(({ hsLoading, size, type }) => (hsLoading
             ? `${size}.${type}.margin.loading`
             : `${size}.${type}.margin.horizontal`))};
-    pointer-events: ${({ loading }) => (loading ? "none" : "auto")};
+    pointer-events: ${({ hsLoading }) => (hsLoading ? "none" : "auto")};
     position: relative;
     text-align: center;
     text-transform: ${lookup`$(type).default.textTransform`};
@@ -94,10 +96,13 @@ export default styled(AntdButton)`
         &:focus,
         &:active,
         &.active {
-            background-color: ${lookup`$(type).disabled.backgroundColor`};
-            border-color: ${lookup`$(type).disabled.borderColor`};
+            background-color: ${lookup(({ hsLoading, type }) => (
+                `${type}.${hsLoading ? "loading" : "disabled"}.backgroundColor`))};
+            border-color: ${lookup(({ hsLoading, type }) => (
+                `${type}.${hsLoading ? "loading" : "disabled"}.borderColor`))};
             box-shadow: none;
-            color: ${lookup`$(type).disabled.color`};
+            color: ${lookup(({ hsLoading, type }) => (
+                `${type}.${hsLoading ? "loading" : "disabled"}.color`))};
             text-shadow: none;
         }
 
@@ -111,7 +116,7 @@ export default styled(AntdButton)`
         border-radius: inherit;
         bottom: -1px;
         content: '';
-        display: ${({ loading }) => (loading ? "block" : "none")};
+        display: ${({ hsLoading }) => (hsLoading ? "block" : "none")};
         left: -1px;
         opacity: 0.35;
         pointer-events: none;
@@ -135,7 +140,7 @@ export default styled(AntdButton)`
         display: inline-block;
         font-style: normal;
         line-height: 1;
-        margin-left: ${lookup(({ size, loading }) => (loading
+        margin-left: ${lookup(({ size, hsLoading }) => (hsLoading
             ? `${size}.$(type).margin.loadingIcon`
             : 0))};
         vertical-align: -0.125em;

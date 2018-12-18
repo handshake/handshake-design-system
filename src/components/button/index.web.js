@@ -35,7 +35,7 @@ class Button extends Component {
                         {(loading && [
                             <Icon
                                 key="icon"
-                                color={lookup(`${type}.${disabled ? "disabled" : "default"}.color`)}
+                                color={lookup(`${type}.loading.color`)}
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 spin
                                 style={{ verticalAlign: "middle" }}
@@ -44,7 +44,7 @@ class Button extends Component {
                             <span key="gap">&nbsp;&nbsp;</span>,
                             loadingText
                                 ? <span key="text">{loadingText}</span>
-                                : <FormattedMessage key="text" id="ds.button.loading" />,
+                                : children,
                         ])
                         || (icon && [
                             <Icon

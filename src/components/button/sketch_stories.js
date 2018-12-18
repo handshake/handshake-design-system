@@ -3,7 +3,7 @@ const _ = require("lodash");
 
 const types = ["primary", "secondary", "confirm", "danger", "link"];
 const sizes = ["large", "small"];
-const icons = [undefined, "plus"];
+const icons = [undefined, "ant-plus"];
 const states = [undefined, "disabled", "loading"];
 
 export const envs = ["Web", "Mobile"];

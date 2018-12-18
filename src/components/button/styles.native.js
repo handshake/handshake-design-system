@@ -4,11 +4,11 @@ import styled from "../../util/styled.native";
 
 export default styled(AntdButton)`
     align-items: center;
-    background-color: ${lookup(({ disabled, loading, type }) => (
+    background-color: ${lookup(({ disabled, hsLoading, type }) => (
         // eslint-disable-next-line max-len
-        `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.backgroundColor`))};
-    border-color: ${lookup(({ disabled, loading, type }) => (
-        `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.borderColor`))};
+        `${type}.${(hsLoading && "loading") || (disabled && "disabled") || "default"}.backgroundColor`))};
+    border-color: ${lookup(({ disabled, hsLoading, type }) => (
+        `${type}.${(hsLoading && "loading") || (disabled && "disabled") || "default"}.borderColor`))};
     border-radius: ${lookup`$(size).$(type).borderRadius`};
     border-width: ${lookup`$(type).default.borderWidth`};
     height: ${lookup`$(size).$(type).height`};
@@ -30,9 +30,9 @@ export default styled(AntdButton)`
     }
 
     #${p => p.type}RawText {
-        color: ${lookup(({ disabled, loading, type }) => (
+        color: ${lookup(({ disabled, hsLoading, type }) => (
             // eslint-disable-next-line max-len
-            `${type}.${(loading && "loading") || (disabled && "disabled") || "default"}.color`))};
+            `${type}.${(hsLoading && "loading") || (disabled && "disabled") || "default"}.color`))};
         /* TODO: might need different values for each environment */
         font-family: ${lookup`$(type).default.fontFamily`};
         font-size: ${lookup`$(size).$(type).fontSize`};

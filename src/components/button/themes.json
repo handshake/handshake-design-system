@@ -74,7 +74,8 @@
         "primary": {
             "default": {
                 "backgroundColor": "hs-color-primary",
-                "borderColor": "_.backgroundColor"
+                "borderColor": "_.backgroundColor",
+                "color": "_"
             },
             "active": {
                 "backgroundColor": "darken(_, 5)",
@@ -91,7 +92,8 @@
             },
             "loading": {
                 "backgroundColor": "lighten(_, 30)",
-                "borderColor": "_.backgroundColor"
+                "borderColor": "_.backgroundColor",
+                "color": "_"
             }
         },
         "secondary": {
@@ -114,14 +116,15 @@
                 "color": "hs-color-primary"
             },
             "loading": {
-                "borderColor": "lighten(_, 30)",
+                "borderColor": "_",
                 "color": "hs-color-gray4"
             }
         },
         "confirm": {
             "default": {
                 "backgroundColor": "hs-color-confirm",
-                "borderColor": "_.backgroundColor"
+                "borderColor": "_.backgroundColor",
+                "color": "_"
             },
             "active": {
                 "backgroundColor": "darken(_, 5)",
@@ -138,13 +141,15 @@
             },
             "loading": {
                 "backgroundColor": "lighten(_, 30)",
-                "borderColor": "_.backgroundColor"
+                "borderColor": "_.backgroundColor",
+                "color": "_"
             }
         },
         "danger": {
             "default": {
                 "backgroundColor": "hs-color-danger",
-                "borderColor": "_.backgroundColor"
+                "borderColor": "_.backgroundColor",
+                "color": "_"
             },
             "active": {
                 "backgroundColor": "darken(_, 5)",
@@ -161,7 +166,8 @@
             },
             "loading": {
                 "backgroundColor": "lighten(_, 30)",
-                "borderColor": "_.backgroundColor"
+                "borderColor": "_.backgroundColor",
+                "color": "_"
             }
         },
         "link": {
@@ -184,6 +190,8 @@
                 "color": "brighten(_, 10)"
             },
             "loading": {
+                "backgroundColor": "_",
+                "borderColor": "_",
                 "color": "lighten(_, 30)"
             }
         }

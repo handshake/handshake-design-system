@@ -165,3 +165,6 @@ export { default as DesignContext } from "./components/design-context";
 export { default as Icon } from "./components/icon/index.web";
 export { default as Spinner } from "./components/spinner/index.web";
 export { default as Text } from "./components/typography/index.web";
+export {
+    H1, H2, H3, H4, H5, P, Span,
+} from "./components/typography/index.web";

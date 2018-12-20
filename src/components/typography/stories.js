@@ -20,26 +20,28 @@ import { withInfo } from "@storybook/addon-info";
 import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
 
-// eslint-disable-next-line camelcase
 import { Text as NativeText } from "../../index.native";
 import themes from "./themes.json";
-// eslint-disable-next-line camelcase
 import { Text as WebText } from "../../index.web";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
 const commonKnobs = extraKnobs => ({
-    type: select("Type", ["body", "h1", "h2", "h3", "h4", "h5"], "body"),
+    type: select("Type", ["h1", "h2", "h3", "h4", "h5", "body"], "h1"),
+    textContent: text("Text Content", "Sample text"),
     ...extraKnobs,
 });
 
-const render = (Text, props) => (
-    <Text {...props}>
-        <FormattedMessage id="This is it!" />
-    </Text>
-);
+const render = (Text, props) => {
+    const { textContent } = props;
+    return (
+        <Text {...props}>
+            <FormattedMessage id={textContent} />
+        </Text>
+    );
+};
 
-storiesOf("Web/Text", module)
+storiesOf("Web/Typography", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
@@ -48,17 +50,12 @@ storiesOf("Web/Text", module)
         "all",
         () => (
             <div>
-                <WebText type="h1"><FormattedMessage id="H1 ABCDEFGH 0123456789" /></WebText>
-                <br />
-                <WebText type="h2"><FormattedMessage id="H2 ABCDEFGH 0123456789" /></WebText>
-                <br />
-                <WebText type="h3"><FormattedMessage id="H3 ABCDEFGH 0123456789" /></WebText>
-                <br />
-                <WebText type="h4"><FormattedMessage id="H4 ABCDEFGH 0123456789" /></WebText>
-                <br />
-                <WebText type="h5"><FormattedMessage id="H5 ABCDEFGH 0123456789" /></WebText>
-                <br />
-                <WebText type="body"><FormattedMessage id="Body ABCDEFGH 0123456789" /></WebText>
+                <WebText.H1><FormattedMessage id="H1 ABCDEFGH 0123456789" /></WebText.H1>
+                <WebText.H2><FormattedMessage id="H2 ABCDEFGH 0123456789" /></WebText.H2>
+                <WebText.H3><FormattedMessage id="H3 ABCDEFGH 0123456789" /></WebText.H3>
+                <WebText.H4><FormattedMessage id="H4 ABCDEFGH 0123456789" /></WebText.H4>
+                <WebText.H5><FormattedMessage id="H5 ABCDEFGH 0123456789" /></WebText.H5>
+                <WebText.P><FormattedMessage id="Body ABCDEFGH 0123456789" /></WebText.P>
             </div>
         ),
         {
@@ -93,11 +90,36 @@ storiesOf("Web/Text", module)
         },
     );
 
-storiesOf("Mobile/Text", module)
+storiesOf("Mobile/Typography", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
     .addDecorator(withThemeVariables(themes))
+    .add(
+        "all",
+        () => (
+            <WingBlank>
+                <NativeText.H1><FormattedMessage id="H1 ABCDEFGH 0123456789" /></NativeText.H1>
+                <NativeText.H2><FormattedMessage id="H2 ABCDEFGH 0123456789" /></NativeText.H2>
+                <NativeText.H3><FormattedMessage id="H3 ABCDEFGH 0123456789" /></NativeText.H3>
+                <NativeText.H4><FormattedMessage id="H4 ABCDEFGH 0123456789" /></NativeText.H4>
+                <NativeText.H5><FormattedMessage id="H5 ABCDEFGH 0123456789" /></NativeText.H5>
+                <NativeText.P><FormattedMessage id="Body ABCDEFGH 0123456789" /></NativeText.P>
+            </WingBlank>
+        ),
+        {
+            info: {
+                header: false,
+                propTables: [WebText],
+                text: `
+                    ### Usage
+                    ~~~js
+                    import { Text } from "@handshake/design-system";
+                    ~~~
+                `,
+            },
+        },
+    )
     .add(
         "options",
         () => (

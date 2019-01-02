@@ -1,8 +1,8 @@
 import _ from "lodash";
-import AntDLocaleProvider from "antd-mobile/es/locale-provider";
+import AntDProvider from "@ant-design/react-native/lib/provider";
 import { IntlProvider } from "react-intl";
 import React, { Component } from "react";
-import Text from "antd-mobile-rn/lib/text";
+import Text from "@ant-design/react-native/lib/text";
 
 import {
     ALL_SUPPORTED_LOCALES,
@@ -52,7 +52,7 @@ export default class LocaleProvider extends Component {
                     locale: localeName,
                 }}
             >
-                <AntDLocaleProvider
+                <AntDProvider
                     locale={antdLocaleData}
                 >
                     <IntlProvider
@@ -62,7 +62,7 @@ export default class LocaleProvider extends Component {
                     >
                         {children}
                     </IntlProvider>
-                </AntDLocaleProvider>
+                </AntDProvider>
             </LocaleContext.Provider>
         );
     }

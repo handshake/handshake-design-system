@@ -3,7 +3,7 @@ import JSXParser from "react-jsx-parser";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import styled from "styled-components";
-import { WhiteSpace, WingBlank } from "antd-mobile-rn";
+import { WhiteSpace, WingBlank } from "@ant-design/react-native/lib";
 
 import "brace/mode/jsx";
 import "brace/theme/github";

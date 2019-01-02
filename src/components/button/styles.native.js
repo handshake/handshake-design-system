@@ -1,4 +1,4 @@
-import AntdButton from "antd-mobile-rn/es/button";
+import AntdButton from "@ant-design/react-native/lib/button";
 import { lookup } from "../design-context/theme-provider/with_theme";
 import styled from "../../util/styled.native";
 

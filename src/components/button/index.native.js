@@ -4,7 +4,7 @@ import Icon from "../icon/index.native";
 import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
 import React, { Component } from "react";
 import StyledButton from "./styles.native";
-import Text from "antd-mobile-rn/es/text";
+import Text from "@ant-design/react-native/lib/text";
 import themes from "./themes.json";
 import WithTheme from "../design-context/theme-provider/with_theme";
 

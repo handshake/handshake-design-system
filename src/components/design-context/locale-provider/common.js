@@ -10,7 +10,7 @@ import React from "react";
 import * as ALL_ANTD_MOBILE_LOCALES from "../../../../node_modules/antd-mobile/es/locale-provider";
 import * as ALL_ANTD_WEB_LOCALES from "../../../../node_modules/antd/es/locale-provider";
 // NOTE: there is also data for React-Native at
-// "../../../../node_modules/antd-mobile-rn/es/locale-provider"
+// "../../../../node_modules/@ant-design/react-native/lib/locale-provider"
 // but it is just a subset of the mobile locale data, and it has some syntax errors (wat?) in one
 // of the locales (sv_SE) so, I'm going to ignore it.
 

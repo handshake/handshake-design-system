@@ -13,6 +13,21 @@ TODO: Overview - TEMPORARY: The Handshake Design System is the Design System use
 npm install @handshake/design-system
 ```
 
+If you use webpack, please add the following dependencies to your babel-loader include (or exclude exceptions) list:
+- react-native-camera-roll-picker
+- react-native-collapsible
+- react-native-animatable
+- @ant-design\/react-native
+- @bang88\/react-native-ultimate-listview
+
+e.g. (our own internal version):
+
+```js
+{
+    exclude: /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-animatable|@ant-design\/react-native|@bang88\/react-native-ultimate-listview)\/).*/,
+}
+```
+
 ## Usage
 
 The Handshake Design System includes a mandatory `DesignContext` component which must be included somewhere near the top of your React hierarchy. This component handles localization and theming.

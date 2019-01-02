@@ -2,7 +2,7 @@ import _ from "lodash";
 import { Text as AnimatableText } from "react-native-animatable";
 import propTypes, { defaultProps, mapProps } from "./prop_types";
 import React, { Component } from "react";
-import Text from "antd-mobile-rn/es/text";
+import Text from "@ant-design/react-native/lib/text";
 
 import "./sets/hs";
 

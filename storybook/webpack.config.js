@@ -1,7 +1,7 @@
 require("@babel/register")();
 const path = require("path");
 const webpack = require("webpack");
-const { StatsWriterPlugin } = require("webpack-stats-plugin")
+// const { StatsWriterPlugin } = require("webpack-stats-plugin");
 
 const { kebabCase: LESS_VARIABLES } = require("../src/theme").theme;
 
@@ -17,7 +17,7 @@ module.exports = (storybookBaseConfig, configType) => {
     };
     const babelLoaderRule = storybookBaseConfig.module.rules[0];
     babelLoaderRule.exclude =
-        /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-animatable)\/).*/;
+        /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-animatable|@ant-design\/react-native\/es|@ant-design\/react-native\/node_modules\/(react-native-collapsible)|@bang88\/react-native-ultimate-listview)\/).*/;
     storybookBaseConfig.module.rules.push(
         {
             enforce: "pre",
@@ -109,7 +109,7 @@ module.exports = (storybookBaseConfig, configType) => {
     storybookBaseConfig.plugins.push(
         new webpack.IgnorePlugin(/\.d\.ts$/),
         new webpack.NormalModuleReplacementPlugin(
-            /antd-mobile-rn\/(es|lib)\/style\/themes\/default\.native\.js/,
+            /@ant-design\/react-native\/(es|lib)\/style\/themes\/default\.js/,
             path.resolve(__dirname, "../src/theme/antd_mobile_rn_variables.js"),
         ),
         // uncomment this in order to generate stats (localhost:9001/stats.json)

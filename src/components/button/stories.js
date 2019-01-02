@@ -15,14 +15,14 @@ import {
 } from "@storybook/addon-knobs";
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import Text from "@ant-design/react-native/lib/text";
 import themes from "./themes.json";
-import { WhiteSpace, WingBlank } from "antd-mobile-rn";
+import { WhiteSpace, WingBlank } from "@ant-design/react-native/lib";
 import { withInfo } from "@storybook/addon-info";
 import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
 
 import { Button as NativeButton } from "../../index.native";
-import Text from "antd-mobile-rn/es/text";
 import { Button as WebButton } from "../../index.web";
 
 import registry from "../icon/registry";

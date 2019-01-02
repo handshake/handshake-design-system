@@ -14,7 +14,7 @@ import {
 } from "@storybook/addon-knobs";
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { WhiteSpace, WingBlank } from "antd-mobile-rn";
+import { WhiteSpace, WingBlank } from "@ant-design/react-native/lib";
 import { withInfo } from "@storybook/addon-info";
 import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";

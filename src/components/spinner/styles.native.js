@@ -1,7 +1,7 @@
-import ActivityIndicator from "antd-mobile-rn/es/activity-indicator";
+import ActivityIndicator from "@ant-design/react-native/lib/activity-indicator";
 // import { lookup } from "../design-context/theme-provider/with_theme";
 import styled, { css } from "../../util/styled.native";
-import View from "antd-mobile-rn/es/view"; // NOTE: is a straight re-export from react-native
+import View from "@ant-design/react-native/lib/view"; // NOTE: is a straight re-export from react-native
 
 export default styled(ActivityIndicator)`
     ${({ toast }) => (toast ? css`

@@ -59,11 +59,11 @@ export default function styledWrapper (Component) {
 }
 
 styledWrapper.Text = (...args) => (
-    styledWrapper(require("antd-mobile-rn/lib/text"))(...args)
+    styledWrapper(require("@ant-design/react-native/lib/text"))(...args)
 );
 
 styledWrapper.View = (...args) => (
-    styledWrapper(require("antd-mobile-rn/lib/view"))(...args)
+    styledWrapper(require("@ant-design/react-native/lib/view"))(...args)
 );
 
 // NOTE: we're not reexporting everything from styled-components/native

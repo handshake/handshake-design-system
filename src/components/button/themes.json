@@ -3,7 +3,7 @@
         "large": {
             "default": {
                 "borderRadius": "4px",
-                "fontSize": "hs-typography-size-h4",
+                "fontSize": "hs.typography.size.h4",
                 "height": "36px",
                 "lineHeight": 1.2,
                 "margin": {
@@ -12,23 +12,23 @@
                     "loadingIcon": "-14px",
                     "vertical": "9px"
                 },
-                "weight": "hs-typography-weight-h4"
+                "weight": "hs.typography.weight.h4"
             },
             "link": {
-                "fontSize": "hs-typography-size-body1",
+                "fontSize": "hs.typography.size.body1",
                 "height": "auto",
                 "margin": {
                     "horizontal": "0px",
                     "loading": "0px",
                     "vertical": "0px"
                 },
-                "weight": "hs-typography-weight-body1"
+                "weight": "hs.typography.weight.body1"
             }
         },
         "small": {
             "default": {
                 "borderRadius": "4px",
-                "fontSize": "hs-typography-size-h5",
+                "fontSize": "hs.typography.size.h5",
                 "height": "25px",
                 "lineHeight": 1.3,
                 "margin": {
@@ -37,17 +37,17 @@
                     "loadingIcon": "-17px",
                     "vertical": "4px"
                 },
-                "weight": "hs-typography-weight-h5"
+                "weight": "hs.typography.weight.h5"
             },
             "link": {
-                "fontSize": "hs-typography-size-body4",
+                "fontSize": "hs.typography.size.body4",
                 "height": "auto",
                 "margin": {
                     "horizontal": "0px",
                     "loading": "0px",
                     "vertical": "0px"
                 },
-                "weight": "hs-typography-weight-body4"
+                "weight": "hs.typography.weight.body4"
             }
         },
         "default": {
@@ -55,17 +55,17 @@
                 "borderStyle": "solid",
                 "borderWidth": "1px",
                 "boxShadow": "0 2px 0 rgba(0, 0, 0, 0.015)",
-                "color": "hs-color-gray0",
-                "fontFamily": "hs-typography-font-title",
+                "color": "hs.color.gray0",
+                "fontFamily": "hs.typography.font.title",
                 "textTransform": "uppercase"
             },
             "active": {
                 "color": "_"
             },
             "disabled": {
-                "backgroundColor": "hs-color-gray1",
-                "borderColor": "hs-color-gray3",
-                "color": "hs-color-gray4"
+                "backgroundColor": "hs.color.gray1",
+                "borderColor": "hs.color.gray3",
+                "color": "hs.color.gray4"
             },
             "hover": {
                 "color": "_"
@@ -73,7 +73,7 @@
         },
         "primary": {
             "default": {
-                "backgroundColor": "hs-color-primary",
+                "backgroundColor": "hs.color.primary",
                 "borderColor": "_.backgroundColor",
                 "color": "_"
             },
@@ -98,13 +98,13 @@
         },
         "secondary": {
             "default": {
-                "backgroundColor": "hs-color-gray0",
-                "borderColor": "hs-color-gray3",
-                "color": "hs-color-gray7"
+                "backgroundColor": "hs.color.gray0",
+                "borderColor": "hs.color.gray3",
+                "color": "hs.color.gray7"
             },
             "active": {
                 "borderColor": "_.color",
-                "color": "darken(hs-color-primary, 5)"
+                "color": "darken(hs.color.primary, 5)"
             },
             "disabled": {
                 "backgroundColor": "_.default.disabled.backgroundColor",
@@ -113,16 +113,16 @@
             },
             "hover": {
                 "borderColor": "_.color",
-                "color": "hs-color-primary"
+                "color": "hs.color.primary"
             },
             "loading": {
                 "borderColor": "_",
-                "color": "hs-color-gray4"
+                "color": "hs.color.gray4"
             }
         },
         "confirm": {
             "default": {
-                "backgroundColor": "hs-color-confirm",
+                "backgroundColor": "hs.color.confirm",
                 "borderColor": "_.backgroundColor",
                 "color": "_"
             },
@@ -147,7 +147,7 @@
         },
         "danger": {
             "default": {
-                "backgroundColor": "hs-color-danger",
+                "backgroundColor": "hs.color.danger",
                 "borderColor": "_.backgroundColor",
                 "color": "_"
             },
@@ -176,8 +176,8 @@
                 "borderColor": "transparent",
                 "borderWidth": 0,
                 "boxShadow": "none",
-                "color": "hs-color-primary",
-                "fontFamily": "hs-typography-font-body",
+                "color": "hs.color.primary",
+                "fontFamily": "hs.typography.font.body",
                 "textTransform": "none"
             },
             "active": {

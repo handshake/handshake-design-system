@@ -78,13 +78,14 @@ export function withTheme (callback, { themes, themeName, variables }) {
 
     function innerLookup (path, origPath, extraArgs) {
         let value = _.get(theme, path) || (/\w+(?:\.\w+)+/.test(path) ? "_" : path);
+        console.log(variables, path, value);
         if (typeof value === "function") {
             value = value(...extraArgs);
         }
         if (/^_/.test(value)) {
             value = expand(value, origPath, extraArgs);
-        } else if (/^hs/.test(value) && variables[_.camelCase(value)]) {
-            value = variables[_.camelCase(value)];
+        } else if (/^hs/.test(value) && variables[value]) {
+            value = variables[value];
         } else if (FN_REGEX.test(value)) {
             value = lookupFn(value, origPath, extraArgs);
         }

@@ -1,12 +1,12 @@
 import _ from "lodash";
 import React from "react";
 
-import LESS_VARIABLES from "../../../theme";
+import { theme as themeVariables } from "../../../theme";
 
-export function ctx (theme = "light", variables = {}) {
+export function ctx (themeName = "light", variables = {}) {
     return {
-        theme,
-        variables: _.extend({}, LESS_VARIABLES, variables),
+        theme: themeName,
+        variables: _.extend({}, themeVariables.pathNotation, variables),
     };
 }
 

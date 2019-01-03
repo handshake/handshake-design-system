@@ -39,7 +39,7 @@ export default styled(AntdButton)`
     text-align: center;
     text-transform: ${lookup`$(type).default.textTransform`};
     touch-action: manipulation;
-    transition: all ${lookup`hs-transition-duration`} ${lookup`hs-transition-easing`};
+    transition: all ${lookup`hs.transition.duration`} ${lookup`hs.transition.easing`};
     user-select: none;
     white-space: nowrap;
     width: ${({ block }) => (block ? "100%" : "auto")};
@@ -147,7 +147,7 @@ export default styled(AntdButton)`
         text-align: center;
         text-transform: none;
         text-rendering: optimizeLegibility;
-        transition: margin-left ${lookup`hs-transition-duration`} ${lookup`hs-transition-easing`};
+        transition: margin-left ${lookup`hs.transition.duration`} ${lookup`hs.transition.easing`};
 
         > * {
             line-height: 1;

@@ -33,11 +33,13 @@ const base = {
     camelCase: _.mapKeys(baseVariables, (__, key) => _.camelCase(key)),
     kebabCase: baseVariables,
     snakeCase: _.mapKeys(baseVariables, (__, key) => _.snakeCase(key)),
+    pathNotation: _.mapKeys(baseVariables, (__, key) => key.split("-").join(".")),
 };
 const theme = {
     camelCase: _.mapKeys(themeVariables, (__, key) => _.camelCase(key)),
     kebabCase: themeVariables,
     snakeCase: _.mapKeys(themeVariables, (__, key) => _.snakeCase(key)),
+    pathNotation: _.mapKeys(themeVariables, (__, key) => key.split("-").join(".")),
 };
 
 export default theme.camelCase;

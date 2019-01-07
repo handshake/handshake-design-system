@@ -120,6 +120,7 @@ export default class ColorFunctions extends Component {
 
     state = {
         autocomplete: [],
+        expr: "",
         history: [],
     }
 

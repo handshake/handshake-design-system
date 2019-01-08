@@ -1,6 +1,5 @@
 import _ from "lodash";
 import { fnHelp, withTheme } from "../src/components/design-context/theme-provider/with_theme";
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
@@ -16,9 +15,13 @@ const ColorFnUI = styled.div`
     justify-content: center;
 
     & > div {
-        height: 450px;
-        margin: 100px 0 40px;
+        height: 590px;
+        margin: 100px 0;
         width: 450px;
+    }
+
+    h1 {
+        font-family: ${p => p.theme["hs.typography.font.title"]};
     }
 
     .row {
@@ -115,12 +118,17 @@ const ColorFnUI = styled.div`
     }
 `;
 
+const DEFAULT_HELP_TEXT = `
+Start with a color function such as "darken(#fff, 10)"
+`;
+
 export default class ColorFunctions extends Component {
     static contextType = ThemeContext;
 
     state = {
         autocomplete: [],
         expr: "",
+        helpText: DEFAULT_HELP_TEXT,
         history: [],
     }
 
@@ -170,6 +178,8 @@ export default class ColorFunctions extends Component {
             if (TinyColor(val)._ok) {
                 result = val;
             }
+        } else {
+            helpText = DEFAULT_HELP_TEXT;
         }
         this.setState({
             autocomplete,
@@ -207,7 +217,7 @@ export default class ColorFunctions extends Component {
             autocomplete: [],
             errorText,
             expr: "",
-            helpText: "",
+            helpText: DEFAULT_HELP_TEXT,
             value: "",
         });
     }
@@ -234,9 +244,11 @@ export default class ColorFunctions extends Component {
             );
         }
 
+        /* eslint-disable react-intl/string-is-marked-for-translation */
         return (
             <ColorFnUI>
                 <div>
+                    <h1>Color Functions</h1>
                     <div className="row">
                         <input
                             // eslint-disable-next-line jsx-a11y/no-autofocus

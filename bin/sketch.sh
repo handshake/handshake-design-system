@@ -31,8 +31,10 @@ ls "$plugins/asketch2sketch.sketchplugin" 2>/dev/null > /dev/null || \
 ls "$plugins/page_utils.sketchplugin" 2>/dev/null > /dev/null || \
     open ./storybook/page_utils.sketchplugin
 
-# Run the Story2Sketch export:
-story2sketch
+if [ "$EXPORT_SKETCH" = "1" ]; then
+    # Run the Story2Sketch export:
+    story2sketch
+fi
 
 # Split the export into multiple pages:
 ./bin/sketch_postprocess.js

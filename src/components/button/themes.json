@@ -103,7 +103,8 @@
                 "color": "hs.color.gray7"
             },
             "active": {
-                "borderColor": "_.color",
+                "backgroundColor": "hs.color.gray3",
+                "borderColor": "_.backgroundColor",
                 "color": "darken(hs.color.primary, 5)"
             },
             "disabled": {
@@ -177,8 +178,8 @@
                 "borderWidth": 0,
                 "boxShadow": "none",
                 "color": "hs.color.primary",
-                "fontFamily": "hs.typography.font.body",
-                "textTransform": "none"
+                "fontFamily": "hs.typography.font.title",
+                "textTransform": "uppercase"
             },
             "active": {
                 "color": "darken(_, 5)"

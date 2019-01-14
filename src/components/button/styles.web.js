@@ -26,7 +26,7 @@ export default styled(AntdButton)`
     font-size: ${lookup`$(size).$(type).fontSize`};
     font-weight: ${lookup`$(size).$(type).weight`};
     height: ${lookup`$(size).$(type).height`};
-    line-height: ${lookup`$(size).$(type).lineHeight`};
+    letter-spacing: 0.046em;
     padding:
         ${lookup`$(size).$(type).margin.vertical`}
         ${lookup`$(size).$(type).margin.horizontal`}

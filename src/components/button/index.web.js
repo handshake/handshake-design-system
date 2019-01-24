@@ -35,6 +35,7 @@ class Button extends Component {
                         {(loading && [
                             <Icon
                                 key="icon"
+                                color="currentColor"
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 spin
                                 icon="loading"
@@ -47,6 +48,7 @@ class Button extends Component {
                         || (icon && [
                             <Icon
                                 key="icon"
+                                color="currentColor"
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 icon={icon}
                             />,

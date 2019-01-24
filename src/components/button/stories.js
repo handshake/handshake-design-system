@@ -29,6 +29,14 @@ import registry from "../icon/registry";
 
 import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
 
+import "../icon/sets/ant";
+import "../icon/sets/fa";
+import "../icon/sets/fi";
+import "../icon/sets/go";
+import "../icon/sets/io";
+import "../icon/sets/md";
+import "../icon/sets/ti";
+
 const ALL_ICONS = registry.keys();
 
 const commonKnobs = extraKnobs => ({

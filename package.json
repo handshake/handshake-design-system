@@ -24,7 +24,6 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@babel/runtime": "^7.0.0",
     "@quickbaseoss/babel-plugin-styled-components-css-namespace": "^0.1.1",
     "@sambego/storybook-styles": "^1.0.0",
     "@storybook/addon-actions": "4.0.0-alpha.23",
@@ -66,6 +65,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/runtime": "^7.0.0",
     "@kmdavis/carmen": "^0.1.0",
     "@target-corp/react-native-svg-parser": "^1.0.6",
     "antd": "^3.10.0",

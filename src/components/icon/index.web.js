@@ -22,7 +22,7 @@ const IconWrapper = styled.i`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-transform: none;
-    vertical-align: -0.125em;
+    vertical-align: 50%;
 
     ${({ flip, rotate }) => (flip || rotate) && css`
         transform: ${() => (

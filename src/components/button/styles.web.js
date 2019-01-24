@@ -136,42 +136,6 @@ export default styled(AntdButton)`
         margin-right: -0.34em;
     }
 
-    .anticon {
-        display: inline-block;
-        font-style: normal;
-        line-height: 1;
-        margin-left: ${lookup(({ size, hsLoading }) => (hsLoading
-            ? `${size}.$(type).margin.loadingIcon`
-            : 0))};
-        vertical-align: -0.125em;
-        text-align: center;
-        text-transform: none;
-        text-rendering: optimizeLegibility;
-        transition: margin-left ${lookup`hs.transition.duration`} ${lookup`hs.transition.easing`};
-
-        > * {
-            line-height: 1;
-        }
-
-        svg {
-            display: inline-block;
-        }
-
-        svg:not(:root) {
-            overflow: hidden;
-        }
-
-        .anticon-spin {
-            animation: ${loadingCircle} 1s infinite linear;
-        }
-    }
-
-    /* To ensure that a space will be placed between character and Icon. */
-    > .anticon + span,
-    > span + .anticon {
-        margin-left: 8px;
-    }
-
     /* a inside Button which only work in Chrome
     * http://stackoverflow.com/a/17253457
     */

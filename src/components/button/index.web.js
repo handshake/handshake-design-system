@@ -35,10 +35,8 @@ class Button extends Component {
                         {(loading && [
                             <Icon
                                 key="icon"
-                                color={lookup(`${type}.loading.color`)}
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 spin
-                                style={{ verticalAlign: "middle" }}
                                 icon="loading"
                             />,
                             <span key="gap">&nbsp;&nbsp;</span>,
@@ -49,11 +47,7 @@ class Button extends Component {
                         || (icon && [
                             <Icon
                                 key="icon"
-                                color={lookup(
-                                    `${type}.${disabled ? "disabled" : "default"}.color`,
-                                )}
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
-                                style={{ verticalAlign: "middle" }}
                                 icon={icon}
                             />,
                             <span key="gap">&nbsp;&nbsp;</span>,

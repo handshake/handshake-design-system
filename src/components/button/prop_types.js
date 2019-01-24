@@ -31,7 +31,7 @@ export function mapPropsForWeb (props) {
         className: props.className,
         disabled: props.disabled || props.loading,
         ghost: false,
-        hsLoading: props.loading,
+        hsloading: props.loading,
         // icon: props.icon, // handled separately
         // loading: props.loading, // handled separately
         // loadingText: props.loadingText, // handled separately
@@ -48,7 +48,7 @@ export function mapPropsForMobile (props) {
         // block: props.block, // handled separately
         // children: props.children, // handled separately
         disabled: props.disabled || props.loading,
-        hsLoading: props.loading,
+        hsloading: props.loading,
         // icon: props.icon, // handled separately
         // loading: props.loading, // handled separately
         // loadingText: props.loadingText, // handled separately

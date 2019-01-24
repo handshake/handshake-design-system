@@ -9,14 +9,14 @@ const loadingCircle = keyframes`
 `;
 
 export default styled(AntdButton)`
-    background-color: ${lookup(({ hsLoading, type }) => (
-        `${type}.${hsLoading ? "loading" : "default"}.backgroundColor`))};
+    background-color: ${lookup(({ hsloading, type }) => (
+        `${type}.${hsloading ? "loading" : "default"}.backgroundColor`))};
     background-image: none;
     border:
         ${lookup`$(type).default.borderWidth`}
         ${lookup`$(type).default.borderStyle`}
-        ${lookup(({ hsLoading, type }) => (
-            `${type}.${hsLoading ? "loading" : "default"}.borderColor`))};
+        ${lookup(({ hsloading, type }) => (
+            `${type}.${hsloading ? "loading" : "default"}.borderColor`))};
     border-radius: ${lookup`$(size).$(type).borderRadius`};
     box-shadow: ${lookup`$(type).default.boxShadow`};
     color: ${lookup`$(type).default.color`};

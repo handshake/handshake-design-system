@@ -1,9 +1,10 @@
 import ActivityIndicator from "@ant-design/react-native/lib/activity-indicator";
 // import { lookup } from "../design-context/theme-provider/with_theme";
+import stripProps from "../../util/strip_props";
 import styled, { css } from "../../util/styled.native";
 import View from "@ant-design/react-native/lib/view"; // NOTE: is a straight re-export from react-native
 
-export default styled(ActivityIndicator)`
+export default styled(stripProps(ActivityIndicator))`
     ${({ toast }) => (toast ? css`
         background-color: transparent;
         bottom: 0;

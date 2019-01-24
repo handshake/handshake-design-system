@@ -26,12 +26,12 @@ export default class Spinner extends Component {
 
         return (
             <WithTheme themes={themes}>
-                {({ lkp }) => ((block && !toast)
+                {({ lookup }) => ((block && !toast)
                     ? (
                         <SpinnerFrame>
                             <SpinnerBox>
                                 <StyledSpinner
-                                    lkp={lkp}
+                                    lookup={lookup}
                                     size={size || "large"}
                                     style={style}
                                     text={text}
@@ -41,7 +41,7 @@ export default class Spinner extends Component {
                     )
                     : (
                         <StyledSpinner
-                            lkp={lkp}
+                            lookup={lookup}
                             size={size || "small"}
                             style={style}
                             text={text}

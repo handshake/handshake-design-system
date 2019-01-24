@@ -13,9 +13,9 @@ class Text extends Component {
         const { children } = this.props;
         return (
             <WithTheme themes={themes}>
-                {({ lkp }) => (
+                {({ lookup }) => (
                     <StyledText
-                        lkp={lkp}
+                        lookup={lookup}
                         {...this.props}
                     >
                         { children }

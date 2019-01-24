@@ -288,14 +288,6 @@ export function withTheme (callback, { themes, themeName, variables }) {
     }
 
     return callback({
-        // wrapped this way to avoid a React DOM warning:
-        //     Warning: Invalid value for prop `lookup` on <button> tag.
-        //     Either remove it from the element, or pass a string or number
-        //     value to keep it in the DOM.
-        // in the case that this is passed to a low level DOM model,
-        // e.g. `div` or `button`; if anyone can think of a better name,
-        // please let Kevan know and we'll swap it out.
-        lkp: { fn: outerLookup },
         lookup: outerLookup,
         theme,
         variables,
@@ -324,7 +316,7 @@ export function getThemeVariables (themes, themeName = "light") {
 }
 
 export function lookup (cb) {
-    return ({ lkp: { fn }, ...props }) => fn(
+    return ({ lookup: fn, ...props }) => fn(
         typeof cb === "function"
             ? cb(props)
             : cb[0].replace(/\$\((\w+)\)/g, (__, k) => props[k]),

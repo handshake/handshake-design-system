@@ -1,5 +1,6 @@
 import AntdButton from "antd/es/button";
 import { lookup } from "../design-context/theme-provider/with_theme";
+import stripProps from "../../util/strip_props";
 import styled, { css, keyframes } from "../../util/styled.web";
 
 const loadingCircle = keyframes`
@@ -8,15 +9,15 @@ const loadingCircle = keyframes`
     }
 `;
 
-export default styled(AntdButton)`
-    background-color: ${lookup(({ hsloading, type }) => (
-        `${type}.${hsloading ? "loading" : "default"}.backgroundColor`))};
+export default styled(stripProps(AntdButton, "hsLoading"))`
+    background-color: ${lookup(({ hsLoading, type }) => (
+        `${type}.${hsLoading ? "loading" : "default"}.backgroundColor`))};
     background-image: none;
     border:
         ${lookup`$(type).default.borderWidth`}
         ${lookup`$(type).default.borderStyle`}
-        ${lookup(({ hsloading, type }) => (
-            `${type}.${hsloading ? "loading" : "default"}.borderColor`))};
+        ${lookup(({ hsLoading, type }) => (
+            `${type}.${hsLoading ? "loading" : "default"}.borderColor`))};
     border-radius: ${lookup`$(size).$(type).borderRadius`};
     box-shadow: ${lookup`$(type).default.boxShadow`};
     color: ${lookup`$(type).default.color`};

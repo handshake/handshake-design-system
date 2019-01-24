@@ -32,9 +32,9 @@ class Button extends Component {
 
         const content = (
             <WithTheme themes={themes}>
-                {({ lkp, lookup }) => (
+                {({ lookup }) => (
                     <StyledButton
-                        lkp={lkp}
+                        lookup={lookup}
                         {...mapPropsForMobile(this.props)}
                     >
                         {(loading && [

@@ -25,17 +25,15 @@ export default class Spinner extends Component {
             return null;
         }
 
-        console.log(themes);
-
         return (
             <WithTheme themes={themes}>
-                {({ lkp }) => (
+                {({ lookup }) => (
                     (toast && (
                         <Toaster>
                             <Toast>
                                 <StyledSpinner
                                     className={className}
-                                    lkp={lkp}
+                                    lookup={lookup}
                                     size={size || "large"}
                                     style={style}
                                     tip={text}
@@ -47,7 +45,7 @@ export default class Spinner extends Component {
                         <SpinnerCard>
                             <StyledSpinner
                                 className={className}
-                                lkp={lkp}
+                                lookup={lookup}
                                 size={size || "large"}
                                 style={style}
                                 tip={text}
@@ -57,7 +55,7 @@ export default class Spinner extends Component {
                     || (
                         <StyledSpinner
                             className={className}
-                            lkp={lkp}
+                            lookup={lookup}
                             size={size || "small"}
                             style={style}
                             tip={text}

@@ -15,7 +15,7 @@ import {
 import { FormattedMessage } from "react-intl";
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { WhiteSpace, WingBlank } from "antd-mobile-rn";
+import { WhiteSpace, WingBlank } from "@ant-design/react-native/lib";
 import { withInfo } from "@storybook/addon-info";
 import withStyles from "@sambego/storybook-styles";
 import { withViewport } from "@storybook/addon-viewport";
@@ -33,6 +33,7 @@ const commonKnobs = extraKnobs => ({
 });
 
 const render = (Text, props) => {
+    // eslint-disable-next-line react/prop-types
     const { textContent } = props;
     return (
         <Text {...props}>

@@ -27,9 +27,9 @@ class Button extends Component {
 
         return (
             <WithTheme themes={themes}>
-                {({ lkp, lookup }) => (
+                {({ lookup }) => (
                     <StyledButton
-                        lkp={lkp}
+                        lookup={lookup}
                         {...mapPropsForWeb(this.props)}
                     >
                         {(loading && [

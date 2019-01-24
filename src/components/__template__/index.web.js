@@ -13,10 +13,10 @@ class __TEMPLATE__Wrapper extends Component {
     render () {
         return (
             <WithTheme themes={themes}>
-                {({ lkp }) => (
+                {({ lookup }) => (
                     // eslint-disable-next-line react/jsx-pascal-case
                     <__TEMPLATE__
-                        lkp={lkp}
+                        lookup={lookup}
                         {...mapPropsForWeb(this.props)}
                     />
                 )}

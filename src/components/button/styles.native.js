@@ -1,8 +1,9 @@
 import AntdButton from "@ant-design/react-native/lib/button";
 import { lookup } from "../design-context/theme-provider/with_theme";
+import stripProps from "../../util/strip_props";
 import styled from "../../util/styled.native";
 
-export default styled(AntdButton)`
+export default styled(stripProps(AntdButton, "hsLoading"))`
     align-items: center;
     background-color: ${lookup(({ disabled, hsLoading, type }) => (
         // eslint-disable-next-line max-len

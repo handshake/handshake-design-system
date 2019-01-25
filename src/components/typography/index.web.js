@@ -26,12 +26,12 @@ class Text extends Component {
     }
 }
 
-const H1 = props => <Text as="h1" type="h1" {...props} />;
-const H2 = props => <Text as="h2" type="h2" {...props} />;
-const H3 = props => <Text as="h3" type="h3" {...props} />;
-const H4 = props => <Text as="h4" type="h4" {...props} />;
-const H5 = props => <Text as="h5" type="h5" {...props} />;
-const P = props => <Text as="p" type="body" {...props} />;
+const H1 = props => <Text as="h1" block type="h1" {...props} />;
+const H2 = props => <Text as="h2" block type="h2" {...props} />;
+const H3 = props => <Text as="h3" block type="h3" {...props} />;
+const H4 = props => <Text as="h4" block type="h4" {...props} />;
+const H5 = props => <Text as="h5" block type="h5" {...props} />;
+const P = props => <Text as="p" block type="body" {...props} />;
 const Span = props => <Text type="body" {...props} />;
 
 Text.H1 = H1;

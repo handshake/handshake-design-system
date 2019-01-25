@@ -57,6 +57,10 @@ storiesOf("Web/Typography", module)
                 <WebText.H4><FormattedMessage id="H4 ABCDEFGH 0123456789" /></WebText.H4>
                 <WebText.H5><FormattedMessage id="H5 ABCDEFGH 0123456789" /></WebText.H5>
                 <WebText.P><FormattedMessage id="Body ABCDEFGH 0123456789" /></WebText.P>
+                <WebText.P>
+                    <WebText.Span><FormattedMessage id="Span inline text 1." /></WebText.Span>
+                    <WebText.Span><FormattedMessage id="Span inline text 2." /></WebText.Span>
+                </WebText.P>
             </div>
         ),
         {
@@ -106,6 +110,10 @@ storiesOf("Mobile/Typography", module)
                 <NativeText.H4><FormattedMessage id="H4 ABCDEFGH 0123456789" /></NativeText.H4>
                 <NativeText.H5><FormattedMessage id="H5 ABCDEFGH 0123456789" /></NativeText.H5>
                 <NativeText.P><FormattedMessage id="Body ABCDEFGH 0123456789" /></NativeText.P>
+                <NativeText.P>
+                    <NativeText.Span><FormattedMessage id="Span inline text 1." /></NativeText.Span>
+                    <NativeText.Span><FormattedMessage id="Span inline text 2." /></NativeText.Span>
+                </NativeText.P>
             </WingBlank>
         ),
         {

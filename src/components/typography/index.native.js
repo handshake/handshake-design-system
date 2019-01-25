@@ -2,6 +2,7 @@ import propTypes, { defaultProps } from "./prop_types";
 import React, { Component } from "react";
 import StyledText from "./styles.native";
 import themes from "./themes.json";
+import { View } from "react-native";
 import WithTheme from "../design-context/theme-provider/with_theme";
 
 class Text extends Component {
@@ -10,28 +11,39 @@ class Text extends Component {
     static defaultProps = defaultProps;
 
     render () {
-        const { children } = this.props;
+        const { block, children } = this.props;
         return (
             <WithTheme themes={themes}>
                 {({ lookup }) => (
-                    <StyledText
-                        lookup={lookup}
-                        {...this.props}
-                    >
-                        { children }
-                    </StyledText>
+                    block ? (
+                        <View>
+                            <StyledText
+                                lookup={lookup}
+                                {...this.props}
+                            >
+                                { children }
+                            </StyledText>
+                        </View>
+                    ) : (
+                        <StyledText
+                            lookup={lookup}
+                            {...this.props}
+                        >
+                            { children }
+                        </StyledText>
+                    )
                 )}
             </WithTheme>
         );
     }
 }
 
-const H1 = props => <Text type="h1" {...props} />;
-const H2 = props => <Text type="h2" {...props} />;
-const H3 = props => <Text type="h3" {...props} />;
-const H4 = props => <Text type="h4" {...props} />;
-const H5 = props => <Text type="h5" {...props} />;
-const P = props => <Text type="body" {...props} />;
+const H1 = props => <Text type="h1" block {...props} />;
+const H2 = props => <Text type="h2" block {...props} />;
+const H3 = props => <Text type="h3" block {...props} />;
+const H4 = props => <Text type="h4" block {...props} />;
+const H5 = props => <Text type="h5" block {...props} />;
+const P = props => <Text type="body" block {...props} />;
 const Span = props => <Text type="body" {...props} />;
 
 Text.H1 = H1;

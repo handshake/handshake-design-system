@@ -15,4 +15,7 @@ export default styled(stripProps("span"))`
     font-weight: ${lookup(({ type }) => (
         `${type}.default.weight`
     ))};
+    display: ${lookup(({ block }) => (
+        block ? "block" : "inline"
+    ))};
 `;

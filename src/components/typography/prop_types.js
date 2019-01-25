@@ -9,8 +9,10 @@ export default {
         "h4",
         "h5",
     ]),
+    block: PropTypes.bool,
 };
 
 export const defaultProps = {
     type: "body",
+    block: false,
 };

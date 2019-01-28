@@ -6,5 +6,5 @@
 //       this component works may change slightly.
 //       YOU HAVE BEEN WARNED.
 
-export { default } from "antd-mobile/lib/spin";
-import "antd-mobile/lib/spin/style";
+export { default } from "antd/lib/spin";
+import "antd/lib/spin/style";

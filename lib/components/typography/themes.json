@@ -2,49 +2,50 @@
     "light": {
         "body" : {
             "default": {
-                "color": "hs-color-gray7",
-                "size": "hs-typography-size-body1",
-                "weight": "hs-typography-weight-body3"
+                "color": "hs.color.gray7",
+                "fontFamily": "hs.typography.font.body",
+                "size": "hs.typography.size.body1",
+                "weight": "hs.typography.weight.body3"
             }
         },
         "h1": {
             "default": {
-                "color": "hs-color-gray7",
-                "size": "hs-typography-size-h1",
-                "weight": "hs-typography-weight-h1",
-                "fontFamily": "hs-typography-font-title"
+                "color": "hs.color.gray7",
+                "fontFamily": "hs.typography.font.title",
+                "size": "hs.typography.size.h1",
+                "weight": "hs.typography.weight.h1"
             }
         },
         "h2": {
             "default": {
-                "color": "hs-color-gray7",
-                "size": "hs-typography-size-h2",
-                "weight": "hs-typography-weight-h2",
-                "fontFamily": "hs-typography-font-title"
+                "color": "hs.color.gray7",
+                "fontFamily": "hs.typography.font.title",
+                "size": "hs.typography.size.h2",
+                "weight": "hs.typography.weight.h2"
             }
         },
         "h3": {
             "default": {
-                "color": "hs-color-gray7",
-                "size": "hs-typography-size-h3",
-                "weight": "hs-typography-weight-h3",
-                "fontFamily": "hs-typography-font-title"
+                "color": "hs.color.gray7",
+                "fontFamily": "hs.typography.font.title",
+                "size": "hs.typography.size.h3",
+                "weight": "hs.typography.weight.h3"
             }
         },
         "h4": {
             "default": {
-                "color": "hs-color-gray7",
-                "size": "hs-typography-size-h4",
-                "weight": "hs-typography-weight-h4",
-                "fontFamily": "hs-typography-font-title"
+                "color": "hs.color.gray7",
+                "fontFamily": "hs.typography.font.title",
+                "size": "hs.typography.size.h4",
+                "weight": "hs.typography.weight.h4"
             }
         },
         "h5": {
             "default": {
-                "color": "hs-color-gray7",
-                "size": "hs-typography-size-h5",
-                "weight": "hs-typography-weight-h5",
-                "fontFamily": "hs-typography-font-title"
+                "color": "hs.color.gray7",
+                "fontFamily": "hs.typography.font.title",
+                "size": "hs.typography.size.h5",
+                "weight": "hs.typography.weight.h5"
             }
         }
     }

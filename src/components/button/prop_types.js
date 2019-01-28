@@ -6,6 +6,7 @@ export default {
     className: PropTypes.string,
     disabled: PropTypes.bool,
     icon: PropTypes.string,
+    iconType: PropTypes.oneOf(["filled", "outlined", "twoTone"]),
     loading: PropTypes.bool,
     loadingText: PropTypes.string,
     onClick: PropTypes.func,

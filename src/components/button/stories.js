@@ -43,6 +43,7 @@ const commonKnobs = extraKnobs => ({
     children: text("Text", "Button Intro"),
     disabled: boolean("Disabled", false),
     icon: select("Icon", [undefined, ...ALL_ICONS], undefined),
+    iconType: select("Type", ["filled", "outlined", "twoTone"], "outlined"),
     loading: boolean("Loading", false),
     loadingText: text("Loading Text"),
     onClick: action("clicked"),

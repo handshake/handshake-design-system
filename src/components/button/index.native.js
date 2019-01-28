@@ -24,6 +24,7 @@ class Button extends Component {
             children,
             disabled,
             icon,
+            iconType,
             loading,
             loadingText,
             size,
@@ -60,6 +61,7 @@ class Button extends Component {
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 style={{ verticalAlign: "middle" }}
                                 icon={icon}
+                                type={iconType}
                             />,
                             <Text key="gap">&nbsp;&nbsp;</Text>,
                             <span key="text">{children}</span>,

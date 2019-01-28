@@ -17,8 +17,8 @@ class Button extends Component {
     render () {
         const {
             children,
-            disabled,
             icon,
+            iconType,
             loading,
             loadingText,
             size,
@@ -51,6 +51,7 @@ class Button extends Component {
                                 color="currentColor"
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 icon={icon}
+                                type={iconType}
                             />,
                             <span key="gap">&nbsp;&nbsp;</span>,
                             <span key="text">{children}</span>,

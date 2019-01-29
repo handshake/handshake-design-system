@@ -22,19 +22,26 @@ class Button extends Component {
     render () {
         const {
             block,
-            children,
             disabled,
-            icon,
+            iconPlacement,
             iconType,
             loading,
             loadingText,
             size,
             type,
         } = this.props;
+        let { children, icon } = this.props;
         const props = {
             ...mapPropsForMobile(this.props),
             ...getStandardProps(this.props, ["children"]),
         };
+
+        if (loading) {
+            icon = "loading";
+            children = loadingText
+                ? <span key="text">{loadingText}</span>
+                : children;
+        }
 
         const content = (
             <WithTheme themes={themes}>
@@ -43,21 +50,7 @@ class Button extends Component {
                         lookup={lookup}
                         {...props}
                     >
-                        {(loading && [
-                            <Icon
-                                key="icon"
-                                color={lookup(`${type}.loading.color`)}
-                                size={parseInt(lookup(`${size}.${type}.fontSize`))}
-                                spin
-                                style={{ verticalAlign: "middle" }}
-                                icon="loading"
-                            />,
-                            <Text key="gap">&nbsp;&nbsp;</Text>,
-                            loadingText
-                                ? <span key="text">{loadingText}</span>
-                                : children,
-                        ])
-                        || (icon && [
+                        {(icon && iconPlacement === "left" && [
                             <Icon
                                 key="icon"
                                 color={lookup(
@@ -70,6 +63,20 @@ class Button extends Component {
                             />,
                             <Text key="gap">&nbsp;&nbsp;</Text>,
                             <span key="text">{children}</span>,
+                        ])
+                        || (icon && iconPlacement === "right" && [
+                            <span key="text">{children}</span>,
+                            <Text key="gap">&nbsp;&nbsp;</Text>,
+                            <Icon
+                                key="icon"
+                                color={lookup(
+                                    `${type}.${disabled ? "disabled" : "default"}.color`,
+                                )}
+                                size={parseInt(lookup(`${size}.${type}.fontSize`))}
+                                style={{ verticalAlign: "middle" }}
+                                icon={icon}
+                                type={iconType}
+                            />,
                         ])
                         || children}
                     </StyledButton>

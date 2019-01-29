@@ -1,5 +1,5 @@
 import _ from "lodash";
-import AntDLocaleProvider from "antd/es/locale-provider";
+import AntDLocaleProvider from "antd/lib/locale-provider";
 import { IntlProvider } from "react-intl";
 import React, { Component } from "react";
 

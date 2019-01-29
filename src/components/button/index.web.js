@@ -17,18 +17,25 @@ class Button extends Component {
 
     render () {
         const {
-            children,
-            icon,
+            iconPlacement,
             iconType,
             loading,
             loadingText,
             size,
             type,
         } = this.props;
+        let { children, icon } = this.props;
         const props = {
             ...mapPropsForWeb(this.props),
             ...getStandardProps(this.props, ["children"]),
         };
+
+        if (loading) {
+            icon = "loading";
+            children = loadingText
+                ? <span key="text">{loadingText}</span>
+                : children;
+        }
 
         return (
             <WithTheme themes={themes}>
@@ -37,19 +44,7 @@ class Button extends Component {
                         lookup={lookup}
                         {...props}
                     >
-                        {(loading && [
-                            <Icon
-                                key="icon"
-                                size={parseInt(lookup(`${size}.${type}.fontSize`))}
-                                spin
-                                icon="loading"
-                            />,
-                            <span key="gap">&nbsp;&nbsp;</span>,
-                            loadingText
-                                ? <span key="text">{loadingText}</span>
-                                : children,
-                        ])
-                        || (icon && [
+                        {(icon && iconPlacement === "left" && [
                             <Icon
                                 key="icon"
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
@@ -58,6 +53,16 @@ class Button extends Component {
                             />,
                             <span key="gap">&nbsp;&nbsp;</span>,
                             <span key="text">{children}</span>,
+                        ])
+                        || (icon && iconPlacement === "right" && [
+                            <span key="text">{children}</span>,
+                            <span key="gap">&nbsp;&nbsp;</span>,
+                            <Icon
+                                key="icon"
+                                size={parseInt(lookup(`${size}.${type}.fontSize`))}
+                                icon={icon}
+                                type={iconType}
+                            />,
                         ])
                         || children}
                     </StyledButton>

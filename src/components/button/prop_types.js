@@ -5,6 +5,7 @@ export default {
     block: PropTypes.bool,
     disabled: PropTypes.bool,
     icon: PropTypes.string,
+    iconPlacement: PropTypes.oneOf(["left", "right"]),
     iconType: PropTypes.oneOf(["filled", "outlined", "twoTone"]),
     loading: PropTypes.bool,
     loadingText: PropTypes.string,
@@ -18,6 +19,7 @@ export default {
 export const defaultProps = {
     // block: WEB ? false : true,
     disabled: false,
+    iconPlacement: "left",
     loading: false,
     size: "large",
     type: "secondary",

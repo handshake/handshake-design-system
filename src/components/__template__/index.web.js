@@ -1,4 +1,5 @@
 import __TEMPLATE__ from "./styles.web";
+import { getStandardProps } from "../../util/props";
 import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
 import themes from "./themes.json";
@@ -11,13 +12,18 @@ class __TEMPLATE__Wrapper extends Component {
     static defaultProps = defaultProps;
 
     render () {
+        const props = {
+            ...mapPropsForWeb(this.props),
+            ...getStandardProps(this.props),
+        };
+
         return (
             <WithTheme themes={themes}>
                 {({ lookup }) => (
                     // eslint-disable-next-line react/jsx-pascal-case
                     <__TEMPLATE__
                         lookup={lookup}
-                        {...mapPropsForWeb(this.props)}
+                        {...props}
                     />
                 )}
             </WithTheme>

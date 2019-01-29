@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { FormattedMessage } from "react-intl";
+import { getStandardProps } from "../../util/props";
 import Icon from "../icon/index.native";
 import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
 import React, { Component } from "react";
@@ -30,13 +31,17 @@ class Button extends Component {
             size,
             type,
         } = this.props;
+        const props = {
+            ...mapPropsForMobile(this.props),
+            ...getStandardProps(this.props, ["children"]),
+        };
 
         const content = (
             <WithTheme themes={themes}>
                 {({ lookup }) => (
                     <StyledButton
                         lookup={lookup}
-                        {...mapPropsForMobile(this.props)}
+                        {...props}
                     >
                         {(loading && [
                             <Icon

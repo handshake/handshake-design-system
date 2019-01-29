@@ -1,6 +1,6 @@
 import AntdButton from "@ant-design/react-native/lib/button";
 import { lookup } from "../design-context/theme-provider/with_theme";
-import stripProps from "../../util/strip_props";
+import { stripProps } from "../../util/props";
 import styled from "../../util/styled.native";
 
 export default styled(stripProps(AntdButton, "hsLoading"))`

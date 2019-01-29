@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { STANDARD_LEAF_PROPS } from "../../util/props";
 
 export default {
     // Render in a block vs inline
@@ -36,12 +37,30 @@ export default {
     // natively supported by `ActivityIndicator`
     // and with by us for `Spin`
     toast: PropTypes.bool,
+
+    ...STANDARD_LEAF_PROPS,
 };
 
 export const defaultProps = {
     block: false,
     enabled: true,
     size: "small",
-    style: {},
     toast: false,
 };
+
+export function mapPropsForWeb (props) {
+    const { block, toast } = props;
+    return {
+        size: props.size || ((block || toast) && "large") || "small",
+        tip: props.text,
+    };
+}
+
+export function mapPropsForMobile (props) {
+    const { block, toast } = props;
+    return {
+        size: props.size || ((block && !toast) && "large") || "small",
+        text: props.text,
+        toast: props.toast,
+    };
+}

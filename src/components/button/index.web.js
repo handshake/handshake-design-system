@@ -1,4 +1,5 @@
 import { FormattedMessage } from "react-intl";
+import { getStandardProps } from "../../util/props";
 import Icon from "../icon";
 import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
@@ -24,18 +25,21 @@ class Button extends Component {
             size,
             type,
         } = this.props;
+        const props = {
+            ...mapPropsForWeb(this.props),
+            ...getStandardProps(this.props, ["children"]),
+        };
 
         return (
             <WithTheme themes={themes}>
                 {({ lookup }) => (
                     <StyledButton
                         lookup={lookup}
-                        {...mapPropsForWeb(this.props)}
+                        {...props}
                     >
                         {(loading && [
                             <Icon
                                 key="icon"
-                                color="currentColor"
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 spin
                                 icon="loading"
@@ -48,7 +52,6 @@ class Button extends Component {
                         || (icon && [
                             <Icon
                                 key="icon"
-                                color="currentColor"
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 icon={icon}
                                 type={iconType}

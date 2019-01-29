@@ -1,4 +1,5 @@
-import propTypes, { defaultProps } from "./prop_types";
+import { getStandardProps } from "../../util/props";
+import propTypes, { defaultProps, mapProps } from "./prop_types";
 import React, { Component } from "react";
 import StyledText from "./styles.web";
 import themes from "./themes.json";
@@ -11,12 +12,17 @@ class Text extends Component {
 
     render () {
         const { children } = this.props;
+        const props = {
+            ...mapProps(this.props),
+            ...getStandardProps(this.props, ["children"]),
+        };
+
         return (
             <WithTheme themes={themes}>
                 {({ lookup }) => (
                     <StyledText
                         lookup={lookup}
-                        {...this.props}
+                        {...props}
                     >
                         { children }
                     </StyledText>

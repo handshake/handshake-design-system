@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import { STANDARD_PROPS } from "../../util/props";
 
 export default {
     type: PropTypes.oneOf([
@@ -10,9 +11,17 @@ export default {
         "h5",
     ]),
     block: PropTypes.bool,
+    ...STANDARD_PROPS,
 };
 
 export const defaultProps = {
     type: "body",
     block: false,
 };
+
+export function mapProps (props) {
+    return {
+        block: props.block,
+        type: props.type,
+    };
+}

@@ -1,6 +1,6 @@
 import AntdButton from "antd/es/button";
 import { lookup } from "../design-context/theme-provider/with_theme";
-import stripProps from "../../util/strip_props";
+import { stripProps } from "../../util/props";
 import styled, { css, keyframes } from "../../util/styled.web";
 
 const loadingCircle = keyframes`

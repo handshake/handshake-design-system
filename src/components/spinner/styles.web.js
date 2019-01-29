@@ -1,6 +1,6 @@
 import AntdSpin from "antd/es/spin";
 import { lookup } from "../design-context/theme-provider/with_theme";
-import stripProps from "../../util/strip_props";
+import { stripProps } from "../../util/props";
 import styled, { keyframes } from "../../util/styled.web";
 
 const antSpinMove = keyframes`

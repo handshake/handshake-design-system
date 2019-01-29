@@ -8,8 +8,8 @@ const spinning = keyframes`
     }
 `;
 
-export default styled(stripProps("i"))`
-        display: inline-block;
+export default styled(stripProps("i", "flip", "rotate", "size", "spin"))`
+    display: inline-block;
     font-style: normal;
     line-height: 0;
     text-align: center;

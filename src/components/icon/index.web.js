@@ -47,7 +47,10 @@ const IconWrapper = styled.i`
 class Icon extends Component {
     static propTypes = propTypes;
 
-    static defaultProps = defaultProps;
+    static defaultProps = {
+        color: "currentColor",
+        ...defaultProps,
+    };
 
     static THEME_VARIABLES = THEME_VARIABLES;
 

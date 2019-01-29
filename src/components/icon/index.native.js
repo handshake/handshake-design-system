@@ -11,7 +11,10 @@ const THEME_VARIABLES = false;
 class Icon extends Component {
     static propTypes = propTypes;
 
-    static defaultProps = defaultProps;
+    static defaultProps = {
+        color: "#000",
+        ...defaultProps,
+    };
 
     static THEME_VARIABLES = THEME_VARIABLES;
 

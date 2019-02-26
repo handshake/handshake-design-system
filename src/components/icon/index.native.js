@@ -1,58 +1,51 @@
 import _ from "lodash";
 import { Text as AnimatableText } from "react-native-animatable";
-import * as ANTD_ICONS from "@ant-design/icons/lib/dist";
+import { getStandardProps } from "../../util/props";
+import propTypes, { defaultProps, mapProps } from "./prop_types";
 import React, { Component } from "react";
-import propTypes, { defaultProps, mapPropsForMobile, ALL_TYPES } from "./prop_types";
-import { renderIconDefinitionToSVGElement } from "@ant-design/icons/lib/helpers";
-import rnSvgParser from "@target-corp/react-native-svg-parser";
-import { ThemeSubscriber } from "../design-context/theme-provider";
-import colorPalette from "../../util/antd_color_palette";
+import Text from "@ant-design/react-native/lib/text";
 
-// TODO: similar to antd (web) provide a mechanism to register additional icons
+import "./sets/hs";
 
-const THEME_VARIABLES = false;
-
-function fillPaths (node, color) {
-    if (node.tag === "path") {
-        node.attrs.fill = color;
-    }
-    if (node.children) {
-        node.children.forEach(n => fillPaths(n, color));
-    }
-}
-
-const THEME_LOOKUP = {
-    filled: "Fill",
-    outlined: "Outline",
-    twoTone: "TwoTone",
-}
-
-class IconWrapper extends Component {
+class Icon extends Component {
     static propTypes = propTypes;
-    static defaultProps = defaultProps;
-    static THEME_VARIABLES = THEME_VARIABLES;
-    static ALL_TYPES = ALL_TYPES;
+
+    static defaultProps = {
+        color: "#000",
+        ...defaultProps,
+    };
 
     render () {
-        let { color, pxSize, spin, style, theme, type } = mapPropsForMobile(this.props);
-
-        if (!type) {
-            return null;
+        const {
+            colors,
+            flip,
+            icon: ActualIcon,
+            rotate,
+            size,
+            spin,
+        } = mapProps(this.props);
+        const { style = {}} = this.props;
+        const standardProps = getStandardProps(this.props, ["children", "style"]);
+        
+        const transform = [];
+        if (flip) {
+            transform.push(
+                (flip === "horizontal" && { scaleX: -1 })
+                || (flip === "vertical" && { scaleY: -1 }),
+            );
         }
-
-        let iconName = `${_.upperFirst(_.camelCase(type))}${THEME_LOOKUP[theme]}`;
-        const icon = _.cloneDeep(ANTD_ICONS[iconName]);
-
-        let content;
-        if (typeof icon.icon === "function") {
-            content = rnSvgParser(renderIconDefinitionToSVGElement(icon, { placeholders: {
-                primaryColor: color, 
-                secondaryColor: colorPalette(color, 0),
-            }}), "", { height: pxSize, width: pxSize, ...style });
-        } else {
-            fillPaths(icon.icon, color);
-            content = rnSvgParser(renderIconDefinitionToSVGElement(icon), "", { height: pxSize, width: pxSize, ...style });
+        if (rotate) {
+            transform.push({ rotate: `${rotate}deg` });
         }
+        if (transform.length) {
+            style.transform = transform;
+        }
+        const content = (
+            <ActualIcon
+                size={size}
+                {...colors}
+            />
+        );
 
         if (spin) {
             return (
@@ -60,14 +53,23 @@ class IconWrapper extends Component {
                     animation="rotate"
                     easing="linear"
                     iterationCount="infinite"
-                    style={{ width: pxSize }}
+                    // display bit is a hack for web preview only
+                    style={{ width: size, display: "inline-block", ...style }}
+                    {...standardProps}
                 >
                     {content}
                 </AnimatableText>
             );
         }
-        return content;
+        return (
+            <Text
+                style={{ width: size, ...style }}
+                {...standardProps}
+            >
+                {content}
+            </Text>
+        );
     }
 }
 
-export default IconWrapper;
+export default Icon;

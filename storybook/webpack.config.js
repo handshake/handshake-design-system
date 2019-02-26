@@ -1,6 +1,7 @@
 require("@babel/register")();
 const path = require("path");
 const webpack = require("webpack");
+// const { StatsWriterPlugin } = require("webpack-stats-plugin");
 
 const { kebabCase: LESS_VARIABLES } = require("../src/theme").theme;
 
@@ -16,8 +17,17 @@ module.exports = (storybookBaseConfig, configType) => {
     };
     const babelLoaderRule = storybookBaseConfig.module.rules[0];
     babelLoaderRule.exclude =
-        /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-animatable)\/).*/;
+        /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-animatable|@ant-design\/react-native\/es|@ant-design\/react-native\/node_modules\/(react-native-collapsible)|@bang88\/react-native-ultimate-listview)\/).*/;
     storybookBaseConfig.module.rules.push(
+        {
+            enforce: "pre",
+            test: /handshake-design-system\/src\/.*(?!\/__tests__\/).+\.js$/,
+            use: [{
+                loader: "eslint-loader",
+            }, {
+                loader: "stylelint-custom-processor-loader",
+            }],
+        },
         {
             test: /\.js$/,
             include: /node_modules\/react-native-menu/,
@@ -26,7 +36,7 @@ module.exports = (storybookBaseConfig, configType) => {
                     loader: "babel-loader",
                     options: {
                         babelrc: false,
-                        presets: ["module:metro-react-native-babel-preset"]
+                        presets: ["module:metro-react-native-babel-preset"],
                     },
                 },
             ],
@@ -83,13 +93,31 @@ module.exports = (storybookBaseConfig, configType) => {
                 },
             ],
         },
+        {
+            test: /\.svg$/,
+            use: [
+                "babel-loader",
+                {
+                    loader: "react-svg-loader",
+                    options: {
+                        jsx: true, // true outputs JSX tags
+                    },
+                },
+            ],
+        },
     );
     storybookBaseConfig.plugins.push(
         new webpack.IgnorePlugin(/\.d\.ts$/),
         new webpack.NormalModuleReplacementPlugin(
-            /antd-mobile-rn\/(es|lib)\/style\/themes\/default\.native\.js/,
-            path.resolve(__dirname, "../src/theme/antd_mobile_rn_variables.js")
+            /@ant-design\/react-native\/(es|lib)\/style\/themes\/default\.js/,
+            path.resolve(__dirname, "../src/theme/antd_mobile_rn_variables.js"),
         ),
+        // uncomment this in order to generate stats (localhost:9001/stats.json)
+        // that can be visualized using https://chrisbateman.github.io/webpack-visualizer/
+        // recomment it at the end, because it's QUITE slow
+        // new StatsWriterPlugin({
+        //     fields: null,
+        // }),
     );
 
     return storybookBaseConfig;

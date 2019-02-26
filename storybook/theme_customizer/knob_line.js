@@ -28,12 +28,12 @@ const KnobLine = styled.label`
 
         > div {
             font-family: sans-serif;
-            font-size: ${({ inPanel }) => inPanel ? 11 : 14}px;
-            left: ${({ inPanel }) => inPanel ? 11 : 10}px;
+            font-size: ${({ inPanel }) => (inPanel ? 11 : 14)}px;
+            left: ${({ inPanel }) => (inPanel ? 11 : 10)}px;
             opacity: 0.3;
             pointer-events: none;
             position: absolute;
-            top: ${({ inPanel }) => inPanel ? 11 : 6}px;
+            top: ${({ inPanel }) => (inPanel ? 11 : 6)}px;
         }
     }
 `;

@@ -10,30 +10,27 @@ export default function getLessVars (from) {
         paths: [dirname],
         javascriptEnabled: true,
     })
-        .then(parsed =>
-            less.render(`
+        .then(parsed => less.render(`
 @import "${from}";
 ${Object.keys(parsed.variables()).map(v => `.${v.slice(1)} { value: ${v}; }`).join("\n")}`, {
-                paths: [dirname],
-                javascriptEnabled: true,
-                compress: true, // compress to get rid of comments
-            }),
-        )
-        .then(({ css }) =>
-            css.split("}").map((line) => {
-                const parts = line.match(/^\.([\w-]+)\s*\{\s*value:\s*([^;]+);?$/);
-                if (!parts) {
-                    return undefined;
-                }
-                return [parts[1], parts[2]];
-            }),
-        )
+            paths: [dirname],
+            javascriptEnabled: true,
+            compress: true, // compress to get rid of comments
+        }))
+        .then(({ css }) => css.split("}").map((line) => {
+            const parts = line.match(/^\.([\w-]+)\s*\{\s*value:\s*([^;]+);?$/);
+            if (!parts) {
+                return undefined;
+            }
+            return [parts[1], parts[2]];
+        }))
         .then(pairs => pairs.filter(p => !_.isNil(p)))
         .then(pairs => pairs.map(([k, v]) => [
             k,
-            (!isNaN(v) && _.toNumber(v)) ||
-            ((v === "true" || v === "false") && v === "true") ||
-            v
+            // eslint-disable-next-line no-restricted-globals
+            (!isNaN(v) && _.toNumber(v))
+            || ((v === "true" || v === "false") && v === "true")
+            || v,
         ]))
         .then(pairs => _.sortBy(pairs, "0"))
         .then(_.fromPairs);

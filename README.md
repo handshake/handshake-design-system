@@ -13,6 +13,21 @@ TODO: Overview - TEMPORARY: The Handshake Design System is the Design System use
 npm install @handshake/design-system
 ```
 
+If you use webpack, please add the following dependencies to your babel-loader include (or exclude exceptions) list:
+- react-native-camera-roll-picker
+- react-native-collapsible
+- react-native-animatable
+- @ant-design\/react-native
+- @bang88\/react-native-ultimate-listview
+
+e.g. (our own internal version):
+
+```js
+{
+    exclude: /node_modules\/(?!(react-native-camera-roll-picker|react-native-collapsible|react-native-animatable|@ant-design\/react-native|@bang88\/react-native-ultimate-listview)\/).*/,
+}
+```
+
 ## Usage
 
 The Handshake Design System includes a mandatory `DesignContext` component which must be included somewhere near the top of your React hierarchy. This component handles localization and theming.
@@ -143,6 +158,44 @@ const { LocaleSubscriber } = DesignContext;
 </LocaleSubscriber>
 ```
 
+## Icons
+
+By default, we only enable our own curated set of icons, but we also provide several other sets of third party icons that can be opted into, just by importing the icon set:
+
+```js
+import "@handshake/design-system/lib/components/icon/sets/{set_name}";
+```
+
+`set_name` can be any of:
+
+- ant: Ant Design Icons: https://ant.design/components/icon/
+- fa: FontAwesome Icons: https://react-icons.netlify.com/#/icons/fa
+- fi: Feather Icons: https://react-icons.netlify.com/#/icons/fi
+- go: Github Octicons: https://react-icons.netlify.com/#/icons/go
+- io: Ionicons: https://react-icons.netlify.com/#/icons/io
+- md: Material Design Icons: https://react-icons.netlify.com/#/icons/md
+- ti: Typicons: https://react-icons.netlify.com/#/icons/ti
+
+Also, since we use SVG icons, you'll need to configure webpack to load SVG:
+
+Install the webpack react-svg-loader: `npm install react-svg-loader`
+
+And in your webpack config, add the following to module.rules:
+```js
+{
+    test: /\.svg$/,
+    use: [
+        "babel-loader",
+        {
+            loader: "react-svg-loader",
+            options: {
+                jsx: true
+            }
+        }
+    ]
+}
+```
+
 ## Development setup
 
 ```sh
@@ -150,6 +203,15 @@ git clone https://github.com/handshake/handshake-design-system.git
 cd handshake-design-system
 npm install
 npm start # this will launch our Storybook in your default browser
+```
+
+## Release instructions
+
+```sh
+npm run build
+npm run sketch # only if you have Sketch installed
+npm version (major|minor|patch) -m "Release message goes here"
+npm publish
 ```
 
 ## Release History

@@ -1,13 +1,13 @@
+/* eslint-disable react-intl/string-is-marked-for-translation */
 import _ from "lodash";
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { withOptions } from "@storybook/addon-options";
-import withStyles from "@sambego/storybook-styles"
 import ThemeCustomizer from "./theme_customizer/theme_customizer";
+import { withOptions } from "@storybook/addon-options";
+import withStyles from "@sambego/storybook-styles";
 
+import ColorFunctions from "./color_functions";
 import Playground from "./playground";
-
-// import "antd/es/style";
 
 storiesOf("Welcome", module)
     .addDecorator(withOptions({ showAddonPanel: false }))
@@ -23,5 +23,8 @@ storiesOf("Welcome", module)
         height: "100vh",
         overflowX: "hidden",
     }))
-    .add("Theme Customization", () => <ThemeCustomizer />)
-    .add("Playground", () => <Playground web mobile />);
+    .add("Theme Customization", () => <ThemeCustomizer prefix="hs" />)
+    .add("Playground", () => <Playground web mobile />)
+    .add("Color Functions", () => (
+        <ColorFunctions />
+    ));

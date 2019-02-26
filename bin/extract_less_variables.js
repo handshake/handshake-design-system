@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 require("@babel/register")();
-const fs = require("fs");
 const _ = require("lodash");
+const fs = require("fs");
+const antdRnVariables = require("@ant-design/react-native/lib/style/themes/default");
 const extract = require("../src/theme/extract_less_variables").default;
-const antdRnVariables = require("antd-mobile-rn/lib/style/themes/default.native");
 
 const extractToFile = (from, to) => 
     extract(from)

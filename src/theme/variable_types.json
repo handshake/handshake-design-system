@@ -1,0 +1,11 @@
+{
+    "$comment": "Restart Storybook after any change to this file; it will not be picked up automatically.",
+    "hs": {
+        "color": "color",
+        "typography": {
+            "font": "font",
+            "size": "length",
+            "weight": "font-weight"
+        }
+    }
+}

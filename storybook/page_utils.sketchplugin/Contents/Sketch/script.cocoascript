@@ -1,0 +1,35 @@
+function findByIterating (list, key){
+  for (var i = 0; i < list.count(); i++) {
+    var elementKey = list.objectAtIndex(i).name();
+    if (elementKey && elementKey.isEqualToString(key)) {
+      return list.objectAtIndex(i);
+    }
+  }
+  return nil;
+}
+
+function findPageByName (pages, name) {
+  return findByIterating(pages, name);
+}
+
+function getPageFromContext (context) {
+  return findPageByName(context.document.pages(), context.target);
+}
+
+var addPage = function (context) {
+  var page = context.document.documentData().addBlankPage();
+  page.name = context.target;
+  return page;
+}
+
+var setPage = function (context) {
+  context.document.setCurrentPage(getPageFromContext(context));
+};
+
+var setOrAddPage = function (context) {
+  var page = getPageFromContext(context);
+  if (!page) {
+    page = addPage(context);
+  }
+  context.document.setCurrentPage(page);
+}

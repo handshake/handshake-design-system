@@ -28,14 +28,15 @@ import { default as Card } from "./_components/card/index.web";
 import { default as Carousel } from "./_components/carousel/index.web";
 import { default as Cascader } from "./_components/cascader/index.web";
 import { default as Checkbox } from "./_components/checkbox/index.web";
+import { Col, Row } from "./_components/grid/index.web";
 import { default as Collapse } from "./_components/collapse/index.web";
+import { default as Comment } from "./_components/comment/index.web";
 import { default as DatePicker } from "./_components/date-picker/index.web";
 import { default as Divider } from "./_components/divider/index.web";
 import { default as Drawer } from "./_components/drawer/index.web";
 import { default as Dropdown } from "./_components/dropdown/index.web";
 import { default as Flex } from "./_components/flex/index.web";
 import { default as Form } from "./_components/form/index.web";
-import { Row, Col } from "./_components/grid/index.web";
 import { default as Input } from "./_components/input/index.web";
 import { default as InputNumber } from "./_components/input-number/index.web";
 import { default as Layout } from "./_components/layout/index.web";
@@ -56,14 +57,15 @@ import { default as SegmentedControl } from "./_components/segmented-control/ind
 import { default as Select } from "./_components/select/index.web";
 import { default as Skeleton } from "./_components/skeleton/index.web";
 import { default as Slider } from "./_components/slider/index.web";
+import { default as Spin } from "./_components/spin/index.web";
 import { default as Steps } from "./_components/steps/index.web";
 import { default as SwipeAction } from "./_components/swipe-action/index.web";
 import { default as Switch } from "./_components/switch/index.web";
 import { default as Table } from "./_components/table/index.web";
 import { default as Tabs } from "./_components/tabs/index.web";
 import { default as Tag } from "./_components/tag/index.web";
-import { default as TimePicker } from "./_components/time-picker/index.web";
 import { default as Timeline } from "./_components/timeline/index.web";
+import { default as TimePicker } from "./_components/time-picker/index.web";
 import { default as Toast } from "./_components/toast/index.web";
 import { default as Tooltip } from "./_components/tooltip/index.web";
 import { default as Transfer } from "./_components/transfer/index.web";
@@ -75,12 +77,12 @@ import { default as WingBlank } from "./_components/wing-blank/index.web";
 
 import {
     FormattedDate,
-    FormattedTime,
-    FormattedRelative,
+    FormattedHTMLMessage,
+    FormattedMessage,
     FormattedNumber,
     FormattedPlural,
-    FormattedMessage,
-    FormattedHTMLMessage,
+    FormattedRelative,
+    FormattedTime,
     injectIntl,
     intlShape,
 } from "react-intl";
@@ -101,6 +103,7 @@ export const antd = {
     Checkbox,
     Col,
     Collapse,
+    Comment,
     DatePicker,
     Divider,
     Drawer,
@@ -123,19 +126,20 @@ export const antd = {
     Radio,
     Rate,
     Result,
-    Row, 
+    Row,
     SegmentedControl,
     Select,
     Skeleton,
     Slider,
+    Spin,
     Steps,
     SwipeAction,
     Switch,
     Table,
     Tabs,
     Tag,
-    TimePicker,
     Timeline,
+    TimePicker,
     Toast,
     Tooltip,
     Transfer,
@@ -148,12 +152,12 @@ export const antd = {
 
 export const intl = {
     FormattedDate,
-    FormattedTime,
-    FormattedRelative,
+    FormattedHTMLMessage,
+    FormattedMessage,
     FormattedNumber,
     FormattedPlural,
-    FormattedMessage,
-    FormattedHTMLMessage,
+    FormattedRelative,
+    FormattedTime,
     injectIntl,
     intlShape,
 };
@@ -162,3 +166,7 @@ export { default as Button } from "./components/button/index.web";
 export { default as DesignContext } from "./components/design-context";
 export { default as Icon } from "./components/icon/index.web";
 export { default as Spinner } from "./components/spinner/index.web";
+export { default as Text } from "./components/typography/index.web";
+export {
+    H1, H2, H3, H4, H5, P, Span,
+} from "./components/typography/index.web";

@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+storybook-static
 
 # misc
 .env.local
@@ -15,5 +16,6 @@ yarn-error.log*
 
 .DS_Store
 .vscode
+.cache
 
 # /lib

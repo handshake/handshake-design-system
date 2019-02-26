@@ -1,59 +1,54 @@
 import PropTypes from "prop-types";
+import { STANDARD_PROPS } from "../../util/props";
 
 export default {
     block: PropTypes.bool,
-    children: PropTypes.node,
     disabled: PropTypes.bool,
     icon: PropTypes.string,
+    iconPlacement: PropTypes.oneOf(["left", "right"]),
+    iconType: PropTypes.oneOf(["filled", "outlined", "twoTone"]),
     loading: PropTypes.bool,
+    loadingText: PropTypes.string,
     onClick: PropTypes.func,
     // shape: PropTypes.oneOf(["circle", "circle-outline"]), // FIXME: Not supported on mobile yet
-    size: PropTypes.oneOf(["large", "default", "small"]),
-    type: PropTypes.oneOf(["default", "primary", "ghost", "warning"]), // TODO: add `dashed` for RN
-    webHtmlType: PropTypes.oneOf(["submit", "button", "reset"]),
-}
+    size: PropTypes.oneOf(["large", "small"]),
+    type: PropTypes.oneOf(["primary", "secondary", "confirm", "danger", "link"]),
+    ...STANDARD_PROPS,
+};
 
 export const defaultProps = {
     // block: WEB ? false : true,
     disabled: false,
+    iconPlacement: "left",
     loading: false,
-    size: "default",
-    style: {},
-    type: "default",
-    // webHtmlType: "button",
+    size: "large",
+    type: "secondary",
 };
 
 export function mapPropsForWeb (props) {
     return {
         block: props.block,
-        children: props.children,
-        className: props.className,
-        disabled: props.disabled,
-        ghost: props.type === "ghost",
-        icon: props.icon,
-        loading: props.loading,
-        onClick: props.onClick,
+        disabled: props.disabled || props.loading,
+        ghost: false,
+        hsLoading: props.loading,
+        // icon: props.icon, // handled separately
+        // loading: props.loading, // handled separately
+        // loadingText: props.loadingText, // handled separately
         // shape: props.shape,
-        size: props.size,
-        style: props.style,
-        type: ((type) => ({
-            ghost: "default",
-            warning: "danger",
-        }[type] || type))(props.type),
-        htmlType: props.webHtmlType,
+        size: (size => ({ default: "large" })[size] || size)(props.size),
+        type: props.type,
     };
 }
 
 export function mapPropsForMobile (props) {
     return {
         // block: props.block, // handled separately
-        // children: props.children, // handled separately
-        disabled: props.disabled,
+        disabled: props.disabled || props.loading,
+        hsLoading: props.loading,
         // icon: props.icon, // handled separately
-        loading: props.loading,
-        onClick: props.onClick,
-        size: ((size) => ({ default: "large" })[size] || size)(props.size),
-        style: props.style,
-        type: props.type
+        // loading: props.loading, // handled separately
+        // loadingText: props.loadingText, // handled separately
+        size: (size => ({ default: "large" })[size] || size)(props.size),
+        type: props.type,
     };
 }

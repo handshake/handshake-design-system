@@ -1,5 +1,5 @@
 import _ from "lodash";
-import colorPalette from "../../util/antd_color_palette";
+import { generate as generatePalette } from "ant-design-palettes";
 
 const normalize = id => _.kebabCase(id).toLowerCase();
 
@@ -24,7 +24,8 @@ class IconRegistry {
             stroke: ["strokeColor", "color"],
         },
         twoTone: {
-            fill: ["fillColor", ({ color, strokeColor }) => colorPalette(strokeColor || color, 0)],
+            fill: ["fillColor",
+                ({ color, strokeColor }) => generatePalette(strokeColor || color)[0]],
             stroke: ["strokeColor", "color"],
         },
         default: {

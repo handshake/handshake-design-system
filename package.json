@@ -78,7 +78,8 @@
     "build": "./bin/extract_less_variables.js && rm -rf lib && babel src --out-dir lib --ignore src/**/stories.js --ignore src/**/__tests__ --ignore src/components/__template__ && sed -i '' 's/.\\/..\\/..\\/..\\/..\\/node_modules\\///g' lib/components/design-context/locale-provider/common.js && cd src && find . \\( -name \"*.json\" -o -name \"*.svg\" \\) | cut -d'/' -f2- | cpio -p -dum ../lib",
     "build-storybook": "./bin/extract_less_variables.js && build-storybook -c storybook",
     "start": "./bin/extract_less_variables.js && start-storybook -p 9001 -c storybook",
-    "sketch": "./bin/sketch.sh"
+    "export-sketch": "EXPORT_SKETCH=1 ./bin/sketch.sh",
+    "import-sketch": "./bin/sketch.sh"
   },
   "jest": {
     "preset": "jest-expo"

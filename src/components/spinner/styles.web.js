@@ -1,5 +1,6 @@
 import AntdSpin from "antd/es/spin";
 import { lookup } from "../design-context/theme-provider/with_theme";
+import { stripProps } from "../../util/props";
 import styled, { keyframes } from "../../util/styled.web";
 
 const antSpinMove = keyframes`
@@ -14,7 +15,7 @@ const antRotate = keyframes`
     }
 `;
 
-export default styled(AntdSpin)`
+export default styled(stripProps(AntdSpin))`
     box-sizing: border-box;
     color: #1890ff;
     display: inline-block;

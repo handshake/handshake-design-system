@@ -1,4 +1,5 @@
 import { FormattedMessage } from "react-intl";
+import { getStandardProps } from "../../util/props";
 import Icon from "../icon";
 import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
@@ -16,44 +17,52 @@ class Button extends Component {
 
     render () {
         const {
-            children,
-            disabled,
-            icon,
+            iconPlacement,
+            iconType,
             loading,
             loadingText,
             size,
             type,
         } = this.props;
+        let { children, icon } = this.props;
+        const props = {
+            ...mapPropsForWeb(this.props),
+            ...getStandardProps(this.props, ["children"]),
+        };
+
+        if (loading) {
+            icon = "loading";
+            children = loadingText
+                ? <span key="text">{loadingText}</span>
+                : children;
+        }
 
         return (
             <WithTheme themes={themes}>
-                {({ lkp, lookup }) => (
+                {({ lookup }) => (
                     <StyledButton
-                        lkp={lkp}
-                        {...mapPropsForWeb(this.props)}
+                        lookup={lookup}
+                        {...props}
                     >
-                        {(loading && [
+                        {(icon && iconPlacement === "left" && [
                             <Icon
                                 key="icon"
-                                color="currentColor"
-                                size={parseInt(lookup(`${size}.${type}.fontSize`))}
-                                spin
-                                icon="loading"
-                            />,
-                            <span key="gap">&nbsp;&nbsp;</span>,
-                            loadingText
-                                ? <span key="text">{loadingText}</span>
-                                : children,
-                        ])
-                        || (icon && [
-                            <Icon
-                                key="icon"
-                                color="currentColor"
                                 size={parseInt(lookup(`${size}.${type}.fontSize`))}
                                 icon={icon}
+                                type={iconType}
                             />,
                             <span key="gap">&nbsp;&nbsp;</span>,
                             <span key="text">{children}</span>,
+                        ])
+                        || (icon && iconPlacement === "right" && [
+                            <span key="text">{children}</span>,
+                            <span key="gap">&nbsp;&nbsp;</span>,
+                            <Icon
+                                key="icon"
+                                size={parseInt(lookup(`${size}.${type}.fontSize`))}
+                                icon={icon}
+                                type={iconType}
+                            />,
                         ])
                         || children}
                     </StyledButton>

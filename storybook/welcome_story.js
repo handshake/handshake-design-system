@@ -4,11 +4,10 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import ThemeCustomizer from "./theme_customizer/theme_customizer";
 import { withOptions } from "@storybook/addon-options";
-import withStyles from "@sambego/storybook-styles"
+import withStyles from "@sambego/storybook-styles";
 
+import ColorFunctions from "./color_functions";
 import Playground from "./playground";
-
-// import "antd/es/style";
 
 storiesOf("Welcome", module)
     .addDecorator(withOptions({ showAddonPanel: false }))
@@ -25,4 +24,7 @@ storiesOf("Welcome", module)
         overflowX: "hidden",
     }))
     .add("Theme Customization", () => <ThemeCustomizer prefix="hs" />)
-    .add("Playground", () => <Playground web mobile />);
+    .add("Playground", () => <Playground web mobile />)
+    .add("Color Functions", () => (
+        <ColorFunctions />
+    ));

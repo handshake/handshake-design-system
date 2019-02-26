@@ -30,6 +30,69 @@ const fns = {
         .mostReadable(baseColor, colorList).toString(),
 };
 
+export const fnHelp = {
+    palette: {
+        desc: "Ant Design's custom palette function",
+        args: ["color", "index"],
+    },
+    lighten: {
+        desc: "Lighten a color by a percentage amount",
+        args: ["color", "amount"],
+    },
+    brighten: {
+        desc: "Brighten a color by a percentage amount",
+        args: ["color", "amount"],
+    },
+    darken: {
+        desc: "Darken a color by a percentage amount",
+        args: ["color", "amount"],
+    },
+    desaturate: {
+        desc: "Desaturate a color by a percentage amount",
+        args: ["color", "amount"],
+    },
+    saturate: {
+        desc: "Saturate a color by a percentage amount",
+        args: ["color", "amount"],
+    },
+    greyscale: {
+        desc: "Grayscale version of a color",
+        args: ["color"],
+    },
+    spin: {
+        desc: "Rotate the hue of a color by a degree amount",
+        args: ["color", "amount"],
+    },
+    analogous: {
+        desc: "Find an analogous color. Advanced Use.",
+        args: ["color", "num", "slices", "index"],
+    },
+    complement: {
+        desc: "Find a complement of a color",
+        args: ["color"],
+    },
+    monochromatic: {
+        desc: "TODO",
+        args: ["color", "index"],
+    },
+    splitcomplement: {
+        desc: "Left or Right hand split complement",
+        args: ["color", "index"],
+    },
+    triad: {
+        desc: "One of a triad of similar colors",
+        args: ["color", "index"],
+    },
+    tetrad: {
+        desc: "One of a tetrad of similar colors",
+        args: ["color", "index"],
+    },
+    mostReadable: {
+        desc: "Select color that is most readable on a given background",
+        args: ["baseColor", "color1", "color2"],
+    },
+};
+
 export function withTheme (callback, { themes, themeName, variables }) {
     const theme = themes[themeName];
 
@@ -73,12 +136,16 @@ export function withTheme (callback, { themes, themeName, variables }) {
                 return innerLookup(arg, origPath, extraArgs);
             }
         });
-        return fns[fn](...args);
+        try {
+            return fns[fn](...args);
+        } catch (e) {
+            return value;
+        }
     }
 
     function innerLookup (path, origPath, extraArgs) {
-        let value = _.get(theme, path) || (/\w+(?:\.\w+)+/.test(path) ? "_" : path);
-        console.log(variables, path, value);
+        let value = _.get(theme, path)
+            || ((/^\w+(?:\.\w+)+/.test(path) && !path.startsWith("hs")) ? "_" : path);
         if (typeof value === "function") {
             value = value(...extraArgs);
         }
@@ -221,14 +288,6 @@ export function withTheme (callback, { themes, themeName, variables }) {
     }
 
     return callback({
-        // wrapped this way to avoid a React DOM warning:
-        //     Warning: Invalid value for prop `lookup` on <button> tag.
-        //     Either remove it from the element, or pass a string or number
-        //     value to keep it in the DOM.
-        // in the case that this is passed to a low level DOM model,
-        // e.g. `div` or `button`; if anyone can think of a better name,
-        // please let Kevan know and we'll swap it out.
-        lkp: { fn: outerLookup },
         lookup: outerLookup,
         theme,
         variables,
@@ -257,7 +316,7 @@ export function getThemeVariables (themes, themeName = "light") {
 }
 
 export function lookup (cb) {
-    return ({ lkp: { fn }, ...props }) => fn(
+    return ({ lookup: fn, ...props }) => fn(
         typeof cb === "function"
             ? cb(props)
             : cb[0].replace(/\$\((\w+)\)/g, (__, k) => props[k]),

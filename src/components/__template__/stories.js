@@ -65,7 +65,7 @@ storiesOf("__TEMPLATE__/Native", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
-    .addDecorator(withThemeVariables(Native__TEMPLATE__.THEME_VARIABLES))
+    .addDecorator(withThemeVariables(themes))
     .add(
         "options",
         () => (

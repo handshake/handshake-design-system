@@ -1,5 +1,6 @@
 import _ from "lodash";
 import __TEMPLATE__ from "./styles.native";
+import { getStandardProps } from "../../util/props";
 import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
 import React, { Component } from "react";
 import themes from "./themes.json";
@@ -12,13 +13,18 @@ class __TEMPLATE__Wrapper extends Component {
     static defaultProps = defaultProps;
 
     render () {
+        const props = {
+            ...mapPropsForMobile(this.props),
+            ...getStandardProps(this.props),
+        };
+
         return (
             <WithTheme themes={themes}>
-                {({ lkp }) => (
+                {({ lookup }) => (
                     // eslint-disable-next-line react/jsx-pascal-case
                     <__TEMPLATE__
-                        lkp={lkp}
-                        {...mapPropsForMobile(this.props)}
+                        lookup={lookup}
+                        {...props}
                     />
                 )}
             </WithTheme>

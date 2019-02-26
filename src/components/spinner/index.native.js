@@ -1,8 +1,9 @@
+import { getStandardProps } from "../../util/props";
 import React, { Component } from "react";
 import themes from "./themes.json";
 import WithTheme from "../design-context/theme-provider/with_theme";
 
-import propTypes, { defaultProps } from "./prop_types";
+import propTypes, { defaultProps, mapPropsForMobile } from "./prop_types";
 import StyledSpinner, { SpinnerBox, SpinnerFrame } from "./styles.native";
 
 export default class Spinner extends Component {
@@ -14,11 +15,12 @@ export default class Spinner extends Component {
         const {
             enabled = true,
             block,
-            size,
-            style,
-            text,
             toast,
         } = this.props;
+        const props = {
+            ...mapPropsForMobile(this.props),
+            ...getStandardProps(this.props, ["children"]),
+        };
 
         if (!enabled) {
             return null;
@@ -26,26 +28,21 @@ export default class Spinner extends Component {
 
         return (
             <WithTheme themes={themes}>
-                {({ lkp }) => ((block && !toast)
+                {({ lookup }) => ((block && !toast)
                     ? (
                         <SpinnerFrame>
                             <SpinnerBox>
                                 <StyledSpinner
-                                    lkp={lkp}
-                                    size={size || "large"}
-                                    style={style}
-                                    text={text}
+                                    lookup={lookup}
+                                    {...props}
                                 />
                             </SpinnerBox>
                         </SpinnerFrame>
                     )
                     : (
                         <StyledSpinner
-                            lkp={lkp}
-                            size={size || "small"}
-                            style={style}
-                            text={text}
-                            toast={toast}
+                            lookup={lookup}
+                            {...props}
                         />
                     )
                 )}

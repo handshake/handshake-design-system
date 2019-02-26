@@ -21,6 +21,7 @@ import { withViewport } from "@storybook/addon-viewport";
 
 import { Icon as NativeIcon } from "../../index.native";
 import registry from "./registry";
+// import themes from "./themes.json";
 import { Icon as WebIcon } from "../..";
 
 // import withThemeVariables from "../../../storybook/theme_customizer/with_theme_variables";
@@ -55,7 +56,7 @@ storiesOf("Web/Icon", module)
     .addDecorator(withInfo)
     .addDecorator(withStyles({ margin: 10 }))
     .addDecorator(withKnobs)
-    // .addDecorator(withThemeVariables(Icon.THEME_VARIABLES))
+    // .addDecorator(withThemeVariables(themes))
     .add(
         "options",
         () => (
@@ -79,7 +80,7 @@ storiesOf("Mobile/Icon", module)
     .addDecorator(withInfo)
     .addDecorator(withViewport("iphone5"))
     .addDecorator(withKnobs)
-    // .addDecorator(withThemeVariables(NativeIcon.THEME_VARIABLES))
+    // .addDecorator(withThemeVariables(themes))
     .add(
         "options",
         () => (

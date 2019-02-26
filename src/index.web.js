@@ -57,6 +57,7 @@ import { default as SegmentedControl } from "./_components/segmented-control/ind
 import { default as Select } from "./_components/select/index.web";
 import { default as Skeleton } from "./_components/skeleton/index.web";
 import { default as Slider } from "./_components/slider/index.web";
+import { default as Spin } from "./_components/spin/index.web";
 import { default as Steps } from "./_components/steps/index.web";
 import { default as SwipeAction } from "./_components/swipe-action/index.web";
 import { default as Switch } from "./_components/switch/index.web";
@@ -130,6 +131,7 @@ export const antd = {
     Select,
     Skeleton,
     Slider,
+    Spin,
     Steps,
     SwipeAction,
     Switch,
@@ -164,3 +166,7 @@ export { default as Button } from "./components/button/index.web";
 export { default as DesignContext } from "./components/design-context";
 export { default as Icon } from "./components/icon/index.web";
 export { default as Spinner } from "./components/spinner/index.web";
+export { default as Text } from "./components/typography/index.web";
+export {
+    H1, H2, H3, H4, H5, P, Span,
+} from "./components/typography/index.web";

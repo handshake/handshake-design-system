@@ -1,19 +1,19 @@
 import _ from "lodash";
 import { Text as AnimatableText } from "react-native-animatable";
+import { getStandardProps } from "../../util/props";
 import propTypes, { defaultProps, mapProps } from "./prop_types";
 import React, { Component } from "react";
 import Text from "@ant-design/react-native/lib/text";
 
 import "./sets/hs";
 
-const THEME_VARIABLES = false;
-
 class Icon extends Component {
     static propTypes = propTypes;
 
-    static defaultProps = defaultProps;
-
-    static THEME_VARIABLES = THEME_VARIABLES;
+    static defaultProps = {
+        color: "#000",
+        ...defaultProps,
+    };
 
     render () {
         const {
@@ -23,8 +23,10 @@ class Icon extends Component {
             rotate,
             size,
             spin,
-            style,
         } = mapProps(this.props);
+        const { style = {}} = this.props;
+        const standardProps = getStandardProps(this.props, ["children", "style"]);
+        
         const transform = [];
         if (flip) {
             transform.push(
@@ -53,12 +55,20 @@ class Icon extends Component {
                     iterationCount="infinite"
                     // display bit is a hack for web preview only
                     style={{ width: size, display: "inline-block", ...style }}
+                    {...standardProps}
                 >
                     {content}
                 </AnimatableText>
             );
         }
-        return <Text style={{ width: size, ...style }}>{content}</Text>;
+        return (
+            <Text
+                style={{ width: size, ...style }}
+                {...standardProps}
+            >
+                {content}
+            </Text>
+        );
     }
 }
 

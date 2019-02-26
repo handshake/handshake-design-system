@@ -1,5 +1,6 @@
 import _ from "lodash";
 import PropTypes from "prop-types";
+import { STANDARD_LEAF_PROPS } from "../../util/props";
 
 import registry from "./registry";
 
@@ -16,6 +17,7 @@ export default {
     spin: PropTypes.bool,
     strokeColor: PropTypes.string,
     type: PropTypes.oneOf(["filled", "outlined", "twoTone"]),
+    ...STANDARD_LEAF_PROPS,
 };
 
 export const iconPropTypes = {
@@ -28,7 +30,6 @@ export const defaultProps = {
     // color: "#000",
     // size: "default",
     spin: false,
-    style: {},
     type: "outlined",
 };
 
@@ -42,13 +43,11 @@ function getSize (size) {
 
 export function mapProps (props) {
     const {
-        className,
         flip,
         icon: iconName,
         rotate,
         size,
         spin,
-        style,
         type,
     } = props;
 
@@ -56,13 +55,11 @@ export function mapProps (props) {
     const colors = registry.mapColors(iconName, icon.iconType, props);
 
     return {
-        className,
         colors,
         flip,
         icon,
         rotate: !spin && rotate,
         size: getSize(size),
         spin,
-        style,
     };
 }

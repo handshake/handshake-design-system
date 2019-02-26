@@ -1,4 +1,5 @@
-import propTypes, { defaultProps } from "./prop_types";
+import { getStandardProps } from "../../util/props";
+import propTypes, { defaultProps, mapPropsForWeb } from "./prop_types";
 import React, { Component } from "react";
 import themes from "./themes.json";
 import WithTheme from "../design-context/theme-provider/with_theme";
@@ -12,33 +13,28 @@ export default class Spinner extends Component {
 
     render () {
         const {
-            className,
             block,
             enabled = true,
-            size,
-            style,
-            text,
             toast,
         } = this.props;
+        const props = {
+            ...mapPropsForWeb(this.props),
+            ...getStandardProps(this.props, ["children"]),
+        };
 
         if (!enabled) {
             return null;
         }
 
-        console.log(themes);
-
         return (
             <WithTheme themes={themes}>
-                {({ lkp }) => (
+                {({ lookup }) => (
                     (toast && (
                         <Toaster>
                             <Toast>
                                 <StyledSpinner
-                                    className={className}
-                                    lkp={lkp}
-                                    size={size || "large"}
-                                    style={style}
-                                    tip={text}
+                                    lookup={lookup}
+                                    {...props}
                                 />
                             </Toast>
                         </Toaster>
@@ -46,21 +42,15 @@ export default class Spinner extends Component {
                     || (block && (
                         <SpinnerCard>
                             <StyledSpinner
-                                className={className}
-                                lkp={lkp}
-                                size={size || "large"}
-                                style={style}
-                                tip={text}
+                                lookup={lookup}
+                                {...props}
                             />
                         </SpinnerCard>
                     ))
                     || (
                         <StyledSpinner
-                            className={className}
-                            lkp={lkp}
-                            size={size || "small"}
-                            style={style}
-                            tip={text}
+                            lookup={lookup}
+                            {...props}
                         />
                     )
                 )}

@@ -50,6 +50,10 @@ export { default as Button } from "./components/button/index.native";
 export { default as DesignContext } from "./components/design-context";
 export { default as Icon } from "./components/icon/index.native";
 export { default as Spinner } from "./components/spinner/index.native";
+export { default as Text } from "./components/typography/index.native";
+export {
+    H1, H2, H3, H4, H5, P, Span,
+} from "./components/typography/index.native";
 
 export {
     antd,

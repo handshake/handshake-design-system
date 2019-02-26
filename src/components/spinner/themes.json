@@ -1,0 +1,22 @@
+{
+    "light": {
+        "default": {
+            "dotSize": {
+                "outer": "20px",
+                "inner": "9px"
+            }
+        },
+        "large": {
+            "dotSize": {
+                "outer": "32px",
+                "inner": "14px"
+            }
+        },
+        "small": {
+            "dotSize": {
+                "outer": "14px",
+                "inner": "6px"
+            }
+        }
+    }
+}

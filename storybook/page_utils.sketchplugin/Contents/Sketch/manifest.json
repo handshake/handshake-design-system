@@ -1,0 +1,34 @@
+{
+  "author" : "",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "name" : "Set Page",
+      "handlers" : {
+        "run" : "setPage"
+      },
+      "identifier" : "setPage"
+    },
+    {
+      "script" : "script.cocoascript",
+      "name" : "Add Page",
+      "handlers" : {
+        "run" : "addPage"
+      },
+      "identifier" : "addPage"
+    },
+    {
+      "script" : "script.cocoascript",
+      "name" : "Set or Add Page",
+      "handlers" : {
+        "run" : "setOrAddPage"
+      },
+      "identifier" : "setOrAddPage"
+    }
+  ],
+  "identifier" : "com.example.sketch.29ebfce2-779f-4dce-aa95-45e6c62cd391",
+  "version" : "1.0",
+  "description" : "",
+  "authorEmail" : "",
+  "name" : "Page Utilities"
+}
